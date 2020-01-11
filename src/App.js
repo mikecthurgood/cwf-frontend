@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import API from './helpers/API'
-import logo from './logo.svg';
 import './App.scss';
 import NavBar from './components/NavBar'
 import MainContainer from './components/MainContainer'
