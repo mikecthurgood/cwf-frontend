@@ -11,6 +11,7 @@
     "react-google-maps": "^9.4.5",
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.3.0",
+    "react-star-ratings": "^2.3.0",
     "sass": "^1.24.4",
     "semantic-ui-react": "^0.88.2"
   },

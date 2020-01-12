@@ -9,6 +9,7 @@ const App = () => {
 
   const [user, setUser] = useState({ username: null })
   const [walls, setWalls] = useState([])
+  const [searchFilter, setSearchFilter] = useState('')
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -40,6 +41,18 @@ const App = () => {
     localStorage.removeItem('token')
   }
 
+  const updateFilter = (e) => {
+    setSearchFilter(e.target.value)
+  }
+
+  const clearFilter = (e) => {
+    e.preventDefault()
+    e.target.searchInput.value = ''
+    setSearchFilter('')
+  }
+
+  const filteredWalls = walls.filter(wall => wall.name.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.area.toLowerCase().includes(searchFilter.toLocaleLowerCase()))
+
   // code for throwing error if user not found for JS side
   //   .then(data => {
   //     if (data.error) throw Error(data.error)
@@ -53,8 +66,12 @@ const App = () => {
         user={user}
       />
       <MainContainer
-        walls={walls}
+        walls={filteredWalls}
         setWalls={setWalls}
+        setSearchFilter={setSearchFilter}
+        searchFilter={searchFilter}
+        updateFilter={updateFilter}
+        clearFilter={clearFilter}
       />
     </>
   );

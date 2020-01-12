@@ -1,4 +1,5 @@
 import React from 'react'
+import StarRatings from 'react-star-ratings';
 
 const WallCard = ({ wall }) => (
     <div className='wall-card'>
@@ -13,7 +14,16 @@ const WallCard = ({ wall }) => (
                 <p><strong>Location:</strong> {wall.area}</p>
                 <p><strong>User Rating:</strong><br />
                     {wall.reviews.length > 0 ?
-                        `${wall.reviews.reduce((prev, cur) => { return prev + cur.rating }, 0) / wall.reviews.length}/5`
+                        <StarRatings
+                            rating={wall.reviews.reduce((prev, cur) => { return prev + cur.rating }, 0) / wall.reviews.length}
+                            starRatedColor="gold"
+                            // changeRating={this.changeRating}
+                            numberOfStars={5}
+                            name='rating'
+                            starDimension="20px"
+                            starSpacing="0px"
+                        />
+
                         :
                         'No ratings yet'}</p>
                 <strong>{wall.bouldering_only && <p style={{ color: 'red' }}>Bouldering Only</p>}</strong>

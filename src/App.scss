@@ -35,9 +35,22 @@ $base-color: #282c34;
   margin-top: 80px;
   position: relative;
 
-  // .search-box {
+  .search-box {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin: 10px;
+    padding-top: 15px;
+    
+    .searchInput {
+      width: 200px;
+      font-size: 14px;
+    }
 
-  // }
+    .searchButton{
+      font-size: 14px;
+    }
+  }
 
   .card-container {
     display: flex;
