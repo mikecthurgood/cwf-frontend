@@ -1,69 +1,109 @@
 $base-color: #282c34;
+$secondary-color: #323741;
 
-.navbar-container {
-  height: 80px;
-  background-color: $base-color;
-  position: fixed;
-  top: 0;
-  width: 100%;
-  z-index: 1000;
-
-    #main-logo {
-      height: 80%;
-      position: relative;
-      top: 0.5rem;
-      left: calc(50vw - (/* width */318px / 2)); 
-    }
-    
-    .login_logout {
-      position: absolute;
-      float: right;
-      right: 5px;
-      top: 5px;
-    }
-    
-    .nav-username {
-      position: relative;
-      float: right;
-      right: 5px;
-      top: 20px;
-      color: white
-    }
+span {
+  display: inline-flex;
+  h2, h3 {
+    text-align: left;
+  }
+  
 }
 
 .main-container {
-  margin-top: 80px;
   position: relative;
+  width: 100%;
+  background-color: $base-color;
+  min-width: 300px;
+  min-height: 100vh;
 
   .search-box {
-    position: relative;
+    position: fixed;
+    top: 0;
     width: 100%;
     text-align: center;
-    margin: 10px;
-    padding-top: 15px;
-    
+    padding: 10px;
+    top: 50px;
+    height: fit-content;
+    z-index: 10;
+    background-color: #ED5656;
     .searchInput {
       width: 200px;
       font-size: 14px;
+      text-align: center;
     }
 
     .searchButton{
-      font-size: 14px;
+      background-color: #0f59c7;
+      border-radius: 3px;
+      border-width: 2px;
+      border-style: groove;
+      border-color: grey;
+      color: white;
+      outline: none;
+      margin-left: 2px;
+      &:hover {
+        filter: brightness(115%);
+      }
+      &:active {
+        background-color: #136cf1;
+        border-color: white;
+        transform: translateY(0.5px);
+      }
     }
   }
-
-  .card-container {
+  .outer-card-container {
+    left: calc(50vw - (/* width */fit-content / 2)); 
     display: flex;
+    margin-top: 30px;
     flex-wrap: wrap;
+    flex-direction: row;
     justify-content: center;
     position: relative;
     height: fit-content;
+    width: 100vw;
+    min-width: 300px;
+  }
 
+  .card-container {
+    margin-top: 70px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    position: relative;
+    height: fit-content;
+    width: fit-content;
+    max-width: 85%;
+    margin-right: auto;
+    margin-left: auto;
+
+    @media only screen and (max-width: 974px) {
+      max-width: 100%;
+      justify-content: center;
+    }
+
+    &::after {
+      content: "";
+      flex: auto;
+      width: 20%;
+    }
+
+    .wall-card-placeholder {
+      min-width: 270px;
+      // height: 2px;
+      margin: 2px;
+      // background-color: red;
+      
+      flex-basis: 270px;
+      flex-grow: 1;
+    }
     .wall-card {
+      flex: 1;
+      flex-grow: 1;
+      flex-basis: 270px;
       height: 100%;
-      width: 300px;
-      margin: 10px;
-      border-radius: 5px;
+      min-width: 270px;
+      margin: 2px;
+      border-radius: 2px;
       border-style: solid;
       border-color: $base-color;
       border-width: 0.04em;
@@ -72,6 +112,13 @@ $base-color: #282c34;
       transition: 0.5s;
       overflow: hidden;
       position: relative;
+      background-color: #fff;
+
+      @media only screen and (max-width: 974px) {
+        font-size: 10px;
+        min-width: 200px;
+        max-width: 280px;
+      }
 
       &:hover {
           box-shadow: 0 4px 8px 0 rgba(0,0,0,0.8);
@@ -86,6 +133,9 @@ $base-color: #282c34;
           h5 {
             font-size: 16px;
             margin: 10px 0px;
+            @media only screen and (max-width: 974px) {
+              font-size: 12px;
+            }
           }
 
 
@@ -98,6 +148,11 @@ $base-color: #282c34;
           .wall-image {
               height: 100%;
               min-width: 100%;
+
+              img {
+                width: 100%;
+                object-fit: cover;
+              }
           }
       }
       
@@ -107,9 +162,13 @@ $base-color: #282c34;
         width: 100%;  
         position: relative;
         height: 155px;
+        @media only screen and (max-width: 974px) {
+          font-size: 10px;
+          height: 120px;
+        }
 
         .wall-details-1 {
-          width: 150px;
+          width: fit-content;
           position: relative;
           float: left;
           padding-left: 10px;   
@@ -126,11 +185,14 @@ $base-color: #282c34;
 
       .wallcard-button {
         padding: 5px 30px;
-        border-radius: 5px;
+        border-radius: 2px;
         background-color: #ED5656;
         color: white;
         font-size: 14px;
         width: 100%;
+        @media only screen and (max-width: 974px) {
+          font-size: 12px;
+        }
 
         &:focus {outline:0;}
 
@@ -141,6 +203,30 @@ $base-color: #282c34;
     }
   }
 }
+.login_logout {
+  height: 24px;
+  margin: 0  1rem; 
+  background-color: #0f59c7;
+  border-radius: 3px;
+  border-width: 1px;
+  border-style: groove;
+  border-color: white;
+  color: white;
+  outline: none;
+  margin-left: 0;
+  &:hover {
+    filter: brightness(115%);
+  }
+    &.disabled{
+      filter: brightness(50%);
+    }
+  &:active {
+    background-color: #136cf1;
+    border-color: grey;
+    transform: translateY(0.5px);
+  }
+}
+
 
 /* @keyframes App-logo-spin {
   from {

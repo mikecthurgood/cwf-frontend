@@ -1,0 +1,107 @@
+$base-color: #282c34;
+
+.navbar-container {
+    height: 50px;
+    background-color: $base-color;
+    position: fixed;
+    display: flex;
+    // flex-direction: row;
+    // flex-wrap: wrap;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+        @media only screen and (max-width: 382px) {
+          flex-direction: column;
+          justify-content: center;
+        }
+ 
+  
+      #main-logo {
+        position: relative;
+        top: 0.2rem;
+        margin-right: 20px;
+        width: 50%;
+        max-width: 250px;
+        left: 25%;
+        @media only screen and (min-width: 383px) {
+          width: 50%;
+          max-width: 250px;
+          left: 1rem;
+          top: 0.7rem;
+        }
+      }
+      
+      .navbar-account-details{
+        position: absolute;
+        right: 1rem;
+        top: 0;
+        display: flex;
+      }
+      .login_logout {
+        position: relative;
+        z-index: 10000;
+        // float: right;
+        // right: 5px;
+        top: 1rem;
+        height: 24px;
+        @media only screen and (max-width: 383px) {
+          margin: 0;
+          height: 20px;
+          font-size: 10px;
+        }
+      }
+      
+      .nav-username {
+        // position: relative;
+        // float: right;
+        // right: 5px;
+        // top: 20px;
+        color: white;
+        margin-right: 10px;
+        @media only screen and (max-width: 382px) {
+          display: none;
+        }
+        
+      }
+
+      .login-dropdown {
+        background-color: $base-color;
+        max-height: 200px;
+        width: 400px;
+        position: absolute;
+        top: -0.5px;
+        right: 10px;
+        overflow: hidden;
+        z-index: 9999;
+        // transition: max-height 0.15s ease-out;
+            // &.visible {
+            //     max-height: 200px;
+            //     transition: max-height 0.25s ease-in;
+            // }
+      }
+
+      .auth__form {
+        padding-top: 0;
+        z-index: 9999;
+        width: 100%;
+        .auth__form-components {
+          display: flex;
+          flex-direction: row;
+        }
+        form {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+        }
+        .input input {
+          width: 80%;
+          font-size: 12px;
+        }
+        // .login_logout {
+        //   margin-left: 0;
+        //   &.disabled{
+        //     filter: brightness(50%);
+        //   }
+        // }
+      }
+  }

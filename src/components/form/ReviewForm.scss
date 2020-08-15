@@ -1,0 +1,49 @@
+.review__form-container {
+    justify-content: left;
+    width: 100%;
+    display: flex;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.15s ease-out;
+        &.visible {
+            max-height: 500px;
+            transition: max-height 0.25s ease-in;
+        }
+}
+.review__form {
+    width: 95%;
+}
+
+label {
+    display: block;
+    text-transform: uppercase;
+    margin-bottom: 0.25rem;
+  }
+
+hr {
+    margin: 0
+}
+
+.toggle-review-form {
+    border-style: none;
+    background-color: transparent;
+    outline: none;
+    padding-left: 0;
+    color: #136cf1;
+}
+
+.submit-review {
+        margin: 1rem 0;
+        background-color: #0f59c7;
+        border-radius: 3px;
+        border-width: 2px;
+        border-style: groove;
+        border-color: grey;
+        color: white;
+        outline: none;
+        &:active {
+          background-color: #136cf1;
+          border-color: white;
+          transform: translateY(0.5px);
+        }
+}
