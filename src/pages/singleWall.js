@@ -22,7 +22,7 @@ const SingleWall = (props) => {
         window.scrollTo(0, 0)
         
         const fetchWall = async () => {
-            console.log(`https://maps.googleapis.com/maps/api/js?key=${process.env.MAPSAPIKEY}&libraries=geometry,drawing,places`)
+            console.log(`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPSAPIKEY}&libraries=geometry,drawing,places`)
 
             const response = await API.getWall(props.match.params.wallSlug).then(resp => resp.json())
             const data = response.data.singleWall
@@ -231,7 +231,7 @@ const SingleWall = (props) => {
                             <div className='single__wall-map-location'>
                                 <MapComponent 
                                     isMarkerShown
-                                    googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.MAPSAPIKEY}&libraries=geometry,drawing,places`}
+                                    googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPSAPIKEY}&libraries=geometry,drawing,places`}
                                     loadingElement={<div style={{ height: `100%` }} />}
                                     containerElement={<div style={{ height: `320px` }} />}
                                     mapElement={<div style={{ height: `100%` }} />}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
 
-const key = process.env.MAPSAPIKEY
+const key = process.env.REACT_APP_MAPSAPIKEY
 
 const { StandaloneSearchBox } = require("react-google-maps/lib/components/places/StandaloneSearchBox");    
 
