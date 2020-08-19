@@ -21,7 +21,7 @@ export const handleLogin = (authData) => {
             password: password
           }
         }
-        fetch(`http://${process.env.ENDPOINT}/graphql`, {
+        fetch(`http${process.env.NODE_ENV === 'development' ? '' : 's'}://${process.env.ENDPOINT}/graphql`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -94,14 +94,13 @@ export const handleLogin = (authData) => {
             password: password
         }
         }
-        const resData = await fetch(`http://${process.env.ENDPOINT}/graphql`, {
+        const resData = await fetch(`http${process.env.NODE_ENV === 'development' ? '' : 's'}://${process.env.ENDPOINT}/graphql`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify(graphqlQuery)
         }).then(res => {return res.json()})
-        
         if (resData.errors && resData.errors[0].status === 422) {
         throw new Error(
             "Validation failed. Make sure the email address isn't used yet!"

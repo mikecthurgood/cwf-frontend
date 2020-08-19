@@ -1,5 +1,5 @@
 const get = (graphqlQuery) => (
-    fetch(`http://${process.env.ENDPOINT}/graphql`, {
+    fetch(`http${process.env.NODE_ENV === 'development' ? '' : 's'}://${process.env.ENDPOINT}/graphql`, {
         method: 'POST',
         body: JSON.stringify(graphqlQuery),
         headers: {
@@ -11,7 +11,7 @@ const get = (graphqlQuery) => (
 )
 
 const post = (graphqlQuery, token) =>(
-    fetch(`http://${process.env.ENDPOINT}/graphql`, {
+    fetch(`http${process.env.NODE_ENV === 'development' ? '' : 's'}://${process.env.ENDPOINT}/graphql`, {
         method: 'POST',
         body: JSON.stringify(graphqlQuery),
         headers: {

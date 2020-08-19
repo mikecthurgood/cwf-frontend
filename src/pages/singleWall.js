@@ -99,6 +99,7 @@ const SingleWall = (props) => {
         {wall.name && (
             <>
             {console.log(wall)}
+            {console.log(`http${process.env.NODE_ENV === 'development' ? '' : 's'}://${process.env.ENDPOINT}/graphql`)}
             <Helmet>  {/* page title */}
                 <title>{wall.name} | {wall.region} | Clambr </title>
             </Helmet>
