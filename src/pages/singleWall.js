@@ -97,6 +97,7 @@ const SingleWall = (props) => {
         {wall.name && (
             <>
             {console.log(wall)}
+            {console.log(`https://maps.googleapis.com/maps/api/js?key=${process.env.MAPSAPIKEY}&libraries=geometry,drawing,places`)}
             <Helmet>  {/* page title */}
                 <title>{wall.name} | {wall.region} | Clambr </title>
             </Helmet>
