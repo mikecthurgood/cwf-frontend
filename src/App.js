@@ -44,7 +44,7 @@ const App = () => {
   const signupHandler = async (event, authData) => {
     event.preventDefault();
     const signupResult = await handleSignup(authData)
-    if (signupResult.signupSuccess) window.location.assign("/login")
+    if (signupResult.signupSuccess) window.location.assign("/")
   }
 
   const signOut = () => {
