@@ -22,6 +22,7 @@ const SingleWall = (props) => {
         window.scrollTo(0, 0)
         
         const fetchWall = async () => {
+            console.log(`https://maps.googleapis.com/maps/api/js?key=${process.env.MAPSAPIKEY}&libraries=geometry,drawing,places`)
             const response = await API.getWall(props.match.params.wallSlug).then(resp => resp.json())
             const data = response.data.singleWall
             if (props.user.userId !== null && !data.loggedIn) props.signOut()
@@ -97,7 +98,6 @@ const SingleWall = (props) => {
         {wall.name && (
             <>
             {console.log(wall)}
-            {console.log(`https://maps.googleapis.com/maps/api/js?key=${process.env.MAPSAPIKEY}&libraries=geometry,drawing,places`)}
             <Helmet>  {/* page title */}
                 <title>{wall.name} | {wall.region} | Clambr </title>
             </Helmet>
