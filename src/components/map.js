@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react'
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps"
+
+const key = process.env.MAPSAPIKEY
+
 const { StandaloneSearchBox } = require("react-google-maps/lib/components/places/StandaloneSearchBox");    
 
 const MapComponent = withScriptjs(withGoogleMap((props) => {
     const [geo, setGeo] = useState({})
-
+    const wallName = encodeURI(props.wallName.replace(',', ' ' ).replace('&', '%26'))
     useEffect(() => {
             const getGeo = async () => {
-                const geoCachingUrl = `https://maps.googleapis.com/maps/api/geocode/json?key=AIzaSyCZu0xiV2v0ztRCKqfEQA3ID6MrWKOQbbQ&address=${props.address}+${props.postcode}`
+                const geoCachingUrl = `https://maps.googleapis.com/maps/api/geocode/json?key=${key}&address=${wallName}+${props.postcode}`
                 const response = await fetch(geoCachingUrl).then(res => res.json())
-                setGeo(response.results[0].geometry.location)
+                if (response.results.length > 0) setGeo(response.results[0].geometry.location)
+                
             }
             getGeo()
         }, [props.postcode]);

@@ -4,16 +4,16 @@ import WallCard from '../components/WallCard';
 import SearchBar from '../components/SearchBar';
 import { Helmet } from 'react-helmet'
 
-const Home = ({ walls, setWalls, updateFilter, clearFilter, signOut, user }) => {
+const Home = ({ walls, setWalls, updateFilter, clearFilter, searchBarVisible, openSearchBar, openSortInput, signOut, sortInputVisible, user, userPostCode, setUserPostCode }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
         const fetchWalls = async () => {
-        const response = await API.getWalls().then(resp => resp.json())
-        const data = response.data.walls
-        console.log(data)
+        const response = userPostCode ? await API.getWallsWithDistance(userPostCode).then(resp => resp.json()) : await API.getWalls().then(resp => resp.json())
+        const data = response.data.walls || response.data.wallsWithDistance
+        console.log(data.walls)
         if (!data.loggedIn && user.userId !== null) signOut()
-        setWalls(data.walls);
+        return setWalls(data.walls)
     }
     try{
         fetchWalls();
@@ -21,7 +21,10 @@ const Home = ({ walls, setWalls, updateFilter, clearFilter, signOut, user }) => 
         console.log(err)
     }
 
-    }, [setWalls, user.userId]);
+    }, [setWalls, user.userId, userPostCode]);
+
+    const sortedWalls = walls.sort((a, b) => Number(a.distance) - Number(b.distance))
+
 
     return (
         <>
@@ -33,11 +36,17 @@ const Home = ({ walls, setWalls, updateFilter, clearFilter, signOut, user }) => 
                 <SearchBar
                     updateFilter={updateFilter}
                     clearFilter={clearFilter}
+                    searchInputVisible={searchBarVisible}
+                    sortInputVisible={sortInputVisible}
+                    openSearchBar={openSearchBar}
+                    openSort={openSortInput}
+                    userPostCode={userPostCode} 
+                    setUserPostCode={setUserPostCode}
                 />
             </div>
             <div className='outer-card-container'>
                 <div className='card-container'>
-                    {walls.map(wall => <WallCard wall={wall} key={wall.id} />)}
+                    {sortedWalls.map(wall => <WallCard wall={wall} key={wall.id} />)}
                     <div className='wall-card-placeholder'></div>
                     <div className='wall-card-placeholder'></div>
                     <div className='wall-card-placeholder'></div>

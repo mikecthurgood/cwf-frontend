@@ -1,0 +1,145 @@
+.search-box {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    text-align: right;
+    padding: 10px;
+    top: 50px;
+    height: 20px;
+    z-index: 10;
+    background-color: #ED5656;
+    img {
+        position: absolute;
+        right: 4%;
+        max-height: 20px;
+        margin-left: 10px;
+    }
+    .search__bar-input {
+        position: relative;
+        width: 0px;
+        top: 0.3px;
+        right: 5.3%;
+        font-size: 14px;
+        text-align: left;
+        opacity: 0;
+        border: none;
+        border-radius: 3px;
+        transition: width 0.25s ease-out;
+        &.visible {
+            width: 200px;
+            opacity: 1;
+            transition: width 0.25s ease-in;
+      }
+    }
+
+    .search__bar-button{
+        position: relative;
+        right: 5%;
+        top: 3px;
+        opacity: 0;
+        background-color: transparent;
+        border: none;
+        font-size: 15px;
+        padding: 0 10px 0 10px;
+        margin: 0;
+        color: white;
+        outline: none;
+        margin-left: 2px;
+        transform: translateY(-3px);
+        font-weight: bold;
+        &.visible {
+            visibility: visible;
+            opacity: 1;
+            transition: opacity 0.25s ease-in;
+
+        }
+        &:hover {
+            color: black;
+        }
+        &:active {
+            background-color: transparent;
+            transform: translateY(0.1px);
+        }
+    }
+  }
+
+  .search__bar-sort-button {
+    position: absolute;
+    left: 1%;
+    top: 6px;
+    opacity: 0;
+    background-color: transparent;
+    border: none;
+    font-size: 15px;
+    padding: 0 10px 0 10px;
+    margin: 0;
+    color: white;
+    outline: none;
+    margin-left: 2px;
+    transform: translateY(-6px);
+    font-weight: bold;
+    &.visible {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0.25s ease-in;
+
+    }
+    &:hover {
+        color: black;
+    }
+    &:active {
+        background-color: transparent;
+        // transform: translateY(0.1px);
+    }
+}
+
+
+  .search__bar-sort {
+      display: none;
+      color: white;
+      font-weight: bold;
+      p {
+          font-weight: normal;
+          font-size: small;
+          margin: 0;
+          text-align: center;
+      }
+      .change-post-code-container {
+          position: absolute;
+          left: 150px;
+          top: 3px;
+          justify-content: left;
+          margin: 0;
+          transform: translateY(-8px);
+          min-width: max-content;
+          .changePostcode {
+            font-weight: bold;
+            &:hover {
+                color: black;
+            }
+        }
+      }
+      &.visible {
+          display: flex;
+          flex-direction: row;
+          position: absolute;
+          z-index: 1000;
+      }
+  }
+
+  .close-sort {
+      margin: 0 !important;
+      padding: 0 0 0 6px !important;
+      position: relative !important;
+      bottom: 0 !important;
+      transform: translateY(-2px) !important;
+      font-weight: inherit !important;
+  }
+
+  .postcode-search-container {
+      position: absolute;
+      display: flex;
+      flex-direction: column;
+      left: 30px;
+      top: 10px;
+  }

@@ -1,16 +1,18 @@
-.review__form-container {
+.contact__form-container {
     justify-content: left;
     width: 100%;
     display: flex;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.15s ease-out;
-        &.visible {
-            max-height: 500px;
-            transition: max-height 0.25s ease-in;
-        }
+    max-height: 320px;
+    position: relative;
+    top: -30px;
+    opacity: 0;
+    &.visible{
+        opacity: 1;
+        height: 320px;
+        transition: opacity 0.25s ease-in;
+    }
 }
-.review__form {
+.contact__form {
     width: 95%;
 }
 
@@ -24,7 +26,7 @@ hr {
     margin: 0
 }
 
-.toggle-review-form {
+.toggle-contact-form {
     border-style: none;
     background-color: transparent;
     outline: none;
@@ -32,7 +34,7 @@ hr {
     color: #136cf1;
 }
 
-.delete-review {
+.delete-contact {
     border-style: none;
     background-color: transparent;
     outline: none;
@@ -41,8 +43,8 @@ hr {
     font-weight: bolder;
 }
 
-.submit-review {
-        margin: 1rem 0;
+.submit-contact {
+        margin: 0;
         background-color: #0f59c7;
         border-radius: 3px;
         border-width: 2px;

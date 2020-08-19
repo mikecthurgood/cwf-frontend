@@ -5,8 +5,6 @@ $base-color: #282c34;
     background-color: $base-color;
     position: fixed;
     display: flex;
-    // flex-direction: row;
-    // flex-wrap: wrap;
     top: 0;
     width: 100%;
     z-index: 9;
@@ -40,9 +38,7 @@ $base-color: #282c34;
       .login_logout {
         position: relative;
         z-index: 10000;
-        // float: right;
-        // right: 5px;
-        top: 1rem;
+        top: 0.9rem;
         height: 24px;
         @media only screen and (max-width: 383px) {
           margin: 0;
@@ -52,10 +48,8 @@ $base-color: #282c34;
       }
       
       .nav-username {
-        // position: relative;
-        // float: right;
-        // right: 5px;
-        // top: 20px;
+        position: relative;
+        top: 1px;
         color: white;
         margin-right: 10px;
         @media only screen and (max-width: 382px) {
@@ -66,7 +60,7 @@ $base-color: #282c34;
 
       .login-dropdown {
         background-color: $base-color;
-        max-height: 200px;
+        max-height: 50px;
         width: 400px;
         position: absolute;
         top: -0.5px;
@@ -97,11 +91,5 @@ $base-color: #282c34;
           width: 80%;
           font-size: 12px;
         }
-        // .login_logout {
-        //   margin-left: 0;
-        //   &.disabled{
-        //     filter: brightness(50%);
-        //   }
-        // }
       }
   }

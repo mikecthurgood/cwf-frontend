@@ -56,10 +56,47 @@ const getWalls = async () => {
     const walls = await get(graphqlQuery)
     return walls
 }
-// const getUser = (id) => get(userUrl + id)
-// const signIn = (username, password) => post(signInUrl, { username, password })
-// const validate = () => get(validateUrl)
-// const createUser = (user) => post(userUrl, user)
+const getWallsWithDistance = async (postcode) => {
+    console.log('gql---------------', postcode)
+    const graphqlQuery = { 
+        query: `
+            query GetWallsWithDistance($postcode: String!) {
+                    wallsWithDistance(postcode: $postcode) {
+                        walls {
+                            id
+                            name
+                            description
+                            weekdayOpening
+                            weekdayClosing
+                            weekendOpening
+                            weekendClosing
+                            openingNotes
+                            websiteUrl
+                            imageUrl
+                            boulderingOnly
+                            addressLine1
+                            addressLine2
+                            addressLine3
+                            city
+                            region
+                            postcode
+                            slug
+                            distance
+                            reviews {
+                                rating
+                            }
+                        }
+                        loggedIn
+                    }
+                }
+            `,
+            variables: {
+                postcode: postcode
+            }}
+    const walls = await get(graphqlQuery)
+    return walls
+}
+
 const getWall = async (wallId) => {
     const graphqlQuery = {
         query: `
@@ -83,6 +120,13 @@ const getWall = async (wallId) => {
                         city
                         region
                         postcode
+                        phone
+                        email
+                        auto
+                        top
+                        lead
+                        gym
+                        cafe
                         reviews {
                             id
                             title
@@ -172,16 +216,9 @@ const createEditReview = async (reviewData, editing, token) => {
         })
       .catch(err => {
         console.log(err);
-        // this.setState({
-        //   isEditing: false,
-        //   editPost: null,
-        //   editLoading: false,
-        //   error: err
-        // });
       });
     }
 
-// const getReview = (reviewId) => get(reviewsUrl + reviewId)
     const deleteReview = async (reviewId, token) => {
         let graphqlQuery = {
             query: `
@@ -209,12 +246,7 @@ const createEditReview = async (reviewData, editing, token) => {
 export default {
     createEditReview,
     deleteReview,
-    // getReviews,
+    getWallsWithDistance,
     getWalls,
-    // getUser,
-    // signIn,
-    // validate,
-    // createUser,
     getWall,
-    // getReview,
 }

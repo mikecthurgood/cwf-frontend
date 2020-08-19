@@ -11,6 +11,9 @@ const App = () => {
   const [walls, setWalls] = useState([])
   const [singleWall, setSingleWall] = useState({})
   const [signUpFlag, setSignUpFlag] = useState(false)
+  const [searchBarVisible, setSearchBarVisibility] = useState(false)
+  const [sortInputVisible, setSortInputVisibility] = useState(false)
+  const [userPostCode, setUserPostCode] = useState('')
   
   const [searchFilter, setSearchFilter] = useState('')
 
@@ -25,16 +28,6 @@ const App = () => {
     setUser({username, userId, token, isAuth: true})
   }, [])
 
-  // const fetchSingleWall = async (wallId) => {
-  //   const response = await API.getWall(wallId).then(resp => resp.json())
-  //   const data = response.data.singleWall
-  //   console.log(data)
-  //   console.log(user)
-  //   if (!data.loggedIn && user.userId) {
-  //       signOut()
-  //   }
-  //   setSingleWall(data.wall);
-  // }
 
   const loginHandler = async (event, authData) => {
     event.preventDefault();
@@ -45,16 +38,15 @@ const App = () => {
     }
   };
 
+  const toggleSearchBar = () => {
+    setSearchBarVisibility(!searchBarVisible)
+  }
+
   const signupHandler = async (event, authData) => {
     event.preventDefault();
     const signupResult = await handleSignup(authData)
     if (signupResult.signupSuccess) window.location.assign("/login")
   }
-
-  // const signIn = userData => {
-  //   localStorage.setItem('token', userData.token)
-  //   setUser({ username: userData.user.username })
-  // }
 
   const signOut = () => {
     setUser({username: null, userId: null, isAuth: false, token: ''})
@@ -67,10 +59,31 @@ const App = () => {
     setSearchFilter(e.target.value)
   }
 
-  const clearFilter = (e = null) => {
+  const clearFilter = (e) => {
     e.preventDefault()
     e.target.searchInput.value = ''
     setSearchFilter('')
+  }
+
+  const setPostCode = (postcode) => {
+    const postcodeRegEx = /[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}/i; 
+    if (!postcode) {
+      setUserPostCode('')
+      return {status: true}
+    }
+    const validPostcode = postcodeRegEx.test(postcode); 
+    if (validPostcode) {
+      console.log(postcode)
+      setUserPostCode(postcode)
+      return {status: true}
+    }
+    console.log('Postcode is invalid')
+    return {status: false, message: 'Postcode is invalid'}
+      // .replace(/\s/g,''))
+  }
+
+  const openSortInput = () => {
+    setSortInputVisibility(!sortInputVisible)
   }
 
   const filteredWalls = walls.filter(wall => wall.name.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.region.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.city.toLowerCase().includes(searchFilter.toLocaleLowerCase())).sort((a, b) => (a.name > b.name) ? 1 : -1)
@@ -86,13 +99,19 @@ const App = () => {
         setSignUpFlag={setSignUpFlag}
       />
       <MainContainer
+        userPostCode={userPostCode} 
+        setUserPostCode={setPostCode}
         clearFilter={clearFilter}
         loginHandler={loginHandler}
+        openSearchBar={toggleSearchBar}
+        openSortInput={openSortInput}
         setWalls={setWalls}
         setSearchFilter={setSearchFilter}
+        searchBarVisible={searchBarVisible}
         searchFilter={searchFilter}
         signOut={signOut}
         signupHandler={signupHandler}
+        sortInputVisible={sortInputVisible}
         updateFilter={updateFilter}
         user={user}
         walls={filteredWalls}

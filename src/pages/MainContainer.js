@@ -4,17 +4,23 @@ import Home from './Home'
 import SingleWall from './singleWall';
 import AuthForm from '../components/form/AuthForm'
 
-const MainContainer = ({ walls, setWalls, updateFilter, clearFilter, user, loginHandler, signUpFlag, signupHandler, signOut }) => (
+const MainContainer = ({ walls, setWalls, updateFilter, clearFilter, user, loginHandler, openSearchBar, openSortInput, searchBarVisible, setUserPostCode, signUpFlag, signupHandler, signOut, sortInputVisible, userPostCode }) => (
     <div className='main-container'>
         <Switch>
         <Route exact path="/" render={(routerProps) => <Home
             {...routerProps}
-            walls={walls}
-            setWalls={setWalls}
-            updateFilter={updateFilter}
             clearFilter={clearFilter}
+            openSearchBar={openSearchBar}
+            openSortInput={openSortInput}
+            searchBarVisible={searchBarVisible}
+            sortInputVisible={sortInputVisible}
+            setWalls={setWalls}
             signOut={signOut}
+            updateFilter={updateFilter}
             user={user}
+            walls={walls}
+            userPostCode={userPostCode} 
+            setUserPostCode={setUserPostCode}
         />} />
         {/* <Route exact path="/login" render={(routerProps) => <AuthForm {...routerProps} onSubmit={loginHandler} signup={false} user={user} />}/> */}
         <Route exact path="/signup" render={(routerProps) => <AuthForm {...routerProps} onSubmit={signupHandler} signup={true} user={user} />}/>

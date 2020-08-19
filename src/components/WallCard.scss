@@ -1,0 +1,123 @@
+$base-color: #f5f5f5;
+$text-color: #282c34;
+
+.wall-card-placeholder {
+    min-width: 270px;
+    // height: 2px;
+    margin: 2px;
+    // background-color: red;
+    
+    flex-basis: 270px;
+    flex-grow: 1;
+  }
+  .wall-card {
+    flex: 1;
+    flex-grow: 1;
+    flex-basis: 270px;
+    height: 100%;
+    min-width: 270px;
+    margin: 2px;
+    border-radius: 2px;
+    border-style: solid;
+    border-color: $base-color;
+    border-width: 0.04em;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.5s;
+    overflow: hidden;
+    position: relative;
+    background-color: #fff;
+
+    @media only screen and (max-width: 974px) {
+      font-size: 10px;
+      min-width: 200px;
+      max-width: 280px;
+    }
+
+    &:hover {
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.8);
+    }
+
+    .wallcard-heading {
+        color: $text-color;
+        border-width: 0em;
+        border-bottom: 0.04em;
+        border-color: lightgray;
+        border-style: solid;
+        padding: 10px 0;
+        h4 {
+          padding: 0;
+          margin: 0;
+          color: #ED5656;
+        }
+        h5 {
+          font-size: 16px;
+          margin: 0;
+          @media only screen and (max-width: 974px) {
+            font-size: 12px;
+          }
+        }
+
+
+    }
+
+    .wallcard-image-container {
+        width: 100%;
+        height: 210px;
+        
+        .wall-image {
+            height: 100%;
+            min-width: 100%;
+
+            img {
+              width: 100%;
+              object-fit: cover;
+            }
+        }
+    }
+    
+    .wallcard-content {
+      text-align: left;
+      font-size: 12px;
+      width: 100%;  
+      position: relative;
+      height: 155px;
+      @media only screen and (max-width: 974px) {
+        font-size: 10px;
+        height: 120px;
+      }
+
+      .wall-details-1 {
+        width: fit-content;
+        position: relative;
+        float: left;
+        padding-left: 10px;   
+
+      }
+
+      .wall-details-2 {
+        width: 100px;
+        position: relative;
+        float: right;
+        padding-right: 10px;
+      }
+    }
+
+    .wallcard-button {
+      padding: 5px 30px;
+      border-radius: 2px;
+      background-color: #ED5656;
+      color: white;
+      font-size: 14px;
+      width: 100%;
+      @media only screen and (max-width: 974px) {
+        font-size: 12px;
+      }
+
+      &:focus {outline:0;}
+
+      &:hover {
+        background-color: rgb(179, 64, 64);
+      }
+    }
+  }

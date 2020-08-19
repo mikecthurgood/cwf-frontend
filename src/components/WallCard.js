@@ -1,11 +1,13 @@
 import React from 'react'
 import StarRatings from 'react-star-ratings';
 import { Link } from 'react-router-dom';
+import './WallCard.scss'
 
 const WallCard = ({ wall, singleWall }) => (
     <div className='wall-card'>
         <div className='wallcard-heading'>
             <h5>{wall.name}</h5>
+            {wall.distance && <h4>({wall.distance} miles)</h4>}
         </div>
         <div className='wallcard-image-container'>
             <img src={wall.imageUrl} className='wall-image' alt="" />
