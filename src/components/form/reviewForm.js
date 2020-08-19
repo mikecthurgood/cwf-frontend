@@ -28,10 +28,6 @@ class ReviewForm extends Component {
         
       };
 
-    //   const [loginForm, setLoginForm] = useState({...formDetails.loginForm})
-
-    //   console.log(loginForm.email)
-
     inputChangeHandler = (input, value) => {
         this.setState(prevState => {
           let isValid = true;

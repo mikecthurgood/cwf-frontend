@@ -1,5 +1,5 @@
 const get = (graphqlQuery) => (
-    fetch(`http${process.env.NODE_ENV === 'development' ? '' : 's'}://${process.env.ENDPOINT}/graphql`, {
+    fetch('https://clambr-api.herokuapp.com/graphql', {
         method: 'POST',
         body: JSON.stringify(graphqlQuery),
         headers: {
@@ -11,7 +11,7 @@ const get = (graphqlQuery) => (
 )
 
 const post = (graphqlQuery, token) =>(
-    fetch(`http${process.env.NODE_ENV === 'development' ? '' : 's'}://${process.env.ENDPOINT}/graphql`, {
+    fetch('https://clambr-api.herokuapp.com/graphql', {
         method: 'POST',
         body: JSON.stringify(graphqlQuery),
         headers: {
@@ -57,7 +57,6 @@ const getWalls = async () => {
     return walls
 }
 const getWallsWithDistance = async (postcode) => {
-    console.log('gql---------------', postcode)
     const graphqlQuery = { 
         query: `
             query GetWallsWithDistance($postcode: String!) {
@@ -152,7 +151,6 @@ const getWall = async (wallId) => {
 const createEditReview = async (reviewData, editing, token) => {
     let queryType
     let queryTypeString
-    console.log(reviewData)
     if (editing) {
         queryType = `updateReview`
         queryTypeString = `${queryType}(id: "${reviewData.reviewId}", userInput: {`

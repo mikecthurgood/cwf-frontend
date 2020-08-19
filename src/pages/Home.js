@@ -11,7 +11,6 @@ const Home = ({ walls, setWalls, updateFilter, clearFilter, searchBarVisible, op
         const fetchWalls = async () => {
         const response = userPostCode ? await API.getWallsWithDistance(userPostCode).then(resp => resp.json()) : await API.getWalls().then(resp => resp.json())
         const data = response.data.walls || response.data.wallsWithDistance
-        console.log(data.walls)
         if (!data.loggedIn && user.userId !== null) signOut()
         return setWalls(data.walls)
     }

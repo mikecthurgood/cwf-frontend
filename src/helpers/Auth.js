@@ -21,7 +21,7 @@ export const handleLogin = (authData) => {
             password: password
           }
         }
-        fetch(`http${process.env.NODE_ENV === 'development' ? '' : 's'}://${process.env.ENDPOINT}/graphql`, {
+        fetch('https://clambr-api.herokuapp.com/graphql', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ export const handleLogin = (authData) => {
             password: password
         }
         }
-        const resData = await fetch(`http${process.env.NODE_ENV === 'development' ? '' : 's'}://${process.env.ENDPOINT}/graphql`, {
+        const resData = await fetch('https://clambr-api.herokuapp.com/graphql', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

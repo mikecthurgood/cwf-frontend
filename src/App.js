@@ -32,7 +32,6 @@ const App = () => {
   const loginHandler = async (event, authData) => {
     event.preventDefault();
     const loginResult = await handleLogin(authData)
-    console.log('login handler--------------', loginResult)
     if (loginResult.isAuth) {
         setUser({username: loginResult.username, userId: loginResult.userId, isAuth: true, token: loginResult.token})
     }
@@ -73,11 +72,9 @@ const App = () => {
     }
     const validPostcode = postcodeRegEx.test(postcode); 
     if (validPostcode) {
-      console.log(postcode)
       setUserPostCode(postcode)
       return {status: true}
     }
-    console.log('Postcode is invalid')
     return {status: false, message: 'Postcode is invalid'}
       // .replace(/\s/g,''))
   }
