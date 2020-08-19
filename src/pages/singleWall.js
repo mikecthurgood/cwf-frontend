@@ -98,8 +98,6 @@ const SingleWall = (props) => {
         <>
         {wall.name && (
             <>
-            {console.log(wall)}
-            {console.log(`http${process.env.NODE_ENV === 'development' ? '' : 's'}://${process.env.ENDPOINT}/graphql`)}
             <Helmet>  {/* page title */}
                 <title>{wall.name} | {wall.region} | Clambr </title>
             </Helmet>
@@ -162,7 +160,7 @@ const SingleWall = (props) => {
                                     </div>
                                     <div className={`single__wall-facilities-container ${tabContent === 'facilities' && 'visible'}`}>
                                         <div className={`single__wall-facilities ${tabContent === 'facilities' && 'visible'}`}>
-                                            <p>
+                                            <div>
                                                 <ul>
                                                     <li>
                                                         <span><img src='/images/bouldering-icon.png' alt='bouldering-icon'/><h4>Bouldering</h4> </span>
@@ -174,7 +172,7 @@ const SingleWall = (props) => {
                                                         {wall.cafe && <span><img src='/images/cafe.jpg' alt='cafe icon' /><h4>Onsite Cafe</h4></span>}
                                                     </li>
                                                 </ul>
-                                            </p>
+                                            </div>
                                         </div>
                                     </div>
                                     <div className={`single__wall-contact-form ${tabContent === 'contact-form' && 'visible'}`}>
