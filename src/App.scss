@@ -18,7 +18,6 @@ span {
   justify-content: center;
 
   .outer-card-container {
-    left: calc(50vw - (/* width */fit-content / 2)); 
     display: flex;
     margin-top: 30px;
     flex-wrap: wrap;
