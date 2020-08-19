@@ -21,7 +21,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "CI= react-scripts build && node -p 'process.env",
+    "build": "CI= react-scripts build && node -p 'process.env'",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
   },
