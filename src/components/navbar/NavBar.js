@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AuthForm from '../form/AuthForm'
 import './navbar.scss'
 
-const NavBar = ({ loginHandler, setSearchFilter, signInTest, setSignUpFlag, signOut, user }) => {
+const NavBar = ({ loginError, loginHandler, setSearchFilter, signInTest, setSignUpFlag, signOut, user }) => {
 
     return (
         <div className='navbar-container'>
@@ -11,7 +11,7 @@ const NavBar = ({ loginHandler, setSearchFilter, signInTest, setSignUpFlag, sign
             {!user.username ?
             <>
                  <div className='login-dropdown'>
-                    <AuthForm onSubmit={loginHandler} signup={false} setSignUpFlag={setSignUpFlag} user={user} />
+                    <AuthForm loginError={loginError} onSubmit={loginHandler} signup={false} setSignUpFlag={setSignUpFlag} user={user} />
                  </div>
             </>
                 :

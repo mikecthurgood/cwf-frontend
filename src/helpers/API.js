@@ -1,5 +1,5 @@
 const get = (graphqlQuery) => (
-    fetch('https://clambr-api.herokuapp.com/graphql', {
+    fetch('http://localhost:8080/graphql', {
         method: 'POST',
         body: JSON.stringify(graphqlQuery),
         headers: {
@@ -11,7 +11,7 @@ const get = (graphqlQuery) => (
 )
 
 const post = (graphqlQuery, token) =>(
-    fetch('https://clambr-api.herokuapp.com/graphql', {
+    fetch('http://localhost:8080/graphql', {
         method: 'POST',
         body: JSON.stringify(graphqlQuery),
         headers: {

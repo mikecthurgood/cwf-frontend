@@ -1,3 +1,5 @@
+$base-color: #282c34;
+
 .input {
   margin: 1rem 0;
   width: 100%;
@@ -7,6 +9,7 @@
   display: block;
   text-transform: uppercase;
   margin-bottom: 0.25rem;
+  color: $base-color;
 }
 
 .input input,

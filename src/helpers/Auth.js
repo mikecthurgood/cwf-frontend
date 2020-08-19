@@ -21,7 +21,7 @@ export const handleLogin = (authData) => {
             password: password
           }
         }
-        fetch('https://clambr-api.herokuapp.com/graphql', {
+        fetch('http://localhost:8080/graphql', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -32,7 +32,6 @@ export const handleLogin = (authData) => {
             return res.json();
           })
           .then(resData => {
-              console.log(resData)
             if (resData.errors && resData.errors[0].status === 422) {
               throw new Error('Validation failed.');
             }
@@ -94,7 +93,7 @@ export const handleLogin = (authData) => {
             password: password
         }
         }
-        const resData = await fetch('https://clambr-api.herokuapp.com/graphql', {
+        const resData = await fetch('http://localhost:8080/graphql', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

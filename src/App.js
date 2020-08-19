@@ -16,6 +16,7 @@ const App = () => {
   const [userPostCode, setUserPostCode] = useState('')
   
   const [searchFilter, setSearchFilter] = useState('')
+  const [loginError, setLoginError] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -34,6 +35,11 @@ const App = () => {
     const loginResult = await handleLogin(authData)
     if (loginResult.isAuth) {
         setUser({username: loginResult.username, userId: loginResult.userId, isAuth: true, token: loginResult.token})
+    } else {
+      setLoginError(true)
+      setTimeout(()=> {
+        setLoginError(false)
+      },500)
     }
   };
 
@@ -93,13 +99,13 @@ const App = () => {
         user={user}
         setSearchFilter={setSearchFilter}
         loginHandler={loginHandler}
+        loginError={loginError}
         setSignUpFlag={setSignUpFlag}
       />
       <MainContainer
         userPostCode={userPostCode} 
         setUserPostCode={setPostCode}
         clearFilter={clearFilter}
-        loginHandler={loginHandler}
         openSearchBar={toggleSearchBar}
         openSortInput={openSortInput}
         setWalls={setWalls}
