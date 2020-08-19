@@ -23,6 +23,7 @@ const SingleWall = (props) => {
         
         const fetchWall = async () => {
             console.log(`https://maps.googleapis.com/maps/api/js?key=${process.env.MAPSAPIKEY}&libraries=geometry,drawing,places`)
+
             const response = await API.getWall(props.match.params.wallSlug).then(resp => resp.json())
             const data = response.data.singleWall
             if (props.user.userId !== null && !data.loggedIn) props.signOut()
