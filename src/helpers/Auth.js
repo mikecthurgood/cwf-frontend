@@ -21,7 +21,7 @@ export const handleLogin = (authData) => {
             password: password
           }
         }
-        fetch('http://localhost:8080/graphql', {
+        fetch(`${process.env.ENDPOINT}/graphql`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ export const handleLogin = (authData) => {
             password: password
         }
         }
-        const resData = await fetch('http://localhost:8080/graphql', {
+        const resData = await fetch(`${process.env.ENDPOINT}/graphql`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
