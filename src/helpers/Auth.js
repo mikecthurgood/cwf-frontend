@@ -1,4 +1,4 @@
-const handleLogin = (authData) => {
+export const handleLogin = (authData) => {
     const promise = new Promise((resolve, reject) => {
         // reader.onload = e => resolve(e.target.result);
         // reader.onerror = err => reject(err);
@@ -64,7 +64,7 @@ const handleLogin = (authData) => {
         return promise
       }
 
-  const handleSignup = async (authData) => {
+ export const handleSignup = async (authData) => {
     const promise = new Promise( async (resolve, reject) => {
     const { username, email, password, passwordConfirmation } = authData.submitData
     try{
@@ -129,8 +129,3 @@ const handleLogin = (authData) => {
   })
   return promise
 }
-
-  module.exports = {
-    handleLogin,
-    handleSignup,
-  }
