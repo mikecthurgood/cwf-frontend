@@ -88,7 +88,20 @@ class ContactForm extends Component {
       
       render() {
         const {user} = this.props;
-          return user.isAuth ? 
+          return process.env.NODE_ENV !== 'development' ? 
+          (
+            <>
+            <div className='contact__form-container visible'>
+                <div className='contact__form'>
+                  <h4>Coming Soon</h4>
+                </div>
+            </div>
+          </>
+          ) 
+          
+          :
+          
+          user.isAuth ? 
           (
             <>
                 <div className={`contact__form-container ${this.props.visible && 'visible'}`}>
