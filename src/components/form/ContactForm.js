@@ -91,7 +91,7 @@ class ContactForm extends Component {
           return process.env.NODE_ENV !== 'development' ? 
           (
             <>
-            <div className='contact__form-container visible'>
+            <div className={`contact__form-container ${this.props.visible && 'visible'}`}>
                 <div className='contact__form'>
                   <h4>Coming Soon</h4>
                 </div>
@@ -157,7 +157,7 @@ class ContactForm extends Component {
         ) 
         :
         <>
-                <div className='contact__form-container visible'>
+                <div className={`contact__form-container ${this.props.visible && 'visible'}`}>
                     <div className='contact__form'>
                       <h4>Please login or create an account to send a message</h4>
                     </div>
