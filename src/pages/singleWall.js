@@ -130,7 +130,7 @@ const SingleWall = (props) => {
                             {wall.boulderingOnly &&<div className='single__wall-bouldering-only'><strong><h5 style={{ color: 'red' }}>Bouldering Only</h5></strong></div>}
                         </div>
                     </div>
-                    <div className='single__wall-image-container' styles={{backgroundImage: `url(${wall.imageUrl})`}} >
+                    <div className='single__wall-image-container'>
                         <img src={wall.imageUrl} className='wall-image' alt="" />
                     </div>
                     <div className='single__wall-information'>
