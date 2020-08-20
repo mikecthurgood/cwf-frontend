@@ -144,13 +144,11 @@ class ContactForm extends Component {
         ) 
         :
         <>
-                <hr />
                 <div className='contact__form-container visible'>
                     <div className='contact__form'>
                       <h4>Please login or create an account to send a message</h4>
                     </div>
                 </div>
-                <hr />
             </>
       }
 }
