@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Suspense } from 'react'
 import API from '../helpers/API'
-import StarRatings from 'react-star-ratings';
-import ReviewForm from '../components/form/reviewForm'
-import MapComponent from '../components/map'
-import GaugeChart from 'react-gauge-chart'
-import CountUp from 'react-countup';
-import Reviews from '../components/Reviews'
-import ContactForm from '../components/form/ContactForm'
 import { Helmet } from 'react-helmet'
-
 import './singlewall.scss'
+
+const CountUp = React.lazy(() => import('react-countup'))
+const GaugeChart = React.lazy(() => import('react-gauge-chart'))
+const StarRatings = React.lazy(() => import('react-star-ratings'))
+const ReviewForm = React.lazy(() => import('../components/form/reviewForm'))
+const MapComponent = React.lazy(() => import('../components/map'))
+const Reviews = React.lazy(() => import('../components/Reviews'))
+const ContactForm = React.lazy(() => import('../components/form/ContactForm'))
 
 const SingleWall = (props) => {
     
@@ -109,6 +109,7 @@ const SingleWall = (props) => {
                         </div>
                         <div className='single__wall-sub-heading'>
                             <div className='single__wall-reviews'>
+                            <Suspense fallback={<div></div>}>
                                 <StarRatings
                                     rating={1}
                                     starRatedColor="gold"
@@ -118,6 +119,7 @@ const SingleWall = (props) => {
                                     starDimension="20px"
                                     starSpacing="0px"
                                 />
+                            </Suspense>
                                 {wall.reviews && wall.reviews.length > 0 ?
                                 <>
                                     <h5>{wall.reviews.reduce((prev, cur) => { return prev + Number(cur.rating) }, 0) / wall.reviews.length}</h5>
@@ -174,11 +176,13 @@ const SingleWall = (props) => {
                                         </div>
                                     </div>
                                     <div className={`single__wall-contact-form ${tabContent === 'contact-form' && 'visible'}`}>
-                                        <ContactForm 
-                                            user={props.user}
-                                            wallId={wall.id}
-                                            visible={tabContent === 'contact-form'}
-                                        />
+                                        <Suspense fallback={<div></div>}>
+                                            <ContactForm 
+                                                user={props.user}
+                                                wallId={wall.id}
+                                                visible={tabContent === 'contact-form'}
+                                            />
+                                        </Suspense>
                                     </div>
                                 </div>
                             </div>
@@ -186,27 +190,31 @@ const SingleWall = (props) => {
                                 <button onClick={toggleVisible} className='toggle-review-form'>
                                     <strong>{!alreadyReviewed() && 'Post New Review'}</strong>
                                 </button>
-                                <ReviewForm
-                                    user={props.user}
-                                    wallId={wall.id}
-                                    visible={alreadyReviewed() ? false : reviewFormVisible}
-                                    editing={false}
-                                    addReview={addReview}
-                                    review={null}
-                                    createEditPost={createEditPost}
-                                />
+                                <Suspense fallback={<div></div>}>
+                                    <ReviewForm
+                                        user={props.user}
+                                        wallId={wall.id}
+                                        visible={alreadyReviewed() ? false : reviewFormVisible}
+                                        editing={false}
+                                        addReview={addReview}
+                                        review={null}
+                                        createEditPost={createEditPost}
+                                    />
+                                </Suspense>
                             </div>
                             {(wall.reviews && wall.reviews.length > 0) ? 
-                                <Reviews
-                                    wallId={wall.id}
-                                    reviews={wall.reviews}
-                                    user={props.user}
-                                    editReviewFormVisible={editReviewFormVisible}
-                                    addReview={addReview}
-                                    createEditPost={createEditPost}
-                                    editReviewFormVisibleToggle={editReviewFormVisibleToggle}
-                                    deleteReview={deleteReview}
-                                />    
+                                <Suspense fallback={<div></div>}>
+                                    <Reviews
+                                        wallId={wall.id}
+                                        reviews={wall.reviews}
+                                        user={props.user}
+                                        editReviewFormVisible={editReviewFormVisible}
+                                        addReview={addReview}
+                                        createEditPost={createEditPost}
+                                        editReviewFormVisibleToggle={editReviewFormVisibleToggle}
+                                        deleteReview={deleteReview}
+                                    />
+                                </Suspense>
                                 :
                                 <div>
                                     <h4>No Reviews yet! Post a review to let others know your thoughts.</h4>
@@ -215,6 +223,7 @@ const SingleWall = (props) => {
                         </div>
                         <div className='single__wall-location'>
                             <div className='single__wall-climber-count'>
+                            <Suspense fallback={<div></div>}>
                                 <GaugeChart id="gauge-chart3" 
                                     nrOfLevels={30} 
                                     colors={["#4a7ce9", "#4a7ce9", "#4a7ce9", "#4a7ce9", "#FF5F6D" ]} 
@@ -223,10 +232,14 @@ const SingleWall = (props) => {
                                     hideText={true}
                                     animDelay={0}
                                 />
+                            </Suspense>
                                 <h4>Current climber count </h4>
+                            <Suspense fallback={<div></div>}>
                                 <CountUp end={86} duration={5}/> of 200 climbers
+                            </Suspense>
                             </div>
                             <div className='single__wall-map-location'>
+                            <Suspense fallback={<div></div>}>
                                 <MapComponent 
                                     isMarkerShown
                                     googleMapURL={`https://maps.googleapis.com/maps/api/js?key=${process.env.REACT_APP_MAPSAPIKEY}&libraries=geometry,drawing,places`}
@@ -237,6 +250,7 @@ const SingleWall = (props) => {
                                     postcode={wall.postcode}
                                     controlSize={10}
                                 />
+                            </Suspense>
                             </div>
                             <div className='single__wall-address'>
                                 <p><strong>Address</strong><br />

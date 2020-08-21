@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import API from '../../helpers/API'
 import Input from './Input'
 import { required, email } from '../../util/validators';
 import './ContactForm.scss';

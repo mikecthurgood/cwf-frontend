@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import API from '../../helpers/API'
 import Input from './Input'
 import { required, length } from '../../util/validators';
 import './ReviewForm.scss';

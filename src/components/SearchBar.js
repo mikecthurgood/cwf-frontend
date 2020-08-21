@@ -34,7 +34,7 @@ const SearchBar = ({ updateFilter, clearFilter, searchInputVisible, sortInputVis
                 <input type='button' value='Cancel' className={`search__bar-button close-sort ${sortInputVisible ? 'visible' : ''}`} onClick={openSort} />
             </form>
         </div>
-        <img src='/images/search-icon.png' value='Close' onClick={openSearchBar} onMouseOver={e => (e.currentTarget.src = '/images/search-icon-black.png')} onMouseOut={e => (e.currentTarget.src = '/images/search-icon.png')} />
+        <img src='/images/search-icon.png' alt='search icon' value='Close' onClick={openSearchBar} onMouseOver={e => (e.currentTarget.src = '/images/search-icon-black.png')} onMouseOut={e => (e.currentTarget.src = '/images/search-icon.png')} />
         <div className='search-box-container'>
             <form onChange={updateFilter} onSubmit={clearFilter} autocomplete="off">
                 <input type="submit" value='Clear' className={`search__bar-button ${searchInputVisible ? 'visible' : ''}`} />
