@@ -25,6 +25,7 @@
         border: none;
         border-radius: 3px;
         transition: width 0.25s ease-out;
+        font-family: 'Muli', sans-serif;
         &.visible {
             width: 200px;
             opacity: 1;
