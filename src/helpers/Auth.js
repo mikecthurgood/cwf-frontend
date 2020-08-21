@@ -20,7 +20,7 @@ export const handleLogin = (authData) => {
           }
         }
         // fetch('http://localhost:8080/graphql', {
-          fetch('https://api-data.clambr.co.uk/graphql', {
+          fetch('https://clambr-api.herokuapp.com/graphql', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -93,7 +93,7 @@ export const handleLogin = (authData) => {
         }
         }
         // const resData = await fetch('http://localhost:8080/graphql', {
-        const resData = await fetch('https://api-data.clambr.co.uk/graphql', {
+        const resData = await fetch('https://clambr-api.herokuapp.com/graphql', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
