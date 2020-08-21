@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import './WallCard.scss'
 
 const WallCard = ({ wall, singleWall }) => (
-    <div className='wall-card'>
+    <Link to={"/" + wall.slug} className='wall-card'>
         <div className='wallcard-heading'>
             <h5>{wall.name}</h5>
             {wall.distance && <h4>({wall.distance} miles)</h4>}
@@ -43,7 +43,7 @@ const WallCard = ({ wall, singleWall }) => (
         {!singleWall && <div>
             <Link to={"/" + wall.slug} ><button className='wallcard-button' >View Details and Reviews</button></Link>
         </div>}
-    </div>
+    </Link>
 )
 
 export default WallCard
