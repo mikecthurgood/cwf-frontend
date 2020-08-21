@@ -4,7 +4,7 @@ import WallCard from '../components/WallCard';
 import SearchBar from '../components/SearchBar';
 import { Helmet } from 'react-helmet'
 
-const Home = ({ walls, setWalls, updateFilter, clearFilter, searchBarVisible, openSearchBar, openSortInput, signOut, sortInputVisible, user, userPostCode, setUserPostCode }) => {
+const Home = ({ walls, setWalls, updateFilter, clearFilter, searchFilter, searchBarVisible, openSearchBar, openSortInput, signOut, sortInputVisible, user, userPostCode, setUserPostCode }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -22,7 +22,7 @@ const Home = ({ walls, setWalls, updateFilter, clearFilter, searchBarVisible, op
 
     }, [setWalls, user.userId, userPostCode]);
 
-    const sortedWalls = walls.sort((a, b) => Number(a.distance) - Number(b.distance))
+    const sortedWalls = walls ? walls.sort((a, b) => Number(a.distance) - Number(b.distance)) : {}
 
 
     return (
@@ -45,12 +45,14 @@ const Home = ({ walls, setWalls, updateFilter, clearFilter, searchBarVisible, op
             </div>
             <div className='outer-card-container'>
                 <div className='card-container'>
-                    {sortedWalls.map(wall => <WallCard wall={wall} key={wall.id} />)}
-                    <div className='wall-card-placeholder'></div>
-                    <div className='wall-card-placeholder'></div>
-                    <div className='wall-card-placeholder'></div>
-                    <div className='wall-card-placeholder'></div>
-                    <div className='wall-card-placeholder'></div>
+                    {searchFilter.length < 1 && sortedWalls.length === 0 && (<div>Loading Walls...</div>)}
+                    {sortedWalls.length > 0 ? sortedWalls.map(wall => <WallCard wall={wall} key={wall.id} />) : searchFilter.length > 0 && <div className='wall-card-none-found'><h3>No walls match your search</h3></div>}
+                    {sortedWalls.length > 0 && (<>
+                        <div className='wall-card-placeholder'></div>
+                        <div className='wall-card-placeholder'></div>
+                        <div className='wall-card-placeholder'></div>
+                        <div className='wall-card-placeholder'></div>
+                        <div className='wall-card-placeholder'></div></>)}
                 </div>
             </div>
 
