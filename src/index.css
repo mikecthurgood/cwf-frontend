@@ -1,6 +1,6 @@
 body {
   margin: 0;
-  font-family: Circular, -apple-system, BlinkMacSystemFont, Roboto, Helvetica Neue, sans-serif;  -webkit-font-smoothing: antialiased;
+  font-family: 'Muli', sans-serif;
   -moz-osx-font-smoothing: grayscale;
   min-width: 300px;
 }
