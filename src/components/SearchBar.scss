@@ -29,6 +29,8 @@
             width: 200px;
             opacity: 1;
             transition: width 0.25s ease-in;
+            padding: 5px;
+            transform: translateY(-3px);
       }
     }
 
@@ -51,7 +53,7 @@
             visibility: visible;
             opacity: 1;
             transition: opacity 0.25s ease-in;
-
+            transform: translateY(-5px);
         }
         &:hover {
             color: black;
