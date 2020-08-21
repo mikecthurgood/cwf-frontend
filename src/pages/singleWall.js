@@ -67,17 +67,12 @@ const SingleWall = (props) => {
 
     const createEditPost = async (reviewData, editing, token) => {
         const review = await API.createEditReview(reviewData, editing, token)
-        // if (!editing) {
             const updatedReviews = [review, ...wall.reviews.filter(rev => rev.id !== review.id)]
             const updatedWall = {...wall, reviews: updatedReviews}
 
             setReviewFormVisibility(false)
             setEditReviewFormVisibility(null)
             setWall(updatedWall)
-        // } else {
-        //     const updatedReviews = [review, ...wall.reviews]
-        //     const updatedWall = {...wall, reviews: updatedReviews}
-        // }
     }
 
     const createHTMLdescription = () => {
@@ -113,7 +108,6 @@ const SingleWall = (props) => {
                                 <StarRatings
                                     rating={1}
                                     starRatedColor="gold"
-                                    // changeRating={this.changeRating}
                                     numberOfStars={1}
                                     name='rating'
                                     starDimension="20px"
@@ -256,7 +250,6 @@ const SingleWall = (props) => {
                                 <p><strong>Address</strong><br />
                                 {wall.addressLine1}<br />{wall.addressLine2 && <>{wall.addressLine2} <br /></>}{wall.addressLine3 && <>{wall.addressLine3} <br /></>}{wall.city}<br />{wall.postcode}</p>
                             </div>
-                                {/* <iframe src="https://www.google.com/maps/d/embed?mid=1oXA4fxR0XAKnSFUoax7H7tKBAC4ya220" width="640" height="480"></iframe> */}
                         </div>
                     </div>
                 </div>

@@ -6,7 +6,6 @@ const SearchBar = ({ updateFilter, clearFilter, searchInputVisible, sortInputVis
 
     const handleSetPostCode = (e) => {
         e.preventDefault()
-        // const valid = setUserPostCode(e.target.searchInput.value)
         const valid = setUserPostCode(postCodeInput)
         if (valid.status) openSort()
     }

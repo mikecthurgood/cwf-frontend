@@ -20,7 +20,6 @@ const WallCard = ({ wall, singleWall }) => (
                         <StarRatings
                             rating={wall.reviews.reduce((prev, cur) => { return prev + cur.rating }, 0) / wall.reviews.length}
                             starRatedColor="gold"
-                            // changeRating={this.changeRating}
                             numberOfStars={5}
                             name='rating'
                             starDimension="20px"

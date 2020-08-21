@@ -97,7 +97,6 @@ class ReviewForm extends Component {
                 <div className={`review__form-container ${visible? 'visible' : ''}`}>
                     <div className='review__form'>
                         <form
-                            // autocomplete="off"
                             onSubmit={e =>this.submitHandler(e, editing, user.token)}
                         >
                             <Input
@@ -124,7 +123,6 @@ class ReviewForm extends Component {
                                 onBlur={this.inputBlurHandler.bind(this, 'content')}
                                 value={this.state.reviewForm.content.value}
                                 valid={this.state.reviewForm['content'].valid}
-                                // touched={this.state.reviewForm['content'].touched}
                             />
                             <label>Your rating</label>
                             <StarRatings

@@ -110,7 +110,6 @@ class AuthForm extends Component {
                   <div className='auth__form-components'>
                     {!signup && <Link to='/signup'><button onClick={() => this.props.setSignUpFlag(true)} className='login_logout register'>Register</button></Link>}
                     <form className={`${loginError ? 'error' : ''}`}
-                        // autocomplete="off"
                         onSubmit={e =>this.submitHandler(e)}
                     >
                         {signup && <Input

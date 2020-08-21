@@ -1,8 +1,6 @@
 import React, { Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom';
-// import Home from './Home'
-// import SingleWall from './singleWall';
-// import AuthForm from '../components/form/AuthForm'
+
 const Home = React.lazy(() => import('./Home'))
 const AuthForm = React.lazy(() => import('../components/form/AuthForm'))
 const SingleWall = React.lazy(() => import('./singleWall'));

@@ -82,7 +82,6 @@ const App = () => {
       return {status: true}
     }
     return {status: false, message: 'Postcode is invalid'}
-      // .replace(/\s/g,''))
   }
 
   const openSortInput = () => {
@@ -94,7 +93,6 @@ const App = () => {
   return (
     <div className='main-container'>
       <NavBar
-        // signInTest={signInTest}
         signOut={signOut}
         user={user}
         setSearchFilter={setSearchFilter}
@@ -121,7 +119,6 @@ const App = () => {
         signUpFlag={signUpFlag}
         singleWall={singleWall}
         setSingleWall={setSingleWall}
-        // fetchSingleWall={fetchSingleWall}
       />
     </div>
   );

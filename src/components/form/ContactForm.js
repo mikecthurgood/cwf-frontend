@@ -106,7 +106,6 @@ class ContactForm extends Component {
                 <div className={`contact__form-container ${this.props.visible && 'visible'}`}>
                     <div className='contact__form'>
                         <form
-                            // autocomplete="off"
                             onSubmit={e =>this.submitHandler(e, user.token)}
                         >
                              <Input

@@ -1,7 +1,5 @@
 export const handleLogin = (authData) => {
     const promise = new Promise((resolve, reject) => {
-        // reader.onload = e => resolve(e.target.result);
-        // reader.onerror = err => reject(err);
         const { email, password } = authData.submitData
         const graphqlQuery = {
           query: `
@@ -21,7 +19,8 @@ export const handleLogin = (authData) => {
             password: password
           }
         }
-        fetch('https://clambr-api.herokuapp.com/graphql', {
+        // fetch('http://localhost:8080/graphql', {
+          fetch('https://api-data.clambr.co.uk/graphql', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -93,7 +92,8 @@ export const handleLogin = (authData) => {
             password: password
         }
         }
-        const resData = await fetch('https://clambr-api.herokuapp.com/graphql', {
+        // const resData = await fetch('http://localhost:8080/graphql', {
+        const resData = await fetch('https://api-data.clambr.co.uk/graphql', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

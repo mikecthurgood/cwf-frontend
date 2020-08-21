@@ -12,7 +12,6 @@ const Reviews = ({reviews, wallId, user, editReviewFormVisible, addReview, creat
                     <StarRatings
                         rating={Number(review.rating)}
                         starRatedColor="gold"
-                        // changeRating={this.changeRating}
                         numberOfStars={5}
                         name='rating'
                         starDimension="20px"
