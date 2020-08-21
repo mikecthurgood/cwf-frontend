@@ -33,6 +33,11 @@ $text-color: #282c34;
       max-width: 280px;
     }
 
+    @media only screen and (max-width: 430px) {
+      min-width: 100vw;
+      border-radius: 0;
+    }
+
     &:hover {
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.8);
     }
@@ -52,8 +57,13 @@ $text-color: #282c34;
         h5 {
           font-size: 16px;
           margin: 0;
+          text-decoration: none;
+
           @media only screen and (max-width: 974px) {
             font-size: 12px;
+          }
+          @media only screen and (max-width: 430px) {
+            font-size: 22px;
           }
         }
 
@@ -85,13 +95,18 @@ $text-color: #282c34;
         font-size: 10px;
         height: 120px;
       }
+      @media only screen and (max-width: 430px) {
+        font-size: 20px;
+      }
 
       .wall-details-1 {
         width: fit-content;
         position: relative;
         float: left;
-        padding-left: 10px;   
-
+        padding-left: 10px; 
+        @media only screen and (max-width: 430px) {
+          width: 45%;
+        }
       }
 
       .wall-details-2 {
@@ -99,6 +114,10 @@ $text-color: #282c34;
         position: relative;
         float: right;
         padding-right: 10px;
+        @media only screen and (max-width: 430px) {
+          width: 45%;
+          text-align: right; 
+        }
       }
     }
 
@@ -111,6 +130,9 @@ $text-color: #282c34;
       width: 100%;
       @media only screen and (max-width: 974px) {
         font-size: 12px;
+      }
+      @media only screen and (max-width: 430px) {
+        font-size: 20px;
       }
 
       &:focus {outline:0;}
