@@ -14,12 +14,11 @@ $secondary-color: #72757c;
         padding: 50px 0 0 0;      
     }
 
-    @media (max-width: 480) {
-        padding: 50px 0 0 0;
-    }
-
     .single__wall {
         max-width: 1240px;
+        @media only screen and (max-width: 480) {
+            width: 100vw;
+        }
         .single__wall-heading {
             .single__wall-title {
                     h1 {
@@ -73,16 +72,24 @@ $secondary-color: #72757c;
                 border-radius: 0;      
             }
 
-            @media (max-width: 480) {
-                border-radius: 0;      
-            }
         }
         .single__wall-information {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
+
+            @media only screen and (max-width: 480) {
+                flex-direction: column;
+            }
+
             .single__wall-content {
                 width: 65%;
+
+                @media only screen and (max-width: 480) {
+                    width: 95%;
+                    padding: 0 2.5%;
+                }
+
                 .single__wall-center-details {
                     border-bottom: 1px solid rgb(172, 172, 172);
                     margin: 30px 0;
@@ -91,6 +98,12 @@ $secondary-color: #72757c;
                     display: flex;
                     flex-direction: row;
                     justify-content: space-between;
+
+                    @media only screen and (max-width: 480) {
+                        width: 95%;
+                        padding: 0 2.5%;
+                        position: absolute;
+                    }
                 }
                 .single__wall-opening-hours {
                     width: fit-content;
@@ -111,6 +124,9 @@ $secondary-color: #72757c;
                 }
 
                 .single__wall-tabbed-details {
+                    @media only screen and (max-width: 480) {
+                        display: none;
+                    }
                     ::-webkit-scrollbar {
                         width: 5px;
                     }
@@ -282,6 +298,13 @@ $secondary-color: #72757c;
             .single__wall-location {
                 width: 30%;
                 margin-top: 30px;
+
+                @media only screen and (max-width: 480) {
+                    width: 100%;
+                    position: absolute;
+                    top: 560px;
+                }
+
                 .single__wall-climber-count {
                     .gauge {
                         
