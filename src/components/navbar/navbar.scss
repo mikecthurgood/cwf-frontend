@@ -8,7 +8,7 @@ $base-color: #282c34;
     top: 0;
     width: 100%;
     z-index: 9;
-        @media only screen and (max-width: 382px) {
+        @media only screen and (max-width: 480px) {
           flex-direction: column;
           justify-content: center;
         }
@@ -16,16 +16,17 @@ $base-color: #282c34;
   
       #main-logo {
         position: relative;
-        top: 0.2rem;
         margin-right: 20px;
         width: 50%;
         max-width: 250px;
-        left: 25%;
-        @media only screen and (min-width: 383px) {
-          width: 50%;
-          max-width: 250px;
-          left: 1rem;
-          top: 0.7rem;
+        left: 1rem;
+        top: 0.7rem;
+
+        @media only screen and (max-width: 480px) {
+          max-width: none;
+          top: 0.1rem;
+          left: 25%;
+          // max-height: 70%;
         }
       }
       
@@ -41,7 +42,7 @@ $base-color: #282c34;
         top: 1px;
         color: white;
         margin-right: 10px;
-        @media only screen and (max-width: 382px) {
+        @media only screen and (max-width: 480px) {
           display: none;
         }
         
@@ -56,6 +57,10 @@ $base-color: #282c34;
         right: 10px;
         overflow: hidden;
         z-index: 9999;
+
+        @media only screen and (max-width: 480px) {
+          display: none;
+        }
       }
 
       .login_logout {
@@ -82,7 +87,7 @@ $base-color: #282c34;
           background-color: #136cf1;
           transform: translateY(0.5px);
         }
-        @media only screen and (max-width: 383px) {
+        @media only screen and (max-width: 480px) {
           margin: 0;
           height: 20px;
           font-size: 10px;
@@ -92,6 +97,7 @@ $base-color: #282c34;
         padding-top: 0;
         z-index: 9999;
         width: 100%;
+
         .auth__form-components {
           display: flex;
           flex-direction: row;

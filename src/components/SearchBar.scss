@@ -1,3 +1,5 @@
+$base-color: #282c34;
+
 .search-box {
     position: fixed;
     top: 0;
@@ -8,41 +10,15 @@
     height: 20px;
     z-index: 10;
     background-color: #ED5656;
-    img {
-        position: absolute;
-        right: 4%;
-        max-height: 20px;
-        margin-left: 10px;
-    }
-    .search__bar-input {
-        position: relative;
-        width: 0px;
-        top: 0.3px;
-        right: 5.3%;
-        font-size: 14px;
-        text-align: left;
-        opacity: 0;
-        border: none;
-        border-radius: 3px;
-        transition: width 0.25s ease-out;
-        font-family: 'Muli', sans-serif;
-        &.visible {
-            width: 200px;
-            opacity: 1;
-            transition: width 0.25s ease-in;
-            padding: 5px;
-            transform: translateY(-3px);
-      }
-    }
 
-    .search__bar-button{
+    .search__bar-button {
         position: relative;
         right: 5%;
         top: 3px;
         opacity: 0;
         background-color: transparent;
         border: none;
-        font-size: 15px;
+        font-size: 16px;
         padding: 0 10px 0 10px;
         margin: 0;
         color: white;
@@ -64,26 +40,115 @@
             transform: translateY(0.1px);
         }
     }
+   
+
+    img {
+        position: absolute;
+        right: 4%;
+        max-height: 20px;
+        margin-left: 10px;
+        z-index: 100;
+        @media only screen and (max-width: 480px) {
+            right: 10%;
+            max-height: 20px;
+            margin-left: 10px;
+        }
+    }
+    .search-box-container {
+        display: flex;
+        flex-direction: row;
+        position: relative;
+        left: 0;
+        height: 100%;
+        width: 100vw;
+
+        form {
+            position: absolute;
+            right: 60px;
+            top: -2px;
+            height: fit-content;
+            @media only screen and (max-width: 480px) {
+                right: -10px;
+                margin: 0;
+                top: 0;
+            }
+        }
+        
+        .search__bar-button {
+            @media only screen and (max-width: 480px) {
+                top: 37px;
+                right: 20px;
+                z-index: 100;
+                &:focus {
+                    color: #ffffff;
+                }
+            }
+        }
+        .search__bar-filter-input {
+            position: relative;
+            width: 0px;
+            top: 0.3px;
+            right: 5.3%;
+            font-size: 16px;
+            text-align: left;
+            opacity: 0;
+            border: none;
+            border-radius: 3px;
+            transition: width 0.25s ease-out;
+            font-family: 'Muli', sans-serif;
+
+            &:focus, {
+                outline: none;
+            }
+            &.visible {
+                width: 200px;
+                opacity: 1;
+                padding: 5px;
+                transform: translateY(-3px);
+            }
+
+            @media only screen and (max-width: 480px) {
+                background-color: $base-color;
+                top: 10px;
+                color: #ffffff;
+                &.visible {
+                    transition: opacity 0.25s ease-in;
+                    width: 100vw;
+                    right: 10px;
+                    border-radius: 0;
+                }
+            }
+        }
+    }
   }
+
 
   .search__bar-sort-button {
     position: absolute;
     left: 1%;
     top: 6px;
-    opacity: 0;
+    display: none;
     background-color: transparent;
     border: none;
-    font-size: 15px;
+    font-size: 16px;
     padding: 0 10px 0 10px;
     margin: 0;
     color: white;
     outline: none;
     margin-left: 2px;
-    transform: translateY(-6px);
+    transform: translateY(-3px);
     font-weight: bold;
+     @media only screen and (max-width: 480px) {
+        //   max-width: none;
+        //   top: 0.1rem;
+        margin: 0;
+        left: 0;
+        font-size: 16px;
+        padding: 0;
+    }
     &.visible {
         visibility: visible;
-        opacity: 1;
+        display: flex;
         transition: opacity 0.25s ease-in;
 
     }
@@ -94,23 +159,28 @@
         background-color: transparent;
     }
 }
-
-
-  .search__bar-sort {
+  .search__bar-sort-container {
       display: none;
       color: white;
       font-weight: bold;
+      span {
+          display: flex;
+          flex-direction: row;
+          p {
+              margin-right: 10px;
+          }
+      }
       p {
           font-weight: normal;
           font-size: small;
           margin: 0;
-          text-align: center;
+          text-align: left;
       }
       .change-post-code-container {
-          position: absolute;
-          left: 150px;
-          top: 3px;
-          justify-content: left;
+        //   position: absolute;
+        //   left: 150px;
+        //   top: 3px;
+        //   justify-content: left;
           margin: 0;
           transform: translateY(-8px);
           min-width: max-content;
@@ -134,7 +204,7 @@
       padding: 0 0 0 6px !important;
       position: relative !important;
       bottom: 0 !important;
-      transform: translateY(-2px) !important;
+      transform: translateY(-5px) !important;
       font-weight: inherit !important;
   }
 
@@ -142,6 +212,48 @@
       position: absolute;
       display: flex;
       flex-direction: column;
-      left: 30px;
-      top: 10px;
+      left: 26px;
+      top: 8px;
+      z-index: 100;
+
+      img {
+        position: relative;
+        right: 20px;
+        visibility: hidden;
+        &.visible {
+          visibility: visible;
+          z-index: 100;
+        }
+    }
+      
+      @media only screen and (max-width: 480px) {
+        //   max-width: none;
+        //   top: 0.1rem;
+        margin: 0;
+        left: 14px;
+        font-size: 16px;
+        padding: 0;
+    }
   }
+
+  .search__bar-sort-input {
+    position: relative;
+    width: 0px;
+    top: 0.3px;
+    right: 5.3%;
+    font-size: 16px;
+    text-align: left;
+    opacity: 0;
+    border: none;
+    border-radius: 3px;
+    transition: width 0.25s ease-out;
+    font-family: 'Muli', sans-serif;
+    &.visible {
+        width: 200px;
+        opacity: 1;
+        transition: width 0.25s ease-in;
+        padding: 5px;
+        transform: translateY(-3px);
+  }
+}
+  

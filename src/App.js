@@ -45,6 +45,12 @@ const App = () => {
 
   const toggleSearchBar = () => {
     setSearchBarVisibility(!searchBarVisible)
+    setSortInputVisibility(false)
+  }
+
+  const toggleSortInput = () => {
+    setSortInputVisibility(!sortInputVisible)
+    setSearchBarVisibility(false)
   }
 
   const signupHandler = async (event, authData) => {
@@ -84,42 +90,40 @@ const App = () => {
     return {status: false, message: 'Postcode is invalid'}
   }
 
-  const openSortInput = () => {
-    setSortInputVisibility(!sortInputVisible)
-  }
-
   const filteredWalls = walls.filter(wall => wall.name.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.region.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.city.toLowerCase().includes(searchFilter.toLocaleLowerCase())).sort((a, b) => (a.name > b.name) ? 1 : -1)
 
   return (
-    <div className='main-container'>
-      <NavBar
-        signOut={signOut}
-        user={user}
-        setSearchFilter={setSearchFilter}
-        loginHandler={loginHandler}
-        loginError={loginError}
-        setSignUpFlag={setSignUpFlag}
-      />
-      <MainContainer
-        userPostCode={userPostCode} 
-        setUserPostCode={setPostCode}
-        clearFilter={clearFilter}
-        openSearchBar={toggleSearchBar}
-        openSortInput={openSortInput}
-        setWalls={setWalls}
-        setSearchFilter={setSearchFilter}
-        searchBarVisible={searchBarVisible}
-        searchFilter={searchFilter}
-        signOut={signOut}
-        signupHandler={signupHandler}
-        sortInputVisible={sortInputVisible}
-        updateFilter={updateFilter}
-        user={user}
-        walls={filteredWalls}
-        signUpFlag={signUpFlag}
-        singleWall={singleWall}
-        setSingleWall={setSingleWall}
-      />
+    <div className='app-main-container'>
+      <div className='app-container'>
+        <NavBar
+          signOut={signOut}
+          user={user}
+          setSearchFilter={setSearchFilter}
+          loginHandler={loginHandler}
+          loginError={loginError}
+          setSignUpFlag={setSignUpFlag}
+        />
+        <MainContainer
+          userPostCode={userPostCode} 
+          setUserPostCode={setPostCode}
+          clearFilter={clearFilter}
+          openSearchBar={toggleSearchBar}
+          openSortInput={toggleSortInput}
+          setWalls={setWalls}
+          setSearchFilter={setSearchFilter}
+          searchBarVisible={searchBarVisible}
+          searchFilter={searchFilter}
+          signOut={signOut}
+          signupHandler={signupHandler}
+          sortInputVisible={sortInputVisible}
+          updateFilter={updateFilter}
+          user={user}
+          walls={filteredWalls}
+          signUpFlag={signUpFlag}
+          singleWall={singleWall}
+          setSingleWall={setSingleWall}
+        />
+      </div>
     </div>
   );
 }

@@ -8,61 +8,79 @@ span {
   }
   
 }
-
-.main-container {
+.app-main-container {
   position: relative;
+  width: 100vw;
+  height: 100vh;
+  ::-webkit-scrollbar {
+    width: 0;
+  }
+}
+.app-container {
+  position: relative;
+  top:0;
+  left: 0;
   width: 100%;
-  background-color: $base-color;
-  min-width: 300px;
-  min-height: 100vh;
-  justify-content: center;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  overflow-y: scroll;
 
-  .outer-card-container {
-    display: flex;
-    margin-top: 30px;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: center;
+  .main-container {
     position: relative;
-    height: fit-content;
-    width: 100vw;
+    width: 100%;
+    background-color: $base-color;
     min-width: 300px;
-  }
-
-  .card-container {
-    margin-top: 70px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    position: relative;
-    height: fit-content;
-    width: fit-content;
-    max-width: 85%;
-    margin-right: auto;
-    margin-left: auto;
-
-    @media only screen and (max-width: 974px) {
-      max-width: 100%;
+    min-height: 100vh;
+    justify-content: center;
+  
+    .outer-card-container {
+      display: flex;
+      margin-top: 30px;
+      flex-wrap: wrap;
+      flex-direction: row;
       justify-content: center;
+      position: relative;
+      height: fit-content;
+      width: 100vw;
+      min-width: 300px;
     }
-
-    &::after {
-      content: "";
-      flex: auto;
-      width: 20%;
+  
+    .card-container {
+      margin-top: 70px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: left;
+      position: relative;
+      height: fit-content;
+      width: fit-content;
+      max-width: 85%;
+      margin-right: auto;
+      margin-left: auto;
+  
+      @media only screen and (max-width: 974px) {
+        max-width: 95%;
+        justify-content: center;
+      }
+  
+      &::after {
+        content: "";
+        flex: auto;
+        width: 20%;
+      }
     }
   }
-}
-.wall-card-none-found {
-  margin-top: 10%;
-}
-
-
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  .wall-card-none-found {
+    margin-top: 10%;
   }
-  to {
-    transform: rotate(360deg);
-  }
-} */
+  
+  
+  /* @keyframes App-logo-spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  } */
+}

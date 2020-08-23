@@ -33,7 +33,7 @@ $text-color: #282c34;
       max-width: 280px;
     }
 
-    @media only screen and (max-width: 430px) {
+    @media only screen and (max-width: 480px) {
       min-width: 100vw;
       border-radius: 0;
     }
@@ -62,8 +62,8 @@ $text-color: #282c34;
           @media only screen and (max-width: 974px) {
             font-size: 12px;
           }
-          @media only screen and (max-width: 430px) {
-            font-size: 22px;
+          @media only screen and (max-width: 480px) {
+            font-size: 20px;
           }
         }
 
@@ -95,8 +95,8 @@ $text-color: #282c34;
         font-size: 10px;
         height: 120px;
       }
-      @media only screen and (max-width: 430px) {
-        font-size: 20px;
+      @media only screen and (max-width: 480px) {
+        font-size: 16px;
       }
 
       .wall-details-1 {
@@ -104,7 +104,7 @@ $text-color: #282c34;
         position: relative;
         float: left;
         padding-left: 10px; 
-        @media only screen and (max-width: 430px) {
+        @media only screen and (max-width: 480px) {
           width: 45%;
         }
       }
@@ -114,7 +114,7 @@ $text-color: #282c34;
         position: relative;
         float: right;
         padding-right: 10px;
-        @media only screen and (max-width: 430px) {
+        @media only screen and (max-width: 480px) {
           width: 45%;
           text-align: right; 
         }
@@ -131,7 +131,7 @@ $text-color: #282c34;
       @media only screen and (max-width: 974px) {
         font-size: 12px;
       }
-      @media only screen and (max-width: 430px) {
+      @media only screen and (max-width: 480px) {
         font-size: 20px;
       }
 
