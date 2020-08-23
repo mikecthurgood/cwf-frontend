@@ -196,21 +196,23 @@ const SingleWall = (props) => {
                                     />
                                 </Suspense>
                             </div>
-                            {(wall.reviews && wall.reviews.length > 0) ? 
-                                <Suspense fallback={<div></div>}>
-                                    <Reviews
-                                        wallId={wall.id}
-                                        reviews={wall.reviews}
-                                        user={props.user}
-                                        editReviewFormVisible={editReviewFormVisible}
-                                        addReview={addReview}
-                                        createEditPost={createEditPost}
-                                        editReviewFormVisibleToggle={editReviewFormVisibleToggle}
-                                        deleteReview={deleteReview}
-                                    />
-                                </Suspense>
+                            {(wall.reviews && wall.reviews.length > 0) ?
+                                (<div className='reviews'> 
+                                    <Suspense fallback={<div></div>}>
+                                        <Reviews
+                                            wallId={wall.id}
+                                            reviews={wall.reviews}
+                                            user={props.user}
+                                            editReviewFormVisible={editReviewFormVisible}
+                                            addReview={addReview}
+                                            createEditPost={createEditPost}
+                                            editReviewFormVisibleToggle={editReviewFormVisibleToggle}
+                                            deleteReview={deleteReview}
+                                        />
+                                    </Suspense>
+                                </div>)
                                 :
-                                <div>
+                                <div className='reviews'> 
                                     <h4>No Reviews yet! Post a review to let others know your thoughts.</h4>
                                 </div> 
                             }

@@ -10,14 +10,15 @@ $secondary-color: #72757c;
     display: flex;
     justify-content: center;
 
-    @media only screen and (max-width: 480) {
-        padding: 50px 0 0 0;      
+    @media only screen and (max-width: 480px) {
+        padding: 50px 0 0 0;
+        overflow-x: hidden; 
     }
 
     .single__wall {
         max-width: 1240px;
-        @media only screen and (max-width: 480) {
-            width: 100vw;
+        @media only screen and (max-width: 480px) {
+            width: 95vw;
         }
         .single__wall-heading {
             .single__wall-title {
@@ -68,7 +69,7 @@ $secondary-color: #72757c;
             object-fit: cover;
             }
 
-            @media only screen and (max-width: 480) {
+            @media only screen and (max-width: 480px) {
                 border-radius: 0;      
             }
 
@@ -78,14 +79,14 @@ $secondary-color: #72757c;
             flex-direction: row;
             justify-content: space-between;
 
-            @media only screen and (max-width: 480) {
+            @media only screen and (max-width: 480px) {
                 flex-direction: column;
             }
 
             .single__wall-content {
                 width: 65%;
 
-                @media only screen and (max-width: 480) {
+                @media only screen and (max-width: 480px) {
                     width: 95%;
                     padding: 0 2.5%;
                 }
@@ -99,21 +100,57 @@ $secondary-color: #72757c;
                     flex-direction: row;
                     justify-content: space-between;
 
-                    @media only screen and (max-width: 480) {
+                    @media only screen and (max-width: 480px) {
                         width: 95%;
-                        padding: 0 2.5%;
+                        padding: 0;
                         position: absolute;
+                        flex-direction: column;
+                        justify-content: center;
                     }
+                }
+                .reviews {
+                    @media only screen and (max-width: 480px) {
+                        display: none;
+                    } 
                 }
                 .single__wall-opening-hours {
                     width: fit-content;
+                    @media only screen and (max-width: 480px) {
+                        display: flex;
+                        flex-direction: column;
+                        width: 100%;
+                        justify-content: center;
+                        text-align: center;
+                        padding-bottom: 10px;
+                    } 
                     p {
                         width: fit-content;
                         margin: 0 50px 0 0;
+
+                        @media only screen and (max-width: 480px) {
+                            display: flex;
+                            flex-direction: row;
+                            width: 100%;
+                            padding: 3px;
+                            justify-content: center;
+                            text-align: center;
+                            padding-bottom: 10px;
+
+                            strong {
+                                padding: 0 5px 0 5px;
+                            }
+                        } 
                     }
                 }
                 .single__wall-contact-details {
                     width: fit-content;
+                    @media only screen and (max-width: 480px) {
+                        display: flex;
+                        width: 100%;
+                        justify-content: center;
+                        text-align: center;
+                        padding-bottom: 10px;
+                    } 
                     p {
                         width: fit-content;
                         margin: 0 0 0 0;
@@ -124,7 +161,7 @@ $secondary-color: #72757c;
                 }
 
                 .single__wall-tabbed-details {
-                    @media only screen and (max-width: 480) {
+                    @media only screen and (max-width: 480px) {
                         display: none;
                     }
                     ::-webkit-scrollbar {
@@ -299,7 +336,7 @@ $secondary-color: #72757c;
                 width: 30%;
                 margin-top: 30px;
 
-                @media only screen and (max-width: 480) {
+                @media only screen and (max-width: 480px) {
                     width: 100%;
                     position: absolute;
                     top: 560px;
@@ -340,7 +377,11 @@ $secondary-color: #72757c;
     
         
         .review-form {
-            margin: 20px 0
+            margin: 20px 0;
+
+            @media only screen and (max-width: 480px) {
+                display: none;
+            }
         } 
         .review__card {
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.1);
@@ -359,7 +400,7 @@ $secondary-color: #72757c;
                 margin: 5px 0 10px 0;
             }
         }
-        @media only screen and (max-width: 480) {
+        @media only screen and (max-width: 480px) {
             width: 100vw;     
         }
       }

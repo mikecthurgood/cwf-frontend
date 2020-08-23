@@ -7,12 +7,11 @@ $base-color: #282c34;
     display: flex;
     top: 0;
     width: 100%;
-    z-index: 9;
+    z-index: 1000;
         @media only screen and (max-width: 480px) {
           flex-direction: column;
           justify-content: center;
         }
- 
   
       #main-logo {
         position: relative;
