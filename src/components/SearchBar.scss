@@ -26,8 +26,10 @@ $base-color: #282c34;
         margin-left: 2px;
         transform: translateY(-3px);
         font-weight: bold;
+        z-index: 0;
         &.visible {
             visibility: visible;
+            z-index: 100;
             opacity: 1;
             transition: opacity 0.25s ease-in;
             transform: translateY(-5px);
@@ -55,12 +57,16 @@ $base-color: #282c34;
         }
     }
     .search-box-container {
-        display: flex;
+        display: none;
         flex-direction: row;
         position: relative;
         left: 0;
         height: 100%;
         width: 100vw;
+
+        &.visible {
+            display: flex;
+        }
 
         form {
             position: absolute;
@@ -96,11 +102,12 @@ $base-color: #282c34;
             border-radius: 3px;
             transition: width 0.25s ease-out;
             font-family: 'Muli', sans-serif;
-
+            z-index: 0;
             &:focus, {
                 outline: none;
             }
             &.visible {
+                z-index: 99;
                 width: 200px;
                 opacity: 1;
                 padding: 5px;
@@ -216,13 +223,31 @@ $base-color: #282c34;
       top: 8px;
       z-index: 100;
 
+      .search__bar-button {
+        position: absolute;
+        left: -16px;
+        top: 10px;
+        }
+
       img {
         position: relative;
         right: 20px;
+        top: 1px;
         visibility: hidden;
         &.visible {
           visibility: visible;
           z-index: 100;
+        }
+        @media only screen and (max-width: 480px) {
+            //   max-width: none;
+            //   top: 0.1rem;
+            position: absolute;
+            margin: 0;
+            top: 36px;
+            right: 35px;
+            font-size: 16px;
+            padding: 0;
+            z-index: 10000;
         }
     }
       
@@ -255,5 +280,23 @@ $base-color: #282c34;
         padding: 5px;
         transform: translateY(-3px);
   }
+  @media only screen and (max-width: 480px) {
+    background-color: $base-color;
+    top: 35px;
+    left: -16px;
+    color: #ffffff;
+    .search__bar-button {
+        position: absolute;
+        left: 0;
+    }
+    &.visible {
+        transition: opacity 0.25s ease-in;
+        width: 100vw;
+        border-radius: 0;
+    }
+    &:focus {
+        outline: none;
+    }
+}
 }
   
