@@ -49,7 +49,7 @@ const Home = ({ walls, setWalls, updateFilter, clearFilter, searchFilter, search
             <div className='outer-card-container'>
                 <div className='card-container'>
                     {searchFilter.length < 1 && sortedWalls.length === 0 && (<div>Loading Walls...</div>)}
-                    {sortedWalls.length > 0 ? sortedWalls.map(wall => <Suspense fallback={<div></div>}><WallCard wall={wall} key={wall.id} /></Suspense>) : searchFilter.length > 0 && <div className='wall-card-none-found'><h3>No walls match your search</h3></div>}
+                    {sortedWalls.length > 0 ? sortedWalls.map(wall => <Suspense key={`${wall.id} suspense`} fallback={<div></div>}><WallCard wall={wall} key={wall.id} /></Suspense>) : searchFilter.length > 0 && <div className='wall-card-none-found'><h3>No walls match your search</h3></div>}
                     {sortedWalls.length > 0 && (<>
                         <div className='wall-card-placeholder'></div>
                         <div className='wall-card-placeholder'></div>
