@@ -10,7 +10,11 @@ const WallCard = ({ wall, singleWall }) => (
             {wall.distance && <h4>({wall.distance} miles)</h4>}
         </div>
         <div className='wallcard-image-container'>
-            <img src={wall.imageUrl} className='wall-image' alt="" />
+            <picture>
+                <source srcSet={wall.imageUrl} type='image/webp'></source>
+                <source srcSet={wall.imageUrl.replace('webp', 'jpg').replace('/climbing-walls', '/climbing-walls/jpegs')} type='image/jpeg'></source>
+                <img src={wall.imageUrl.replace('webp', 'jpg').replace('/climbing-walls', '/climbing-walls/jpegs')} className='wall-image' alt="" />
+            </picture>
         </div>
         <div className='wallcard-content'>
             <div className='wall-details-1'>
@@ -25,7 +29,6 @@ const WallCard = ({ wall, singleWall }) => (
                             starDimension="20px"
                             starSpacing="0px"
                         />
-
                         :
                         'No ratings yet'}</>
                 <strong>{wall.boulderingOnly && <p style={{ color: 'red' }}>Bouldering Only</p>}</strong>

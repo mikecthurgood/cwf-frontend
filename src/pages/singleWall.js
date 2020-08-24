@@ -127,7 +127,11 @@ const SingleWall = (props) => {
                         </div>
                     </div>
                     <div className='single__wall-image-container'>
-                        <img src={wall.imageUrl} className='wall-image' alt="" />
+                        <picture>
+                            <source srcSet={wall.imageUrl} type='image/webp'></source>
+                            <source srcSet={wall.imageUrl.replace('webp', 'jpg').replace('/climbing-walls', '/climbing-walls/jpegs')} type='image/jpeg'></source>
+                            <img src={wall.imageUrl.replace('webp', 'jpg').replace('/climbing-walls', '/climbing-walls/jpegs')} className='wall-image' alt="" />
+                        </picture>
                     </div>
                     <div className='single__wall-information'>
                         <div className='single__wall-content'>
