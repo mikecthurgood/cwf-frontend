@@ -43,18 +43,12 @@ $base-color: #282c34;
         }
     }
    
-
     img {
         position: absolute;
         right: 4%;
         max-height: 20px;
         margin-left: 10px;
         z-index: 100;
-        @media only screen and (max-width: 480px) {
-            right: 10%;
-            max-height: 20px;
-            margin-left: 10px;
-        }
     }
     .search-box-container {
         display: none;
@@ -72,24 +66,9 @@ $base-color: #282c34;
             position: absolute;
             right: 60px;
             top: -2px;
-            height: fit-content;
-            @media only screen and (max-width: 480px) {
-                right: -10px;
-                margin: 0;
-                top: 0;
-            }
+            height: fit-content; 
         }
         
-        .search__bar-button {
-            @media only screen and (max-width: 480px) {
-                top: 37px;
-                right: 20px;
-                z-index: 100;
-                &:focus {
-                    color: #ffffff;
-                }
-            }
-        }
         .search__bar-filter-input {
             position: relative;
             width: 0px;
@@ -113,18 +92,6 @@ $base-color: #282c34;
                 padding: 5px;
                 transform: translateY(-3px);
             }
-
-            @media only screen and (max-width: 480px) {
-                background-color: $base-color;
-                top: 10px;
-                color: #ffffff;
-                &.visible {
-                    transition: opacity 0.25s ease-in;
-                    width: 100vw;
-                    right: 10px;
-                    border-radius: 0;
-                }
-            }
         }
     }
   }
@@ -145,14 +112,7 @@ $base-color: #282c34;
     margin-left: 2px;
     transform: translateY(-3px);
     font-weight: bold;
-     @media only screen and (max-width: 480px) {
-        //   max-width: none;
-        //   top: 0.1rem;
-        margin: 0;
-        left: 0;
-        font-size: 16px;
-        padding: 0;
-    }
+
     &.visible {
         visibility: visible;
         display: flex;
@@ -184,10 +144,6 @@ $base-color: #282c34;
           text-align: left;
       }
       .change-post-code-container {
-        //   position: absolute;
-        //   left: 150px;
-        //   top: 3px;
-        //   justify-content: left;
           margin: 0;
           transform: translateY(-8px);
           min-width: max-content;
@@ -238,26 +194,6 @@ $base-color: #282c34;
           visibility: visible;
           z-index: 100;
         }
-        @media only screen and (max-width: 480px) {
-            //   max-width: none;
-            //   top: 0.1rem;
-            position: absolute;
-            margin: 0;
-            top: 36px;
-            right: 35px;
-            font-size: 16px;
-            padding: 0;
-            z-index: 10000;
-        }
-    }
-      
-      @media only screen and (max-width: 480px) {
-        //   max-width: none;
-        //   top: 0.1rem;
-        margin: 0;
-        left: 14px;
-        font-size: 16px;
-        padding: 0;
     }
   }
 
@@ -279,24 +215,90 @@ $base-color: #282c34;
         transition: width 0.25s ease-in;
         padding: 5px;
         transform: translateY(-3px);
-  }
-  @media only screen and (max-width: 480px) {
-    background-color: $base-color;
-    top: 35px;
-    left: -16px;
-    color: #ffffff;
-    .search__bar-button {
-        position: absolute;
-        left: 0;
-    }
-    &.visible {
-        transition: opacity 0.25s ease-in;
-        width: 100vw;
-        border-radius: 0;
-    }
-    &:focus {
-        outline: none;
     }
 }
+
+@media only screen and (max-width: 480px) {
+
+    .search-box {
+        img {
+            right: 10%;
+            max-height: 20px;
+            margin-left: 10px;
+        }
+
+        .search-box-container {
+            form {
+                right: -10px;
+                margin: 0;
+                top: 0;
+            }
+
+            .search__bar-button {
+                top: 42px;
+                right: 20px;
+                z-index: 100;
+                &:focus {
+                    color: #ffffff;
+                }
+            }
+            .search__bar-filter-input {
+                background-color: $base-color;
+                top: 10px;
+                color: #ffffff;
+                &.visible {
+                    transition: opacity 0.25s ease-in;
+                    width: 100vw;
+                    right: 10px;
+                    border-radius: 0;
+                    padding: 10px 5px;
+                }
+            }
+        }  
+    }
+
+    .search__bar-sort-button {
+        margin: 0;
+        left: 0;
+        font-size: 16px;
+        padding: 0;
+    }
+
+    .postcode-search-container {
+        margin: 0;
+        left: 14px;
+        font-size: 16px;
+        padding: 0;
+        
+        img {
+            position: absolute;
+            margin: 0;
+            top: 42px;
+            right: 35px;
+            font-size: 16px;
+            padding: 0;
+            z-index: 10000;
+        }
+
+        .search__bar-sort-input {
+            background-color: $base-color;
+            top: 35px;
+            left: -16px;
+            color: #ffffff;
+            .search__bar-button {
+                position: absolute;
+                left: 0;
+            }
+            &.visible {
+                transition: opacity 0.25s ease-in;
+                width: 100vw;
+                border-radius: 0;
+                padding: 10px 5px;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+    }
 }
   

@@ -10,16 +10,8 @@ $secondary-color: #72757c;
     display: flex;
     justify-content: center;
 
-    @media only screen and (max-width: 480px) {
-        padding: 50px 0 0 0;
-        overflow-x: hidden; 
-    }
-
     .single__wall {
         max-width: 1240px;
-        @media only screen and (max-width: 480px) {
-            width: 95vw;
-        }
         .single__wall-heading {
             .single__wall-title {
                     h1 {
@@ -65,31 +57,17 @@ $secondary-color: #72757c;
             overflow: hidden;
             border-radius: 10px;
             img, picture {
-            width: 100%;
-            object-fit: cover;
+                width: 100%;
+                object-fit: cover;
             }
-
-            @media only screen and (max-width: 480px) {
-                border-radius: 0;      
-            }
-
         }
         .single__wall-information {
             display: flex;
             flex-direction: row;
             justify-content: space-between;
 
-            @media only screen and (max-width: 480px) {
-                flex-direction: column;
-            }
-
             .single__wall-content {
                 width: 65%;
-
-                @media only screen and (max-width: 480px) {
-                    width: 95%;
-                    padding: 0 2.5%;
-                }
 
                 .single__wall-center-details {
                     border-bottom: 1px solid rgb(172, 172, 172);
@@ -98,59 +76,20 @@ $secondary-color: #72757c;
                     padding: 10px 0 20px 0;
                     display: flex;
                     flex-direction: row;
-                    justify-content: space-between;
-
-                    @media only screen and (max-width: 480px) {
-                        width: 95%;
-                        padding: 0;
-                        position: absolute;
-                        flex-direction: column;
-                        justify-content: center;
-                    }
+                    justify-content: space-between;     
                 }
-                .reviews {
-                    @media only screen and (max-width: 480px) {
-                        display: none;
-                    } 
-                }
+                
                 .single__wall-opening-hours {
                     width: fit-content;
-                    @media only screen and (max-width: 480px) {
-                        display: flex;
-                        flex-direction: column;
-                        width: 100%;
-                        justify-content: center;
-                        text-align: center;
-                        padding-bottom: 10px;
-                    } 
                     p {
                         width: fit-content;
                         margin: 0 50px 0 0;
-
-                        @media only screen and (max-width: 480px) {
-                            display: flex;
-                            flex-direction: row;
-                            width: 100%;
-                            padding: 3px;
-                            justify-content: center;
-                            text-align: center;
-                            padding-bottom: 10px;
-
-                            strong {
-                                padding: 0 5px 0 5px;
-                            }
-                        } 
                     }
                 }
+
                 .single__wall-contact-details {
                     width: fit-content;
-                    @media only screen and (max-width: 480px) {
-                        display: flex;
-                        width: 100%;
-                        justify-content: center;
-                        text-align: center;
-                        padding-bottom: 10px;
-                    } 
+                    
                     p {
                         width: fit-content;
                         margin: 0 0 0 0;
@@ -161,9 +100,6 @@ $secondary-color: #72757c;
                 }
 
                 .single__wall-tabbed-details {
-                    @media only screen and (max-width: 480px) {
-                        display: none;
-                    }
                     ::-webkit-scrollbar {
                         width: 5px;
                     }
@@ -336,12 +272,6 @@ $secondary-color: #72757c;
                 width: 30%;
                 margin-top: 30px;
 
-                @media only screen and (max-width: 480px) {
-                    width: 100%;
-                    position: absolute;
-                    top: 560px;
-                }
-
                 .single__wall-climber-count {
                     .gauge {
                         
@@ -378,9 +308,11 @@ $secondary-color: #72757c;
         
         .review-form {
             margin: 20px 0;
-
-            @media only screen and (max-width: 480px) {
-                display: none;
+            .toggle-review-form {
+                strong {
+                    font-family: 'Muli', sans-serif;
+                    font-size: 16px;
+                }
             }
         } 
         .review__card {
@@ -400,11 +332,128 @@ $secondary-color: #72757c;
                 margin: 5px 0 10px 0;
             }
         }
-        @media only screen and (max-width: 480px) {
-            width: 100vw;     
-        }
       }
     }
 
 
-  
+    @media only screen and (max-width: 480px) {
+
+        .single__wall-container {
+            padding: 50px 0 0 0;
+            overflow-x: hidden; 
+            overflow-y: scroll;
+            position: absolute;
+            top: 0;
+            
+            .single__wall {
+                width: 100vw;
+                height: 100vh;
+                overflow-y: scroll;
+                position: absolute;
+                top: 40px;
+                .single__wall-heading {
+                    .single__wall-title {
+                        display: flex;
+                        justify-content: center;
+                        h1 {
+                            font-size: 20px;
+                            margin-bottom: 10px;
+                        }
+                    }
+                    .single__wall-sub-heading {
+                        display: flex;
+                        justify-content: center;
+                    }
+                }
+                .single__wall-image-container {
+                    border-radius: 0;      
+                }
+
+                .single__wall-information {
+                    flex-direction: column;
+    
+                    .single__wall-content {
+                        width: 95%;
+                        padding: 0 2.5%;
+                        
+                        .single__wall-center-details {
+                            width: 95%;
+                            padding: 0;
+                            position: relative;
+                            top: -20px;
+                            flex-direction: column;
+                            justify-content: center;
+                        }
+    
+                        .single__wall-opening-hours {
+                            display: flex;
+                            flex-direction: column;
+                            width: 100%;
+                            justify-content: center;
+                            text-align: center;
+                            
+                            p {
+                                display: flex;
+                                flex-direction: row;
+                                width: 100%;
+                                padding: 3px;
+                                justify-content: center;
+                                text-align: center;
+                                padding-bottom: 5px;
+    
+                                strong {
+                                    padding: 0 5px 0 5px;
+                                }
+                            } 
+                        }
+
+                        .single__wall-contact-details {
+                            display: flex;
+                            flex-direction: column-reverse;
+                            width: 100%;
+                            justify-content: center;
+                            text-align: center;
+                            padding-bottom: 10px;
+                            p {
+                                display: flex;
+                                flex-direction: row;
+                                width: 100%;
+                                justify-content: center;
+                                padding-bottom: 5px;
+                            }
+                        }
+
+                        .single__wall-tabs {
+                            h4 {
+                                font-size: 16px;
+                            }
+                        }
+                        
+                        .single__wall-tabbed-details {
+                            position: relative;
+                            top: -30px;
+                        }
+
+                        .single__wall-reviews-section {
+                            position: relative;
+                            // top: 500px;
+                            
+                            .review-form {
+                                // display: none;
+                            }
+    
+                            .reviews {
+                                // display: none;
+                            }
+                        }
+
+                    }
+                    .single__wall-location {
+                        width: 100%;
+                        position: relative;
+                        // top: -150px;
+                    }
+                }
+            }            
+        }
+    } 

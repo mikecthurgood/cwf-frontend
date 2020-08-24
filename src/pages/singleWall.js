@@ -151,7 +151,7 @@ const SingleWall = (props) => {
                                 <div className='single__wall-tabs'>
                                     <span className={`single__wall-tab ${tabContent === 'description' && 'selected'}`} onClick={() => setTabContent('description')}><h4>Description</h4></span>
                                     <span className={`single__wall-tab ${tabContent === 'facilities' && 'selected'}`} onClick={() => setTabContent('facilities')}><h4>Facilities</h4></span>
-                                    <span className={`single__wall-tab ${tabContent === 'contact-form' && 'selected'}`} onClick={() => setTabContent('contact-form')}><h4>Get In Touch</h4></span>
+                                    <span className={`single__wall-tab ${tabContent === 'contact-form' && 'selected'}`} onClick={() => setTabContent('contact-form')}><h4>Contact</h4></span>
                                 </div>
                                 <div className='single__wall-tab-content'>
                                     <div className={`single__wall-description ${tabContent === 'description' && 'visible'}`} dangerouslySetInnerHTML={createHTMLdescription()}>
@@ -184,45 +184,47 @@ const SingleWall = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className='review-form'>
-                                <button onClick={toggleVisible} className='toggle-review-form'>
-                                    <strong>{!alreadyReviewed() && 'Post New Review'}</strong>
-                                </button>
-                                <Suspense fallback={<div></div>}>
-                                    <ReviewForm
-                                        user={props.user}
-                                        wallId={wall.id}
-                                        visible={alreadyReviewed() ? false : reviewFormVisible}
-                                        editing={false}
-                                        addReview={addReview}
-                                        review={null}
-                                        createEditPost={createEditPost}
-                                    />
-                                </Suspense>
-                            </div>
-                            {(wall.reviews && wall.reviews.length > 0) ?
-                                (<div className='reviews'> 
+                            <div className='single__wall-reviews-section'>
+                                <div className='review-form'>
+                                    <button onClick={toggleVisible} className='toggle-review-form'>
+                                        <strong>{!alreadyReviewed() && 'Post New Review'}</strong>
+                                    </button>
                                     <Suspense fallback={<div></div>}>
-                                        <Reviews
-                                            wallId={wall.id}
-                                            reviews={wall.reviews}
+                                        <ReviewForm
                                             user={props.user}
-                                            editReviewFormVisible={editReviewFormVisible}
+                                            wallId={wall.id}
+                                            visible={alreadyReviewed() ? false : reviewFormVisible}
+                                            editing={false}
                                             addReview={addReview}
+                                            review={null}
                                             createEditPost={createEditPost}
-                                            editReviewFormVisibleToggle={editReviewFormVisibleToggle}
-                                            deleteReview={deleteReview}
                                         />
                                     </Suspense>
-                                </div>)
-                                :
-                                <div className='reviews'> 
-                                    <h4>No Reviews yet! Post a review to let others know your thoughts.</h4>
-                                </div> 
-                            }
+                                </div>
+                                {(wall.reviews && wall.reviews.length > 0) ?
+                                    (<div className='reviews'> 
+                                        <Suspense fallback={<div></div>}>
+                                            <Reviews
+                                                wallId={wall.id}
+                                                reviews={wall.reviews}
+                                                user={props.user}
+                                                editReviewFormVisible={editReviewFormVisible}
+                                                addReview={addReview}
+                                                createEditPost={createEditPost}
+                                                editReviewFormVisibleToggle={editReviewFormVisibleToggle}
+                                                deleteReview={deleteReview}
+                                            />
+                                        </Suspense>
+                                    </div>)
+                                    :
+                                    <div className='reviews'> 
+                                        <h4>No Reviews yet! Post a review to let others know your thoughts.</h4>
+                                    </div> 
+                                }
+                            </div>
                         </div>
                         <div className='single__wall-location'>
-                            <div className='single__wall-climber-count'>
+                            {/* <div className='single__wall-climber-count'>
                             <Suspense fallback={<div></div>}>
                                 <GaugeChart id="gauge-chart3" 
                                     nrOfLevels={30} 
@@ -237,7 +239,7 @@ const SingleWall = (props) => {
                             <Suspense fallback={<div></div>}>
                                 <CountUp end={86} duration={5}/> of 200 climbers
                             </Suspense>
-                            </div>
+                            </div> */}
                             <div className='single__wall-map-location'>
                             <Suspense fallback={<div></div>}>
                                 <MapComponent 
