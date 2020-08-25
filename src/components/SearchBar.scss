@@ -23,7 +23,7 @@ $base-color: #282c34;
             min-width: 180px;
             width: fit-content;
             color: white;
-            padding-right: 45px;
+            padding-right: 35px;
             padding-left: 10px;
             font-weight: bold;
             justify-content: space-between;
@@ -112,6 +112,7 @@ $base-color: #282c34;
                 position: relative;
                 top: 2.5px;
                 font-size: 16px;
+                padding: 10px 5px 10px 25px;
                 text-align: left;
                 opacity: 0;
                 border: none;
@@ -122,8 +123,7 @@ $base-color: #282c34;
                 color: #ffffff;
                 &.visible {
                     opacity: 1;
-                    transition: opacity 0.25s ease-in;
-                    padding: 10px 5px 10px 25px; 
+                    transition: opacity 0.25s ease-in; 
                     &:focus {
                         outline: none;
                     } 
@@ -147,12 +147,14 @@ $base-color: #282c34;
                 padding: 0;
                 .search__bar-sort-icon {
                     z-index: 1000;
+                    margin-right: -20px;
                 }
                 .search__bar-sort-button {
                     margin: 0;
                     left: 10px;
                     font-size: 16px;
                     padding: 0;
+                    margin-left: 5px;
                 }
                 .postcode-confirmation, .change-post-code-container {
                     position: relative;

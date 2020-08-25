@@ -34,37 +34,35 @@ const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, se
         <>
         <div className='search__bar-sort-container'>
             <div className='search__bar-sort-button-container'>
-
-            {!userPostCode ? (
-                <>
-                <input 
-                    type='button' 
-                    value={sortInputVisible ? 'Enter Postcode' : 'Sort By Distance'}
-                    className='search__bar-sort-button'
-                    onClick={() => openInputHandler('sort')}
-                />
-                <img 
-                    src={sortInputVisible ? '/images/close-cross.png' : '/images/search-icon.png'} 
-                    className='search__bar-sort-icon' 
-                    alt='search icon' 
-                    value='Close' 
-                    onClick={() => openInputHandler('sort')}
-                    onMouseOver={e => (e.currentTarget.src = sortInputVisible ? '/images/close-cross-black.png' : '/images/search-icon-black.png')} 
-                    onMouseOut={e => (e.currentTarget.src = sortInputVisible ? '/images/close-cross.png' : '/images/search-icon.png')} 
-                />
-                </>
-            ) : (
-                <>
-                <div className='change-post-code-container'>
-                    <p className='postcode-confirmation'>{`Sorted by distance from ${userPostCode.toUpperCase()}`}</p>
-                    <span>
-                        <p className='changePostcode' onClick={() => openInputHandler('sort')}>{`Change`}</p>
-                        <p className='changePostcode' onClick={clearPostcode}>{`Clear`}</p>
-                    </span>
-                </div>
-                </>
-            )
-        }
+                {!userPostCode ? (
+                    <>
+                        <input 
+                            type='button' 
+                            value={sortInputVisible ? 'Enter Postcode' : 'Sort By Distance'}
+                            className='search__bar-sort-button'
+                            onClick={() => openInputHandler('sort')}
+                        />
+                        <img 
+                            src={sortInputVisible ? '/images/close-cross.png' : '/images/search-icon.png'} 
+                            className='search__bar-sort-icon' 
+                            alt='search icon' 
+                            value='Close' 
+                            onClick={() => openInputHandler('sort')}
+                            onMouseOver={e => (e.currentTarget.src = sortInputVisible ? '/images/close-cross-black.png' : '/images/search-icon-black.png')} 
+                            onMouseOut={e => (e.currentTarget.src = sortInputVisible ? '/images/close-cross.png' : '/images/search-icon.png')} 
+                        />
+                    </>
+                ) : (
+                    <>
+                    <div className='change-post-code-container'>
+                        <p className='postcode-confirmation'>{`Sorted by distance from ${userPostCode.toUpperCase()}`}</p>
+                        <span>
+                            <p className='changePostcode' onClick={() => openInputHandler('sort')}>{`Change`}</p>
+                            <p className='changePostcode' onClick={clearPostcode}>{`Clear`}</p>
+                        </span>
+                    </div>
+                    </>
+                )}
             </div>
             <div className='search__bar-sort-input-container'>
                 <form 

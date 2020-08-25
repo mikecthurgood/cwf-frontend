@@ -6,17 +6,18 @@ import MainContainer from './pages/MainContainer'
 import { handleLogin, handleSignup } from './helpers/Auth'
 
 const App = () => {
-
-  const [user, setUser] = useState({ username: null, userId: null, isAuth: false, token: '' })
-  const [walls, setWalls] = useState([])
+  
+  const [loginError, setLoginError] = useState(false)
+  const [mobileMenuVisible, setMobileMenuVisible] = useState(false)
+  const [searchBarVisible, setSearchBarVisibility] = useState(false)
+  const [searchFilter, setSearchFilter] = useState('')
   const [singleWall, setSingleWall] = useState({})
   const [signUpFlag, setSignUpFlag] = useState(false)
-  const [searchBarVisible, setSearchBarVisibility] = useState(false)
   const [sortInputVisible, setSortInputVisibility] = useState(false)
+  const [user, setUser] = useState({ username: null, userId: null, isAuth: false, token: '' })
   const [userPostCode, setUserPostCode] = useState('')
+  const [walls, setWalls] = useState([])
   
-  const [searchFilter, setSearchFilter] = useState('')
-  const [loginError, setLoginError] = useState(false)
 
   useEffect(() => {
     const token = localStorage.getItem('token')
@@ -90,6 +91,12 @@ const App = () => {
     return {status: false, message: 'Postcode is invalid'}
   }
 
+  const mobileMenuToggle = () => {
+    setMobileMenuVisible(!mobileMenuVisible)
+    console.log(mobileMenuVisible)
+  }
+  
+
   const filteredWalls = walls.filter(wall => wall.name.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.region.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.city.toLowerCase().includes(searchFilter.toLocaleLowerCase())).sort((a, b) => (a.name > b.name) ? 1 : -1)
 
   return (
@@ -101,6 +108,7 @@ const App = () => {
           setSearchFilter={setSearchFilter}
           loginHandler={loginHandler}
           loginError={loginError}
+          mobileMenuToggle={mobileMenuToggle}
           setSignUpFlag={setSignUpFlag}
         />
         <MainContainer

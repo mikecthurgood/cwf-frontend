@@ -24,7 +24,6 @@ const MainContainer = ({ walls, setWalls, updateFilter, clearFilter, user, login
             userPostCode={userPostCode} 
             setUserPostCode={setUserPostCode}
         /></Suspense>} />
-        {/* <Route exact path="/login" render={(routerProps) => <AuthForm {...routerProps} onSubmit={loginHandler} signup={false} user={user} />}/> */}
         <Route exact path="/signup" render={(routerProps) => <Suspense fallback={<div>Loading...</div>}><AuthForm {...routerProps} onSubmit={signupHandler} signup={true} user={user} /></Suspense>}/>
         <Route exact path="/:wallSlug" render={(routerProps) => <Suspense fallback={<div>Loading...</div>}><SingleWall {...routerProps} signOut={signOut} user={user} /> </Suspense>}/>
         </Switch>
