@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './SearchBar.scss'
 
 const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, setUserPostCode }) => {
@@ -7,7 +7,9 @@ const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, se
     const handleSetPostCode = (e) => {
         e.preventDefault()
         const valid = setUserPostCode(postCodeInput)
-        if (valid.status) openSort()
+        if (valid.status) {
+            return openSort()
+        }
     }
 
     const handlePostCodeChange = (e) => {
@@ -15,7 +17,8 @@ const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, se
     }
 
     const clearPostcode = () => {
-        setUserPostCode()
+        setPostCodeInput('')
+        setUserPostCode('')
     }
 
     const openInputHandler = (type) => {
@@ -33,7 +36,7 @@ const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, se
     return (
         <>
         <div className='search__bar-sort-container'>
-            <div className='search__bar-sort-button-container'>
+            <div className='search__bar-sort-button-container' onClick={() => openInputHandler('sort')}>
                 {!userPostCode ? (
                     <>
                         <input 
@@ -65,7 +68,7 @@ const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, se
                 )}
             </div>
             <div className='search__bar-sort-input-container'>
-                <form 
+                <form className={`search__bar-sort-form ${sortInputVisible ? 'visible' : ''}`}
                     onChange={handlePostCodeChange} 
                     onSubmit={handleSetPostCode} 
                     autoComplete="off"
@@ -75,6 +78,7 @@ const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, se
                         placeholder='Enter Postcode' 
                         name='searchInput' 
                         className={`search__bar-sort-input ${sortInputVisible ? 'visible' : ''}`} 
+                        value={postCodeInput}
                     />
                     
                 </form>

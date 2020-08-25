@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import { withRouter } from 'react-router-dom';
 import './App.scss';
 import NavBar from './components/navbar/NavBar'
 import MainContainer from './pages/MainContainer'
 import { handleLogin, handleSignup } from './helpers/Auth'
+
+const MobileMenu = React.lazy(() => import('./components/navbar/MobileMenu'))
 
 const App = () => {
   
@@ -23,9 +25,11 @@ const App = () => {
     const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
     const username = localStorage.getItem('userName')
-        if (!token) {
-          console.log('no token stored')
-          return;
+    const postcode = localStorage.getItem('userPostcode')
+    if (postcode) setPostCode(postcode)  
+    if (!token) {
+      console.log('no token stored')
+      return;
     }
     setUser({username, userId, token, isAuth: true})
   }, [])
@@ -57,6 +61,7 @@ const App = () => {
   const signupHandler = async (event, authData) => {
     event.preventDefault();
     const signupResult = await handleSignup(authData)
+    if (signupResult.error) return signupResult
     if (signupResult.signupSuccess) window.location.assign("/")
   }
 
@@ -81,11 +86,13 @@ const App = () => {
     const postcodeRegEx = /[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}/i; 
     if (!postcode) {
       setUserPostCode('')
+      localStorage.removeItem('userPostcode')
       return {status: true}
     }
     const validPostcode = postcodeRegEx.test(postcode); 
     if (validPostcode) {
       setUserPostCode(postcode)
+      localStorage.setItem('userPostcode', postcode)
       return {status: true}
     }
     return {status: false, message: 'Postcode is invalid'}
@@ -111,6 +118,16 @@ const App = () => {
           mobileMenuToggle={mobileMenuToggle}
           setSignUpFlag={setSignUpFlag}
         />
+         <Suspense fallback={<div></div>}>
+          <MobileMenu 
+            loginError={loginError}
+            loginHandler={loginHandler}
+            mobileMenuToggle={mobileMenuToggle}
+            signOut={signOut}
+            user={user}
+            visible={mobileMenuVisible}
+          />
+        </Suspense>
         <MainContainer
           userPostCode={userPostCode} 
           setUserPostCode={setPostCode}

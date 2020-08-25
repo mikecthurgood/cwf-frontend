@@ -30,7 +30,15 @@
     }
     @media only screen and (max-width: 480px) {
       margin: 0;
-      height: 20px;
-      font-size: 10px;
+      height: 30px;
+      font-size: 16px;
     }
+  }
+
+  h6 {
+    padding: 0;
+    margin: 5px 0 10px 0 ;
+    font-family: 'Muli', sans-serif;
+    font-size: 16px;
+    color: red
   }

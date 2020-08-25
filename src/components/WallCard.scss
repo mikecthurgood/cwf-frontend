@@ -25,6 +25,7 @@ $text-color: #282c34;
     position: relative;
     background-color: #fff;
     color: $text-color !important;
+    text-decoration: none;
     cursor: default;
 
     @media only screen and (max-width: 974px) {

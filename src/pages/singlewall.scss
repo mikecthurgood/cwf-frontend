@@ -349,12 +349,13 @@ $secondary-color: #72757c;
                 width: 100vw;
                 height: 100vh;
                 overflow-y: scroll;
-                position: absolute;
-                top: 40px;
+                position: relative;
+                // top: 40px;
                 .single__wall-heading {
                     .single__wall-title {
                         display: flex;
                         justify-content: center;
+                        
                         h1 {
                             font-size: 20px;
                             margin-bottom: 10px;

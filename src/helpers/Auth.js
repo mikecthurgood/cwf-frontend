@@ -102,12 +102,12 @@ export const handleLogin = (authData) => {
         }).then(res => {return res.json()})
         if (resData.errors && resData.errors[0].status === 422) {
         throw new Error(
-            "Validation failed. Make sure the email address isn't used yet!"
+            "Validation failed. Email address already registered."
         );
         }
         if (resData.errors && resData.errors[0].status === 456) {
             throw new Error(
-                "Invalid email address"
+                "Invalid email address."
             );
             }
         if (resData.errors) {

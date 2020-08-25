@@ -37,7 +37,9 @@ class AuthForm extends Component {
             validators: [required]
           },
           formIsValid: false
-        }
+        },
+        passwordsMatch: true,
+        errorMessage: '',
       };
 
     inputChangeHandler = (input, value) => {
@@ -80,6 +82,7 @@ class AuthForm extends Component {
       };
 
       submitHandler = async e => {
+        console.log(e)
         e.preventDefault()
         const submitData = !this.props.signup ? 
             {
@@ -93,13 +96,20 @@ class AuthForm extends Component {
                 password: this.state.loginForm.password.value,
                 passwordConfirmation: this.state.loginForm.passwordConfirmation.value,
             }
-        await this.props.onSubmit(e, {
+        if (this.props.signUp && submitData.password !== submitData.passwordConfirmation) return this.setState({ passwordsMatch: false, errorMessage: 'Passwords do not match'} )
+        const response = await this.props.onSubmit(e, {
             submitData
         })
+        if (response && response.error) return this.setState({errorMessage: response.error.message})
+      }
+
+      closeMobileMenu = () => {
+        this.props.loginToggle()
+        this.props.mobileMenuToggle()
       }
       
       render() {
-          const { loginError, signup, user } = this.props
+          const { loginError, signup, user, hideRegisterButton } = this.props
           if (user && user.userId) {
             return <Redirect to={"/"} />
           }
@@ -108,7 +118,7 @@ class AuthForm extends Component {
               <div className='auth__form-container'>
                 <div className='auth__form'>
                   <div className='auth__form-components'>
-                    {!signup && <Link to='/signup'><button onClick={() => this.props.setSignUpFlag(true)} className='login_logout register'>Register</button></Link>}
+                    {!signup && !hideRegisterButton && <Link to='/signup'><button className='login_logout register'>Register</button></Link>}
                     <form className={`${loginError ? 'error' : ''}`}
                         onSubmit={e =>this.submitHandler(e)}
                     >
@@ -139,7 +149,7 @@ class AuthForm extends Component {
                         <Input
                         id="password"
                         placeholder={`${signup ? 'Password' : ''}`}
-                        label={`${signup ? 'Password Confirmation' : ''}`}
+                        label={`${signup ? 'Password' : ''}`}
                         type="password"
                         control="input"
                         placeholder={`${signup ? 'Choose your password' : 'Password'}`}
@@ -151,7 +161,7 @@ class AuthForm extends Component {
                         />
                         {signup && <Input
                         id="passwordConfirmation"
-                        label="Password Confirmation"
+                        label="Confirm Password"
                         type="password"
                         control="input"
                         placeholder="Confirm your password"
@@ -161,7 +171,14 @@ class AuthForm extends Component {
                         valid={this.state.loginForm['passwordConfirmation'].valid}
                         touched={this.state.loginForm['passwordConfirmation'].touched}
                         />}
-                        <button onClick={null} disabled={(this.state.loginForm['password'].value.length < 1 || this.state.loginForm.email.value.length < 1) ? true : false} className={`login_logout ${(this.state.loginForm['password'].value.length < 1 || this.state.loginForm.email.value.length < 1) ? 'disabled' : 'active'}`}>{signup ? 'Signup' : 'Login'}</button>
+                        {signup && this.state.errorMessage && (
+                          <>
+                            <h6>{this.state.errorMessage}</h6>
+                          </>
+                        )}
+                        <div className='submit-button'>
+                          <button onClick={this.closeMobileMenu} disabled={(this.state.loginForm['password'].value.length < 1 || this.state.loginForm.email.value.length < 1) ? true : false} className={`login_logout ${(this.state.loginForm['password'].value.length < 1 || this.state.loginForm.email.value.length < 1) ? 'disabled' : 'active'}`}>{signup ? 'Signup' : 'Login'}</button>
+                        </div>
                     </form>
                     </div>
                 </div>

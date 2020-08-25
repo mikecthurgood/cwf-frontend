@@ -27,12 +27,30 @@ $base-color: #282c34;
           left: 25%;
         }
       }
+
+      .hamburger-menu {
+        display: none;
+
+        @media only screen and (max-width: 480px) {
+          display: flex;
+          position: absolute;
+          left: 10px;
+          img {
+            width: 25px;
+          }
+          
+        }
+      }
       
       .navbar-account-details{
         position: absolute;
         right: 1rem;
         top: 0;
         display: flex;
+        @media only screen and (max-width: 480px) {
+          text-align: center;
+          margin: -12px -44px 0 0;
+        }
       }
             
       .nav-username {
@@ -40,10 +58,11 @@ $base-color: #282c34;
         top: 1px;
         color: white;
         margin-right: 10px;
-        @media only screen and (max-width: 480px) {
-          display: none;
+         @media only screen and (max-width: 480px) {
+          margin-right: -10px;
+          padding: 0;
+          width: 10%;
         }
-        
       }
 
       .login-dropdown {
@@ -86,9 +105,7 @@ $base-color: #282c34;
           transform: translateY(0.5px);
         }
         @media only screen and (max-width: 480px) {
-          margin: 0;
-          height: 20px;
-          font-size: 10px;
+          display: none;
         }
       }
       .auth__form {
