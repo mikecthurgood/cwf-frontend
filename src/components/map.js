@@ -3,8 +3,6 @@ import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-map
 
 const key = process.env.REACT_APP_MAPSAPIKEY
 
-const { StandaloneSearchBox } = require("react-google-maps/lib/components/places/StandaloneSearchBox");    
-
 const MapComponent = withScriptjs(withGoogleMap((props) => {
     const [geo, setGeo] = useState({})
     const wallName = encodeURI(props.wallName.replace(',', ' ' ).replace('&', '%26'))
@@ -16,7 +14,7 @@ const MapComponent = withScriptjs(withGoogleMap((props) => {
                 
             }
             getGeo()
-        }, [props.postcode]);
+        }, [props.postcode, wallName]);
 
     return (
         <>

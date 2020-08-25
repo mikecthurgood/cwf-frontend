@@ -5,216 +5,131 @@ $base-color: #282c34;
     top: 0;
     width: 100%;
     text-align: right;
-    padding: 10px;
+    padding: 0;
     top: 50px;
-    height: 20px;
+    height: 40px;
     z-index: 10;
     background-color: #ED5656;
 
-    .search__bar-button {
-        position: relative;
-        right: 5%;
-        top: 3px;
-        opacity: 0;
-        background-color: transparent;
-        border: none;
-        font-size: 16px;
-        padding: 0 10px 0 10px;
-        margin: 0;
-        color: white;
-        outline: none;
-        margin-left: 2px;
-        transform: translateY(-3px);
-        font-weight: bold;
-        z-index: 0;
-        &.visible {
-            visibility: visible;
-            z-index: 100;
-            opacity: 1;
-            transition: opacity 0.25s ease-in;
-            transform: translateY(-5px);
-        }
-        &:hover {
-            color: black;
-        }
-        &:active {
-            background-color: transparent;
-            transform: translateY(0.1px);
-        }
-    }
-   
-    img {
-        position: absolute;
-        right: 4%;
-        max-height: 20px;
-        margin-left: 10px;
-        z-index: 100;
-    }
-    .search-box-container {
-        display: none;
-        flex-direction: row;
-        position: relative;
-        left: 0;
-        height: 100%;
-        width: 100vw;
-
-        &.visible {
-            display: flex;
-        }
-
-        form {
-            position: absolute;
-            right: 60px;
-            top: -2px;
-            height: fit-content; 
-        }
-        
-        .search__bar-filter-input {
-            position: relative;
-            width: 0px;
-            top: 0.3px;
-            right: 5.3%;
-            font-size: 16px;
-            text-align: left;
-            opacity: 0;
-            border: none;
-            border-radius: 3px;
-            transition: width 0.25s ease-out;
-            font-family: 'Muli', sans-serif;
-            z-index: 0;
-            &:focus, {
-                outline: none;
-            }
-            &.visible {
-                z-index: 99;
-                width: 200px;
-                opacity: 1;
-                padding: 5px;
-                transform: translateY(-3px);
-            }
-        }
-    }
-  }
-
-
-  .search__bar-sort-button {
-    position: absolute;
-    left: 1%;
-    top: 6px;
-    display: none;
-    background-color: transparent;
-    border: none;
-    font-size: 16px;
-    padding: 0 10px 0 10px;
-    margin: 0;
-    color: white;
-    outline: none;
-    margin-left: 2px;
-    transform: translateY(-3px);
-    font-weight: bold;
-
-    &.visible {
-        visibility: visible;
+    .search__bar-sort-container {
         display: flex;
-        transition: opacity 0.25s ease-in;
+        flex-direction: column;
+        float: right;
 
-    }
-    &:hover {
-        color: black;
-    }
-    &:active {
-        background-color: transparent;
-    }
-}
-  .search__bar-sort-container {
-      display: none;
-      color: white;
-      font-weight: bold;
-      span {
-          display: flex;
-          flex-direction: row;
-          p {
-              margin-right: 10px;
-          }
-      }
-      p {
-          font-weight: normal;
-          font-size: small;
-          margin: 0;
-          text-align: left;
-      }
-      .change-post-code-container {
-          margin: 0;
-          transform: translateY(-8px);
-          min-width: max-content;
-          .changePostcode {
+        .search__bar-sort-button-container {
+            float: right;  
+            display: inline-flex;
+            height: 40px;
+            min-width: 180px;
+            width: fit-content;
+            color: white;
+            padding-right: 45px;
+            padding-left: 10px;
             font-weight: bold;
-            &:hover {
-                color: black;
+            justify-content: space-between;
+            text-align: right;
+
+            span {
+                display: flex;
+                flex-direction: row;
+                justify-content: right;
+                p {
+                    margin-right: 10px;
+                }
+            }
+
+            p {
+                font-weight: normal;
+                font-size: small;
+                margin: 0;
+                text-align: left;
+            }
+
+            img {
+                position: relative;
+                float: right;
+                max-height: 20px;
+                z-index: 100;
+            }
+
+            .search__bar-sort-button {
+                position: relative;
+                float: right;
+                left: 0;
+                top: 3px;
+                display: flex;
+                background-color: transparent;
+                border: none;
+                font-size: 16px;
+                padding: 0 10px 0 10px;
+                margin: 0;
+                color: white;
+                outline: none;
+                margin-left: 2px;
+                transform: translateY(-3px);
+                font-weight: bold;
+                font-family: 'Muli', sans-serif;
+                
+                &:active {
+                    background-color: transparent;
+                }
+                input {
+                    text-align: right;
+                }
+            }
+
+            .search__bar-sort-icon {
+                margin-top: 10px;
+                float: right;
+                margin-right: 5px;
+            }
+
+            .change-post-code-container {
+                margin: 0;
+                min-width: max-content;
+                span {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    margin-top: 3px;
+                    .changePostcode {
+                        font-weight: bold;
+                        &:hover {
+                            color: black;
+                        }
+                    }
+                }
             }
         }
-      }
-      &.visible {
-          display: flex;
-          flex-direction: row;
-          position: absolute;
-          z-index: 1000;
-      }
-  }
-
-  .close-sort {
-      margin: 0 !important;
-      padding: 0 0 0 6px !important;
-      position: relative !important;
-      bottom: 0 !important;
-      transform: translateY(-5px) !important;
-      font-weight: inherit !important;
-  }
-
-  .postcode-search-container {
-      position: absolute;
-      display: flex;
-      flex-direction: column;
-      left: 26px;
-      top: 8px;
-      z-index: 100;
-
-      .search__bar-button {
-        position: absolute;
-        left: -16px;
-        top: 10px;
+        .search__bar-sort-input-container {
+            position: relative;
+            z-index: 100;
+            form {
+                position: relative;
+                top: -3px;
+            }
+            .search__bar-sort-input {
+                position: relative;
+                top: 2.5px;
+                font-size: 16px;
+                text-align: left;
+                opacity: 0;
+                border: none;
+                border-radius: 0 0 0 5px;
+                transition: opacity 0.25s ease-out;
+                font-family: 'Muli', sans-serif;
+                background-color: $base-color;
+                color: #ffffff;
+                &.visible {
+                    opacity: 1;
+                    transition: opacity 0.25s ease-in;
+                    padding: 10px 5px 10px 25px; 
+                    &:focus {
+                        outline: none;
+                    } 
+                }
+            }
         }
-
-      img {
-        position: relative;
-        right: 20px;
-        top: 1px;
-        visibility: hidden;
-        &.visible {
-          visibility: visible;
-          z-index: 100;
-        }
-    }
-  }
-
-  .search__bar-sort-input {
-    position: relative;
-    width: 0px;
-    top: 0.3px;
-    right: 5.3%;
-    font-size: 16px;
-    text-align: left;
-    opacity: 0;
-    border: none;
-    border-radius: 3px;
-    transition: width 0.25s ease-out;
-    font-family: 'Muli', sans-serif;
-    &.visible {
-        width: 200px;
-        opacity: 1;
-        transition: width 0.25s ease-in;
-        padding: 5px;
-        transform: translateY(-3px);
     }
 }
 
@@ -226,77 +141,55 @@ $base-color: #282c34;
             max-height: 20px;
             margin-left: 10px;
         }
-
-        .search-box-container {
-            form {
-                right: -10px;
-                margin: 0;
-                top: 0;
+        .search__bar-sort-container {
+            width: 100%;
+            .search__bar-sort-button-container {
+                .search__bar-sort-icon {
+                    z-index: 1000;
+                }
+                .search__bar-sort-button {
+                    margin: 0;
+                    left: 0;
+                    font-size: 16px;
+                    padding: 0;
+                }
             }
-
-            .search__bar-button {
-                top: 42px;
-                right: 20px;
-                z-index: 100;
-                &:focus {
+    
+            .search__bar-sort-input-container {
+                
+                .search__bar-sort-input {
+                    background-color: $base-color;
+                    width: 100%;
                     color: #ffffff;
+                    .search__bar-button {
+                        position: absolute;
+                        left: 0;
+                    }
+                    &.visible {
+                        transition: opacity 0.25s ease-in;
+                        
+                        border-radius: 0;
+                        padding: 10px 5px;
+                    }
+                    &:focus {
+                        outline: none;
+                    }
                 }
             }
-            .search__bar-filter-input {
-                background-color: $base-color;
-                top: 10px;
-                color: #ffffff;
-                &.visible {
-                    transition: opacity 0.25s ease-in;
-                    width: 100vw;
-                    right: 10px;
-                    border-radius: 0;
-                    padding: 10px 5px;
-                }
-            }
-        }  
-    }
-
-    .search__bar-sort-button {
-        margin: 0;
-        left: 0;
-        font-size: 16px;
-        padding: 0;
-    }
-
-    .postcode-search-container {
-        margin: 0;
-        left: 14px;
-        font-size: 16px;
-        padding: 0;
+            .search__bar-sort-input-container {
+                margin: 0;
+                font-size: 16px;
+                padding: 0;
         
-        img {
-            position: absolute;
-            margin: 0;
-            top: 42px;
-            right: 35px;
-            font-size: 16px;
-            padding: 0;
-            z-index: 10000;
-        }
-
-        .search__bar-sort-input {
-            background-color: $base-color;
-            top: 35px;
-            left: -16px;
-            color: #ffffff;
-            .search__bar-button {
-                position: absolute;
-                left: 0;
-            }
-            &.visible {
-                transition: opacity 0.25s ease-in;
-                width: 100vw;
-                border-radius: 0;
-                padding: 10px 5px;
-            }
-            &:focus {
-                outline: none;
+                img {
+                    position: absolute;
+                    margin: 0;
+                    top: 42px;
+                    right: 35px;
+                    font-size: 16px;
+                    padding: 0;
+                    z-index: 10000;
+                }  
             }
         }
     }

@@ -42,9 +42,9 @@ const WallCard = ({ wall, singleWall }) => (
                     Open: {wall.weekendOpening}<br />Close: {wall.weekendClosing}</p>
             </div>
         </div>
-        {!singleWall && <div>
-            <Link to={"/" + wall.slug} ><button className='wallcard-button' >View Details and Reviews</button></Link>
-        </div>}
+        <div>
+            <button className='wallcard-button' >View Details and Reviews</button>
+        </div>
     </Link>
 )
 
