@@ -134,7 +134,6 @@ $base-color: #282c34;
 }
 
 @media only screen and (max-width: 480px) {
-
     .search-box {
         img {
             right: 10%;
@@ -144,6 +143,7 @@ $base-color: #282c34;
         .search__bar-sort-container {
             width: 100%;
             .search__bar-sort-button-container {
+                width: 100%;
                 .search__bar-sort-icon {
                     z-index: 1000;
                 }
@@ -154,9 +154,19 @@ $base-color: #282c34;
                     padding: 0;
                 }
             }
-    
             .search__bar-sort-input-container {
-                
+                margin: 0;
+                font-size: 16px;
+                padding: 0;
+                img {
+                    position: absolute;
+                    margin: 0;
+                    top: 42px;
+                    right: 35px;
+                    font-size: 16px;
+                    padding: 0;
+                    z-index: 10000;
+                }  
                 .search__bar-sort-input {
                     background-color: $base-color;
                     width: 100%;
@@ -175,21 +185,6 @@ $base-color: #282c34;
                         outline: none;
                     }
                 }
-            }
-            .search__bar-sort-input-container {
-                margin: 0;
-                font-size: 16px;
-                padding: 0;
-        
-                img {
-                    position: absolute;
-                    margin: 0;
-                    top: 42px;
-                    right: 35px;
-                    font-size: 16px;
-                    padding: 0;
-                    z-index: 10000;
-                }  
             }
         }
     }
