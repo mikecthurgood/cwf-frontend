@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import './SearchBar.scss'
 
-const SearchBar = ({ updateFilter, clearFilter, searchInputVisible, sortInputVisible, openSearchBar, openSort, userPostCode, setUserPostCode }) => {
+const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, setUserPostCode }) => {
     const [postCodeInput, setPostCodeInput ] = useState(userPostCode)
 
     const handleSetPostCode = (e) => {
@@ -25,6 +25,8 @@ const SearchBar = ({ updateFilter, clearFilter, searchInputVisible, sortInputVis
         if (type === 'sort') {
             openSort()
         }
+
+        console.log(type, sortInputVisible)
         
     }
 
@@ -42,19 +44,19 @@ const SearchBar = ({ updateFilter, clearFilter, searchInputVisible, sortInputVis
                     onClick={() => openInputHandler('sort')}
                 />
                 <img 
-                    src={searchInputVisible ? '/images/close-cross.png' : '/images/search-icon.png'} 
+                    src={sortInputVisible ? '/images/close-cross.png' : '/images/search-icon.png'} 
                     className='search__bar-sort-icon' 
                     alt='search icon' 
                     value='Close' 
                     onClick={() => openInputHandler('sort')}
-                    onMouseOver={e => (e.currentTarget.src = searchInputVisible ? '/images/close-cross-black.png' : '/images/search-icon-black.png')} 
-                    onMouseOut={e => (e.currentTarget.src = searchInputVisible ? '/images/close-cross.png' : '/images/search-icon.png')} 
+                    onMouseOver={e => (e.currentTarget.src = sortInputVisible ? '/images/close-cross-black.png' : '/images/search-icon-black.png')} 
+                    onMouseOut={e => (e.currentTarget.src = sortInputVisible ? '/images/close-cross.png' : '/images/search-icon.png')} 
                 />
                 </>
             ) : (
                 <>
                 <div className='change-post-code-container'>
-                    <p>{`Sorted by distance from ${userPostCode.toUpperCase()}`}</p>
+                    <p className='postcode-confirmation'>{`Sorted by distance from ${userPostCode.toUpperCase()}`}</p>
                     <span>
                         <p className='changePostcode' onClick={() => openInputHandler('sort')}>{`Change`}</p>
                         <p className='changePostcode' onClick={clearPostcode}>{`Clear`}</p>
