@@ -27,10 +27,7 @@ const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, se
         }
         if (type === 'sort') {
             openSort()
-        }
-
-        console.log(type, sortInputVisible)
-        
+        }        
     }
 
     return (

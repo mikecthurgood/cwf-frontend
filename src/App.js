@@ -28,7 +28,6 @@ const App = () => {
     const postcode = localStorage.getItem('userPostcode')
     if (postcode) setPostCode(postcode)  
     if (!token) {
-      console.log('no token stored')
       return;
     }
     setUser({username, userId, token, isAuth: true})
@@ -100,7 +99,6 @@ const App = () => {
 
   const mobileMenuToggle = () => {
     setMobileMenuVisible(!mobileMenuVisible)
-    console.log(mobileMenuVisible)
   }
   
 
