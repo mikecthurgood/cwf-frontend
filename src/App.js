@@ -1,12 +1,12 @@
 import React, { useState, useEffect, Suspense } from 'react';
 import { withRouter } from 'react-router-dom';
 import './App.scss';
-import NavBar from './components/navbar/NavBar'
-import MainContainer from './pages/MainContainer'
+import NavBar from './components/navigation/NavBar'
+import MainContainer from './components/MainContainer'
 import { handleLogin, handleSignup } from './helpers/Auth'
 
-const MobileMenu = React.lazy(() => import('./components/navbar/MobileMenu'))
-const LoginMenu = React.lazy(() => import('./components/navbar/LoginMenu'))
+const MobileMenu = React.lazy(() => import('./components/navigation/MobileMenu'))
+const LoginMenu = React.lazy(() => import('./components/navigation/LoginMenu'))
 
 const App = () => {
   

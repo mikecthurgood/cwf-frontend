@@ -5,11 +5,11 @@ import './singlewall.scss'
 
 const CountUp = React.lazy(() => import('react-countup'))
 const GaugeChart = React.lazy(() => import('react-gauge-chart'))
-const ContentTabs = React.lazy(() => import('../components/contentTabs.js'))
+const ContentTabs = React.lazy(() => import('../components/singleWallComponents/contentTabs.js'))
 const StarRatings = React.lazy(() => import('react-star-ratings'))
 const ReviewForm = React.lazy(() => import('../components/form/reviewForm'))
-const MapComponent = React.lazy(() => import('../components/map'))
-const Reviews = React.lazy(() => import('../components/Reviews'))
+const MapComponent = React.lazy(() => import('../components/singleWallComponents/map'))
+const Reviews = React.lazy(() => import('../components/singleWallComponents/Reviews'))
 const ContactForm = React.lazy(() => import('../components/form/ContactForm'))
 
 const SingleWall = (props) => {

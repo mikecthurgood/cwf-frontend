@@ -2,7 +2,7 @@ import React, { Suspense } from 'react'
 
 // import './singlewall.scss'
 
-const ContactForm = React.lazy(() => import('./form/ContactForm'))
+const ContactForm = React.lazy(() => import('../form/ContactForm'))
 
 const ContentTabs = ({wall, user, tabContent, setTabContent, description}) => (
     <>

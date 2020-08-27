@@ -1,6 +1,6 @@
 import React from 'react'
 import StarRatings from 'react-star-ratings';
-import ReviewForm from '../components/form/reviewForm'
+import ReviewForm from '../../components/form/reviewForm'
 
 const Reviews = ({reviews, wallId, user, editReviewFormVisible, addReview, createEditPost, editReviewFormVisibleToggle, deleteReview}) => (
     <div className='single__wall-customer-reviews'>

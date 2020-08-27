@@ -2,8 +2,8 @@ import React, { useEffect, Suspense } from 'react';
 import API from '../helpers/API'
 import { Helmet } from 'react-helmet'
 
-const WallCard = React.lazy(() => import('../components/WallCard'));
-const SearchBar = React.lazy(() => import('../components/SearchBar'));
+const WallCard = React.lazy(() => import('../components/homePageComponents/WallCard'));
+const SearchBar = React.lazy(() => import('../components/sortAndFilter/SearchBar'));
 
 const Home = ({ walls, setWalls, updateFilter, clearFilter, searchFilter, searchBarVisible, openSearchBar, openSortInput, signOut, sortInputVisible, user, userPostCode, setUserPostCode }) => {
 

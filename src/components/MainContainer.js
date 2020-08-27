@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react'
 import { Route, Switch } from 'react-router-dom';
 
-const Home = React.lazy(() => import('./Home'))
-const AuthForm = React.lazy(() => import('../components/form/AuthForm'))
-const SingleWall = React.lazy(() => import('./singleWall'));
+const Home = React.lazy(() => import('../pages/Home'))
+const AuthForm = React.lazy(() => import('./form/AuthForm'))
+const SingleWall = React.lazy(() => import('../pages/singleWall'));
 
 const MainContainer = ({ walls, setWalls, updateFilter, clearFilter, user, loginHandler, openSearchBar, openSortInput, searchBarVisible, setUserPostCode, signUpFlag, signupHandler, signOut, sortInputVisible, userPostCode, searchFilter }) => (
     <div className='main-container'>
