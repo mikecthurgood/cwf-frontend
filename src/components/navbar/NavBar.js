@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AuthForm from '../form/AuthForm'
 import './navbar.scss'
 
-const NavBar = ({ loginError, loginHandler, setSearchFilter, signInTest, setSignUpFlag, signOut, user, mobileMenuToggle }) => {
+const NavBar = ({ loginError, loginHandler, loginMenuToggle, setSearchFilter, signInTest, setSignUpFlag, signOut, user, mobileMenuToggle }) => {
 
     return (
         <div className='navbar-container'>
@@ -11,15 +11,26 @@ const NavBar = ({ loginError, loginHandler, setSearchFilter, signInTest, setSign
             {!user.username ?
             <>
                  <div className='login-dropdown'>
-                    <AuthForm loginError={loginError} onSubmit={loginHandler} signup={false} setSignUpFlag={setSignUpFlag} user={user} />
+                    <AuthForm 
+                    loginError={loginError} 
+                    onSubmit={loginHandler} 
+                    signup={false} 
+                    setSignUpFlag={setSignUpFlag} 
+                    user={user}
+                    loginToggle={() => {}}
+                    mobileMenuToggle={() => {}}
+                />
                  </div>
             </>
                 :
-                <div className="navbar-account-details"><p onClick={mobileMenuToggle} className='nav-username'>Hello {user.username}</p> <button onClick={signOut} className='login_logout'>Log Out</ button ></div>
+                <div className="navbar-account-details"><p onClick={loginMenuToggle} className='nav-username'>Hi {user.username}!</p></div>
             }
 
-            <div className='hamburger-menu'>
+            {/* <div className='hamburger-menu'>
                 <img onClick={mobileMenuToggle} src={require('../../assets/hamburger-icon.jpg')} alt="" />
+            </div> */}
+            <div className={`login-menu ${user.username ? 'logged-in' : '' }`}>
+                <img onClick={loginMenuToggle} src={require('../../assets/login-icon.jpg')} alt="" />
             </div>
         </div >
     )

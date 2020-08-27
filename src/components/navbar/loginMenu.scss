@@ -1,11 +1,13 @@
 $base-color: #282c34;
 
-.mobile__menu-container {
+.login__menu-container {
     position: absolute;
     top: 0;
-    display: none;
+    right: 0;
+    display: flex;
     z-index: 999;
     width: 50%;
+    max-width: 220px;
     // height: 0;
     background-color: $base-color;
     color: white;
@@ -32,13 +34,14 @@ $base-color: #282c34;
         text-align: left;
         color: white;
         text-decoration: none;
+        text-align: center;
     }
 }
 
-.mobile__menu-login-register {
+.login__menu-login-register {
     width: 100%;
 }
-.mobile__menu-auth__form {
+.login__menu-auth__form {
     max-height: 0px;
     overflow-y: hidden;
     transition: max-height 0.25s ease-out; 
@@ -50,7 +53,7 @@ $base-color: #282c34;
     .auth__form-container, .auth__form, input {
         padding: 2px;
         margin: 0;
-        justify-content: left;
+        justify-content: right;
         width: 98%;
     }
     .login_logout {
@@ -62,7 +65,7 @@ $base-color: #282c34;
         width: 100%;
         display: flex;
         flex-direction: row;
-        justify-content: left;
+        justify-content: center;
     }
 }
 
@@ -87,9 +90,10 @@ form {
     }
   }
 
-@media only screen and (max-width: 480px) {
-    .mobile__menu-container {
-        display: flex;
-        left: 0;
-    }
+@media only screen and (min-width: 480px) {
+    // .login__menu-container {
+    //     &.logged-out {
+    //         display: none;
+    //     }
+    // }
 }

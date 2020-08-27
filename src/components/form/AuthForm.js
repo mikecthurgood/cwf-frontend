@@ -82,7 +82,6 @@ class AuthForm extends Component {
       };
 
       submitHandler = async e => {
-        console.log(e)
         e.preventDefault()
         const submitData = !this.props.signup ? 
             {
@@ -148,7 +147,6 @@ class AuthForm extends Component {
                         />
                         <Input
                         id="password"
-                        placeholder={`${signup ? 'Password' : ''}`}
                         label={`${signup ? 'Password' : ''}`}
                         type="password"
                         control="input"

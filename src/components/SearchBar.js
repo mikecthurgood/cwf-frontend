@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import './SearchBar.scss'
 
-const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, setUserPostCode }) => {
+const SearchBar = ({ sortInputVisible, openSort, userPostCode, setUserPostCode }) => {
     const [postCodeInput, setPostCodeInput ] = useState(userPostCode)
 
     const handleSetPostCode = (e) => {
@@ -22,9 +22,6 @@ const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, se
     }
 
     const openInputHandler = (type) => {
-        if (type === 'search') {
-            openSearchBar()
-        }
         if (type === 'sort') {
             openSort()
         }        
@@ -66,7 +63,6 @@ const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, se
             </div>
             <div className='search__bar-sort-input-container'>
                 <form className={`search__bar-sort-form ${sortInputVisible ? 'visible' : ''}`}
-                    onChange={handlePostCodeChange} 
                     onSubmit={handleSetPostCode} 
                     autoComplete="off"
                 >
@@ -76,6 +72,7 @@ const SearchBar = ({ sortInputVisible, openSearchBar, openSort, userPostCode, se
                         name='searchInput' 
                         className={`search__bar-sort-input ${sortInputVisible ? 'visible' : ''}`} 
                         value={postCodeInput}
+                        onChange={handlePostCodeChange} 
                     />
                     
                 </form>

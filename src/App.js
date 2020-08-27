@@ -6,10 +6,12 @@ import MainContainer from './pages/MainContainer'
 import { handleLogin, handleSignup } from './helpers/Auth'
 
 const MobileMenu = React.lazy(() => import('./components/navbar/MobileMenu'))
+const LoginMenu = React.lazy(() => import('./components/navbar/LoginMenu'))
 
 const App = () => {
   
   const [loginError, setLoginError] = useState(false)
+  const [loginMenuVisible, setLoginMenuVisible] = useState(false)
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false)
   const [searchBarVisible, setSearchBarVisibility] = useState(false)
   const [searchFilter, setSearchFilter] = useState('')
@@ -39,6 +41,8 @@ const App = () => {
     const loginResult = await handleLogin(authData)
     if (loginResult.isAuth) {
         setUser({username: loginResult.username, userId: loginResult.userId, isAuth: true, token: loginResult.token})
+        setMobileMenuVisible(false)
+        setLoginMenuVisible(false)
     } else {
       setLoginError(true)
       setTimeout(()=> {
@@ -69,6 +73,8 @@ const App = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('userName')
     localStorage.removeItem('userId')
+    setMobileMenuVisible(false)
+    setLoginMenuVisible(false)
   }
 
   const updateFilter = (e) => {
@@ -100,9 +106,12 @@ const App = () => {
   const mobileMenuToggle = () => {
     setMobileMenuVisible(!mobileMenuVisible)
   }
-  
 
-  const filteredWalls = walls.filter(wall => wall.name.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.region.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.city.toLowerCase().includes(searchFilter.toLocaleLowerCase())).sort((a, b) => (a.name > b.name) ? 1 : -1)
+  const loginMenuToggle = () => {
+    setLoginMenuVisible(!loginMenuVisible)
+  }
+  
+  // const filteredWalls = walls.filter(wall => wall.name.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.region.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.city.toLowerCase().includes(searchFilter.toLocaleLowerCase())).sort((a, b) => (a.name > b.name) ? 1 : -1)
 
   return (
     <div className='app-main-container'>
@@ -114,6 +123,7 @@ const App = () => {
           loginHandler={loginHandler}
           loginError={loginError}
           mobileMenuToggle={mobileMenuToggle}
+          loginMenuToggle={loginMenuToggle}
           setSignUpFlag={setSignUpFlag}
         />
          <Suspense fallback={<div></div>}>
@@ -124,6 +134,16 @@ const App = () => {
             signOut={signOut}
             user={user}
             visible={mobileMenuVisible}
+          />
+        </Suspense>
+        <Suspense fallback={<div></div>}>
+          <LoginMenu 
+            loginError={loginError}
+            loginHandler={loginHandler}
+            loginMenuToggle={loginMenuToggle}
+            signOut={signOut}
+            user={user}
+            visible={loginMenuVisible}
           />
         </Suspense>
         <MainContainer
@@ -141,7 +161,7 @@ const App = () => {
           sortInputVisible={sortInputVisible}
           updateFilter={updateFilter}
           user={user}
-          walls={filteredWalls}
+          walls={walls}
           signUpFlag={signUpFlag}
           singleWall={singleWall}
           setSingleWall={setSingleWall}

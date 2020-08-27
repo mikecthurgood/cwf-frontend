@@ -22,9 +22,9 @@ $base-color: #282c34;
         top: 0.7rem;
 
         @media only screen and (max-width: 480px) {
-          max-width: none;
           top: 0.1rem;
-          left: 25%;
+          left: 0;
+          // left: 25%;
         }
       }
 
@@ -41,29 +41,62 @@ $base-color: #282c34;
           
         }
       }
+
+      .login-menu {
+        display: none;
+        position: absolute;
+        right: 10px;
+        top: 12px;
+        img {
+          width: 25px;
+        }
+        
+        &.logged-in {
+          display: flex;
+        }
+
+        @media only screen and (max-width: 480px) {
+          display: flex;
+          position: absolute;
+          // &.logged-in {
+          //   display: none;
+          //   overflow: hidden;
+
+            img {
+              // display: none;
+            }
+          // }
+        }
+      }
       
       .navbar-account-details{
         position: absolute;
         right: 1rem;
-        top: 0;
+        bottom: 0;
         display: flex;
         @media only screen and (max-width: 480px) {
+          width: fit-content;
           text-align: center;
-          margin: -12px -44px 0 0;
+          margin: 4px 0 0 0;
+          right: 40px;
+          font-size: 13px;
+          top: 0;
+        }
+        .nav-username {
+          position: relative;
+          top: 1px;
+          color: white;
+          margin-right: 30px;
+          text-align: right;
+           @media only screen and (max-width: 480px) {
+            margin-right: 0;
+            padding: 0;
+            width: fit-content;
+            justify-content: right;
+          }
         }
       }
             
-      .nav-username {
-        position: relative;
-        top: 1px;
-        color: white;
-        margin-right: 10px;
-         @media only screen and (max-width: 480px) {
-          margin-right: -10px;
-          padding: 0;
-          width: 10%;
-        }
-      }
 
       .login-dropdown {
         background-color: $base-color;

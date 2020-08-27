@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import './mobileMenu.scss'
+import './loginMenu.scss'
 
 const AuthForm = React.lazy(() => import('../form/AuthForm'))
 
 
-const MobileMenu = ({ loginError, loginHandler, mobileMenuToggle, signOut, user, visible }) => {
+const MobileMenu = ({ loginError, loginHandler, loginMenuToggle, signOut, user, visible }) => {
 
     const [loginVisible, setLoginVisible] = useState(false)
 
@@ -14,14 +14,14 @@ const MobileMenu = ({ loginError, loginHandler, mobileMenuToggle, signOut, user,
     }
 
     return (
-        <div className={`mobile__menu-container ${visible ? 'visible' : ''} ${user.username ? 'full-width' : ''}`}>
-            <div className='mobile__menu-login-register'>
+        <div className={`login__menu-container ${visible ? 'visible' : ''} ${user.username ? '' : 'logged-out'}`}>
+            <div className='login__menu-login-register'>
                 {user && user.username ? 
                 <h5 onClick={signOut}>Log out</h5>
                 :
                 (<>
                     <h5 onClick={loginToggle}>Login</h5>
-                    <div className={`mobile__menu-auth__form ${loginVisible ? 'visible' : ''}`}>
+                    <div className={`login__menu-auth__form ${loginVisible ? 'visible' : ''}`}>
                         <AuthForm 
                             loginError={loginError}
                             onSubmit={loginHandler} 
@@ -30,10 +30,10 @@ const MobileMenu = ({ loginError, loginHandler, mobileMenuToggle, signOut, user,
                             setSignUpFlag={false} 
                             user={false}
                             loginToggle={loginToggle}
-                            mobileMenuToggle={mobileMenuToggle}
+                            mobileMenuToggle={loginMenuToggle}
                         />
                     </div>
-                    <Link to='/signup'><h5 onClick={mobileMenuToggle}>Register</h5></Link>
+                    <Link to='/signup'><h5 onClick={loginMenuToggle}>Register</h5></Link>
                 </>)
                 }
             </div>

@@ -92,6 +92,7 @@ $base-color: #282c34;
                     display: flex;
                     flex-direction: row;
                     justify-content: center;
+                    text-align: center;
                     margin-top: 3px;
                     .changePostcode {
                         font-weight: bold;
@@ -167,9 +168,17 @@ $base-color: #282c34;
                 .postcode-confirmation, .change-post-code-container {
                     position: relative;
                     top: 1px;
+                    left: 10px;
                     width: 100%;
-                    justify-content: center;
-                    text-align: center;
+                    justify-content: left;
+                    // text-align: left;
+                    span {
+                        justify-content: left;
+                    }
+                }
+
+                .postcode-confirmation {
+                    left: 0;
                 }
             }
             .search__bar-sort-input-container {
