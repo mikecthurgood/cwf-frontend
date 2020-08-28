@@ -5,7 +5,7 @@ import './loginMenu.scss'
 const AuthForm = React.lazy(() => import('../form/AuthForm'))
 
 
-const MobileMenu = ({ loginError, loginHandler, loginMenuToggle, signOut, user, visible }) => {
+const LoginMenu = ({ loginError, loginHandler, loginMenuToggle, signOut, user, visible }) => {
 
     const [loginVisible, setLoginVisible] = useState(false)
 
@@ -30,7 +30,7 @@ const MobileMenu = ({ loginError, loginHandler, loginMenuToggle, signOut, user, 
                             setSignUpFlag={false} 
                             user={false}
                             loginToggle={loginToggle}
-                            mobileMenuToggle={loginMenuToggle}
+                            LoginMenuToggle={loginMenuToggle}
                         />
                     </div>
                     <Link to='/signup'><h5 onClick={loginMenuToggle}>Register</h5></Link>
@@ -41,4 +41,4 @@ const MobileMenu = ({ loginError, loginHandler, loginMenuToggle, signOut, user, 
     )
 }
 
-export default MobileMenu
+export default LoginMenu

@@ -8,7 +8,7 @@ $base-color: #282c34;
     padding: 0;
     top: 50px;
     height: 40px;
-    z-index: 10;
+    z-index: 100;
     background-color: #ED5656;
 
     .search__bar-sort-container {
@@ -70,6 +70,7 @@ $base-color: #282c34;
                 transform: translateY(-3px);
                 font-weight: bold;
                 font-family: 'Muli', sans-serif;
+                text-transform: uppercase;
                 
                 &:active {
                     background-color: transparent;

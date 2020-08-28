@@ -47,6 +47,11 @@ const getWalls = async () => {
                     region
                     postcode
                     slug
+                    auto
+                    top
+                    lead
+                    gym
+                    cafe
                     reviews {
                         rating
                       }
@@ -82,6 +87,11 @@ const getWallsWithDistance = async (postcode) => {
                             region
                             postcode
                             slug
+                            auto
+                            top
+                            lead
+                            gym
+                            cafe
                             distance
                             reviews {
                                 rating

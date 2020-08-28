@@ -10,6 +10,7 @@ const LoginMenu = React.lazy(() => import('./components/navigation/LoginMenu'))
 
 const App = () => {
   
+  const [filterSelection, setFilterSelection ] = useState({top: true, bouldering: true, auto: true, lead: true})
   const [loginError, setLoginError] = useState(false)
   const [loginMenuVisible, setLoginMenuVisible] = useState(false)
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false)
@@ -111,7 +112,31 @@ const App = () => {
     setLoginMenuVisible(!loginMenuVisible)
   }
   
-  // const filteredWalls = walls.filter(wall => wall.name.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.region.toLowerCase().includes(searchFilter.toLocaleLowerCase()) || wall.city.toLowerCase().includes(searchFilter.toLocaleLowerCase())).sort((a, b) => (a.name > b.name) ? 1 : -1)
+  const sortedWalls = walls.sort((a, b) => (a.name > b.name) ? 1 : -1);
+  const filteredWalls = sortedWalls.filter(wall => {
+    let selectedFilter = ''
+
+    if (filterSelection.bouldering) selectedFilter = 'all'
+    else if (!filterSelection.bouldering && !filterSelection.auto && (filterSelection.top || filterSelection.lead )) selectedFilter = 'ropesNoAuto'
+    else if (!filterSelection.bouldering && (filterSelection.top || filterSelection.lead || filterSelection.auto)) selectedFilter = 'ropesAndAuto'
+    else if (filterSelection.auto && (!filterSelection.top && !filterSelection.lead && !filterSelection.bouldering)) selectedFilter = 'autosOnly'
+    
+    switch (selectedFilter) {
+      case 'all':
+        return wall;
+      case 'ropesAndAuto':
+        if (wall.top || wall.lead || wall.auto) return wall;
+        break;
+      case 'ropesNoAuto':
+        if (wall.top || wall.lead) return wall;
+        break;
+      case 'autosOnly':
+        if (wall.auto) return wall;
+        break;
+      default:
+        return wall
+    }
+  })
 
   return (
     <div className='app-main-container'>
@@ -148,6 +173,8 @@ const App = () => {
         </Suspense>
         <MainContainer
           userPostCode={userPostCode} 
+          filterSelection={filterSelection}
+          setFilterSelection={setFilterSelection}
           setUserPostCode={setPostCode}
           clearFilter={clearFilter}
           openSearchBar={toggleSearchBar}
@@ -161,7 +188,7 @@ const App = () => {
           sortInputVisible={sortInputVisible}
           updateFilter={updateFilter}
           user={user}
-          walls={walls}
+          walls={filteredWalls}
           signUpFlag={signUpFlag}
           singleWall={singleWall}
           setSingleWall={setSingleWall}

@@ -29,13 +29,13 @@ const SearchBar = ({ sortInputVisible, openSort, userPostCode, setUserPostCode }
 
     return (
         <>
-        <div className='search__bar-sort-container'>
+        {/* <div className='search__bar-sort-container'>
             <div className='search__bar-sort-button-container' onClick={() => openInputHandler('sort')}>
                 {!userPostCode ? (
                     <>
                         <input 
                             type='button' 
-                            value={sortInputVisible ? 'Enter Postcode' : 'Sort By Distance'}
+                            value={sortInputVisible ? 'Enter Postcode' : '+ Sort and filter'}
                             className='search__bar-sort-button'
                             onClick={() => openInputHandler('sort')}
                         />
@@ -77,7 +77,7 @@ const SearchBar = ({ sortInputVisible, openSort, userPostCode, setUserPostCode }
                     
                 </form>
             </div>
-        </div>
+        </div> */}
         </>
     )
 }

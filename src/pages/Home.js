@@ -4,8 +4,9 @@ import { Helmet } from 'react-helmet'
 
 const WallCard = React.lazy(() => import('../components/homePageComponents/WallCard'));
 const SearchBar = React.lazy(() => import('../components/sortAndFilter/SearchBar'));
+const FilterMenu = React.lazy(() => import('../components/sortAndFilter/FilterMenu'));
 
-const Home = ({ walls, setWalls, updateFilter, clearFilter, searchFilter, searchBarVisible, openSearchBar, openSortInput, signOut, sortInputVisible, user, userPostCode, setUserPostCode }) => {
+const Home = ({ filterSelection, setFilterSelection, walls, setWalls, updateFilter, clearFilter, searchFilter, searchBarVisible, openSearchBar, openSortInput, signOut, sortInputVisible, user, userPostCode, setUserPostCode }) => {
 
     useEffect(() => {
         window.scrollTo(0, 0)
@@ -43,6 +44,12 @@ const Home = ({ walls, setWalls, updateFilter, clearFilter, searchFilter, search
                     openSort={openSortInput}
                     userPostCode={userPostCode} 
                     setUserPostCode={setUserPostCode}
+                />
+            </Suspense>
+            <Suspense fallback={<div></div>}>
+                <FilterMenu
+                    filterSelection={filterSelection}
+                    setFilterSelection={setFilterSelection}
                 />
             </Suspense>
             </div>

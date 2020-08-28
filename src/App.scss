@@ -34,6 +34,7 @@ span {
     min-width: 300px;
     min-height: 100vh;
     justify-content: center;
+    z-index: 90;
   
     .outer-card-container {
       display: flex;
