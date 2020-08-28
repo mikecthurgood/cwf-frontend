@@ -1,5 +1,7 @@
 $base-color: #282c34;
 $secondary-color: #72757c;
+$main-pink: #ed5656;
+$hover-pink: #cf4b4b;
 
 .single__wall-container {
     height: 100vh;
@@ -12,6 +14,18 @@ $secondary-color: #72757c;
 
     .single__wall {
         max-width: 1240px;
+        .back-button {
+            position: absolute;
+            right: 10px;
+            top: 70px;
+            color: $main-pink;
+            font-weight: bold;
+            text-decoration: underline;
+            &:hover {
+                color: $hover-pink
+            }
+
+        }
         .single__wall-heading {
             .single__wall-title {
                     h1 {

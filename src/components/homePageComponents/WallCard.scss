@@ -28,11 +28,11 @@ $text-color: #282c34;
     text-decoration: none;
     cursor: default;
 
-    @media only screen and (max-width: 974px) {
-      font-size: 10px;
-      min-width: 200px;
-      max-width: 280px;
-    }
+    // @media only screen and (max-width: 974px) {
+    //   font-size: 10px;
+    //   min-width: 200px;
+    //   max-width: 280px;
+    // }
 
     @media only screen and (max-width: 480px) {
       min-width: 100vw;
@@ -60,9 +60,9 @@ $text-color: #282c34;
           margin: 0;
           text-decoration: none;
 
-          @media only screen and (max-width: 974px) {
-            font-size: 12px;
-          }
+          // @media only screen and (max-width: 974px) {
+          //   font-size: 12px;
+          // }
           @media only screen and (max-width: 480px) {
             font-size: 20px;
           }
@@ -92,10 +92,10 @@ $text-color: #282c34;
       width: 100%;  
       position: relative;
       height: 155px;
-      @media only screen and (max-width: 974px) {
-        font-size: 10px;
-        height: 120px;
-      }
+      // @media only screen and (max-width: 974px) {
+      //   font-size: 10px;
+      //   height: 120px;
+      // }
       @media only screen and (max-width: 480px) {
         font-size: 16px;
       }

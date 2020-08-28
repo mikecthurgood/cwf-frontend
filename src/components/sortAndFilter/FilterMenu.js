@@ -1,15 +1,28 @@
 import React, {useState} from 'react'
 import './filterMenu.scss'
 
-const FilterMenu = ({filterSelection, setFilterSelection}) => {
+const WallFilter = React.lazy(() => import('./WallFilter'))
+const PostcodeSort = React.lazy(() => import('./PostcodeSort'))
 
-    // const handleSetPostCode = (e) => {
-    //     e.preventDefault()
-    //     const valid = setUserPostCode(postCodeInput)
-    //     if (valid.status) {
-    //         return openSort()
-    //     }
-    // }
+const FilterMenu = ({filterSelection, setFilterSelection, userPostCode, setUserPostCode}) => {
+
+    const [postCodeInput, setPostCodeInput ] = useState(userPostCode)
+    const [postCodeInputVisible, setPostCodeInputVisible] = useState(false)
+
+    const handleSetPostCode = (e) => {
+        e.preventDefault()
+        setPostCodeInputVisible(false)
+        const valid = setUserPostCode(postCodeInput)
+    }
+
+    const handlePostCodeChange = (e) => {
+        setPostCodeInput(e.target.value)
+    }
+
+    const clearPostcode = () => {
+        setPostCodeInput('')
+        setUserPostCode('')
+    }
 
     const [visible, setVisibility] = useState(false)
 
@@ -45,52 +58,26 @@ const FilterMenu = ({filterSelection, setFilterSelection}) => {
                 </label>
                     <strong>Sort & Filter </strong>
             </label>
-            <div className={`filter__menu-form-container ${visible ? 'visible' : ''}`} >
-                <label className='filter__menu-form-heading'>
-                        <strong>Wall Type</strong>
-                </label>
-                <form>
-                    <label className='filter__menu-checkbox'>
-                        Bouldering: 
-                        <input
-                            name="bouldering"
-                            type="checkbox"
-                            checked={filterSelection.bouldering}
-                            onChange={handleFilterChange} 
-                        />
-                        <span className="checkbox"></span>
-                    </label>
-                    <label className='filter__menu-checkbox'>
-                        Top Roping: 
-                        <input
-                            name="top"
-                            type="checkbox"
-                            checked={filterSelection.top}
-                            onChange={handleFilterChange} 
-                        />
-                        <span className="checkbox"></span>
-                    </label>
-                    <label className='filter__menu-checkbox'>
-                        Lead: 
-                        <input
-                            name="lead"
-                            type="checkbox"
-                            checked={filterSelection.lead}
-                            onChange={handleFilterChange} 
-                        />
-                        <span className="checkbox"></span>
-                    </label>
-                    <label className='filter__menu-checkbox'>
-                        Auto Belay: 
-                        <input
-                            name="auto"
-                            type="checkbox"
-                            checked={filterSelection.auto}
-                            onChange={handleFilterChange} 
-                        />
-                        <span className="checkbox"></span>
-                    </label>
-                </form>
+            <div className={`filter__menu-filter-container ${visible ? 'visible' : ''}`} >
+                <div className='filter__menu-filter-item' >
+                    <WallFilter 
+                        filterSelection={filterSelection}
+                        handleFilterChange={handleFilterChange}
+                    />
+                </div>
+                <div className='filter__menu-filter-item' >
+                    <PostcodeSort 
+                        filterSelection={filterSelection}
+                        handleFilterChange={handleFilterChange}
+                        postCodeInput={postCodeInput}
+                        handlePostCodeChange={handlePostCodeChange}
+                        handleSetPostCode={handleSetPostCode}
+                        userPostCode={userPostCode}
+                        clearPostcode={clearPostcode}
+                        postCodeInputVisible={postCodeInputVisible}
+                        setPostCodeInputVisible={setPostCodeInputVisible}
+                    />
+                </div>
             </div>
         </div>
         </>

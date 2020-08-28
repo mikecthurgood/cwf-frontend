@@ -5,7 +5,7 @@ const Home = React.lazy(() => import('../pages/Home'))
 const AuthForm = React.lazy(() => import('./form/AuthForm'))
 const SingleWall = React.lazy(() => import('../pages/singleWall'));
 
-const MainContainer = ({ filterSelection, setFilterSelection, walls, setWalls, updateFilter, clearFilter, user, loginHandler, openSearchBar, openSortInput, searchBarVisible, setUserPostCode, signUpFlag, signupHandler, signOut, sortInputVisible, userPostCode, searchFilter }) => (
+const MainContainer = ({ scrollPosition, setScrollPosition, filterSelection, setFilterSelection, walls, setWalls, updateFilter, clearFilter, user, loginHandler, openSearchBar, openSortInput, searchBarVisible, setUserPostCode, signUpFlag, signupHandler, signOut, sortInputVisible, userPostCode, searchFilter }) => (
     <div className='main-container'>
         <Switch>
             <Route exact path="/" render={(routerProps) => <Suspense fallback={<div>Loading...</div>}><Home
@@ -14,6 +14,8 @@ const MainContainer = ({ filterSelection, setFilterSelection, walls, setWalls, u
                 filterSelection={filterSelection}
                 openSearchBar={openSearchBar}
                 openSortInput={openSortInput}
+                scrollPosition={scrollPosition}
+                setScrollPosition={setScrollPosition}
                 searchBarVisible={searchBarVisible}
                 sortInputVisible={sortInputVisible}
                 setWalls={setWalls}

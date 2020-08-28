@@ -16,6 +16,7 @@ const App = () => {
   const [mobileMenuVisible, setMobileMenuVisible] = useState(false)
   const [searchBarVisible, setSearchBarVisibility] = useState(false)
   const [searchFilter, setSearchFilter] = useState('')
+  const [scrollPosition, setScrollPosition] = useState(0)
   const [singleWall, setSingleWall] = useState({})
   const [signUpFlag, setSignUpFlag] = useState(false)
   const [sortInputVisible, setSortInputVisibility] = useState(false)
@@ -35,7 +36,6 @@ const App = () => {
     }
     setUser({username, userId, token, isAuth: true})
   }, [])
-
 
   const loginHandler = async (event, authData) => {
     event.preventDefault();
@@ -139,7 +139,7 @@ const App = () => {
   })
 
   return (
-    <div className='app-main-container'>
+    <div className='app-main-container' >
       <div className='app-container'>
         <NavBar
           signOut={signOut}
@@ -179,6 +179,8 @@ const App = () => {
           clearFilter={clearFilter}
           openSearchBar={toggleSearchBar}
           openSortInput={toggleSortInput}
+          scrollPosition={scrollPosition}
+          setScrollPosition={setScrollPosition}
           setWalls={setWalls}
           setSearchFilter={setSearchFilter}
           searchBarVisible={searchBarVisible}

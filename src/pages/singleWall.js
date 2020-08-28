@@ -1,4 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react'
+import { Link } from 'react-router-dom';
 import API from '../helpers/API'
 import { Helmet } from 'react-helmet'
 import './singlewall.scss'
@@ -97,6 +98,7 @@ const SingleWall = (props) => {
             </Helmet>
             <div className='single__wall-container'>
                 <div className='single__wall'>
+                    <Link to='/'><p className='back-button'>Back to wall list</p></Link>
                     <div className='single__wall-heading'>
                         <div className="single__wall-title">
                             <h1>

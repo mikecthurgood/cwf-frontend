@@ -52,12 +52,12 @@ $hover-pink: #cf4b4b;
         display: flex;
         padding-left: 20px;
     }
-    .filter__menu-form-container {
+    .filter__menu-filter-container {
         position: absolute;
         transform: translateX(-100vw);
         height: 100vh;
         top: 30px;
-        left: -25px;
+        left: -22px;
         padding: 20px;
         background-color: #ffffff;
         color: $base-color;
@@ -69,57 +69,127 @@ $hover-pink: #cf4b4b;
             transition: transform 0.45s ease-in-out;
         }
 
-        form {
-            display: flex;
-            flex-direction: column;
-            margin-top: 10px;
+        .filter__menu-filter-item {
+            margin-bottom: 15px;
 
-            input {
-                padding-left: 20px;
+            form {
+                display: flex;
+                flex-direction: column;
+                margin-top: 10px;
+
+                input {
+                    padding-left: 20px;
+                }
+                .filter__menu-checkbox {
+                    padding-left: 20px;
+                    width: 70%;
+                    margin-bottom: 10px;
+                }
             }
-            .filter__menu-checkbox {
-                padding-left: 20px;
-                width: 70%;
-                margin-bottom: 10px;
+
+            input[type=checkbox] {
+                visibility: hidden
             }
-        }
+            .checkbox {
+                float: right;
+                position: relative; 
+                top: 3px; 
+                left: -15px; 
+                height: 16px; 
+                width: 16px; 
+                background-color: $base-color;
+                border-radius: 3px;
+            }
 
-        input[type=checkbox] {
-            visibility: hidden
-        }
-        .checkbox {
-            float: right;
-            position: relative; 
-            top: 3px; 
-            left: -15px; 
-            height: 16px; 
-            width: 16px; 
-            background-color: $base-color;
-            border-radius: 3px;
-        }
+            .filter__menu-checkbox input:checked ~ .checkbox { 
+                background-color: $base-color; 
+            } 
+            
+            
+            .filter__menu-checkbox input:checked ~ .checkbox:after { 
+                display: block; 
+            } 
+            
+            .checkbox:after { 
+                content: ""; 
+                position: absolute; 
+                display: none; 
+                left: 2px; 
+                bottom: 2px; 
+                width: 6px; 
+                height: 6px; 
+                border: solid $main-pink; 
+                border-width: 3px 3px 3px 3px;
+                border-radius: 3px;
 
-        .filter__menu-checkbox input:checked ~ .checkbox { 
-            background-color: $base-color; 
-        } 
-          
-          
-        .filter__menu-checkbox input:checked ~ .checkbox:after { 
-            display: block; 
-        } 
-          
-        .checkbox:after { 
-            content: ""; 
-            position: absolute; 
-            display: none; 
-            left: 2px; 
-            bottom: 2px; 
-            width: 6px; 
-            height: 6px; 
-            border: solid $main-pink; 
-            border-width: 3px 3px 3px 3px;
-            border-radius: 3px;
+            }
 
-        } 
+            .filter__menu-sort-form {
+                display: none;
+                margin-bottom: -45px;
+                &.visible {
+                    display: flex;
+                }
+                .submit-postcode {
+                    position: relative;
+                    top: -44px;
+                    right: -183px;
+                    height: 44px;
+                    width: 44px;
+                    text-align: center;
+                    padding: 5px;
+                    background-color: $main-pink;
+                    color: white;
+                    font-family: 'Muli', sans-serif;
+                    border-radius: 0 5px 5px 0;
+                    &:active, &:focus {
+                        outline: none;
+                    }
+                    &:hover {
+                        background-color: $hover-pink;
+                    }
+                }
+                .filter__menu-sort-input {
+                    position: relative;
+                    left: 10px;
+                    font-size: 16px;
+                    padding: 10px 2px 10px 10px;
+                    text-align: left;
+                    max-width: 200px;
+                    min-width: 180px;
+                    // border: none;
+                    border-radius: 3px;
+                    transition: opacity 0.25s ease-out;
+                    font-family: 'Muli', sans-serif;
+                    // background-color: $base-color;
+                    color: $base-color;
+                    &:focus {
+                        outline: none;
+                    }
+                }
+            }
+                .change-post-code-container {
+                    width: 70%;
+                    padding-left: 20px;
+                    .filter__menu-sort-input {
+                        left: 0;
+                    }
+                    span {
+                        display: flex;
+                        justify-content: space-between;
+                        p {
+                            margin: 10px 0 0 0;
+                            &:hover{
+                                color: $main-pink;
+                                cursor: pointer;
+                            }
+                        }
+                    }
+                    p {
+                        margin: 10px 0 0 0; 
+                    }
+                }
+        }
     }
 }
 
@@ -135,79 +205,34 @@ $hover-pink: #cf4b4b;
         width: 50%;
         padding-left: 5px;
         
-        .filter__menu-form-container {
+        .filter__menu-filter-container {
             width: 50vw;
             left: 0;
             min-width: 200px;
-            .filter__menu-form-heading {
-                padding-left: 5px;
-            }
-            form {
-                .filter__menu-checkbox {
+            .filter__menu-filter-item {
+
+                .filter__menu-form-heading {
                     padding-left: 5px;
-                    width: 100%;
-                    margin-bottom: 10px;
+                }
+                form {
+                    .filter__menu-checkbox {
+                        padding-left: 5px;
+                        width: 100%;
+                        margin-bottom: 10px;
+                    }
+                }
+                .filter__menu-sort-form {
+                    .filter__menu-sort-input {
+                        left: 0;
+                    }
+                    .submit-postcode {
+                        right: -158px;
+                    }
+                }
+                .change-post-code-container {
+                    padding-left: 5px;
                 }
             }
-
-        
-
-        //     position: absolute;
-        //     transform: translateX(-50vw);
-        //     height: 100vh;
-        //     top: 30px;
-        //     left: -25px;
-        //     padding: 20px;
-        //     background-color: #ffffff;
-        //     color: $base-color;
-        //     width: 40vw;
-        //     opacity: 0.9;
-        //     transition: transform 0.45s ease-in-out;
-        //     &.visible {
-        //         transform: translateX(0);
-        //         transition: transform 0.45s ease-in-out;
-        //     }
-            // form {
-            //     display: flex;
-            //     flex-direction: column;
-            //     margin-top: 10px;
-
-            //     input {
-            //         padding-left: 20px;
-            //     }
-            // }
-
-    
-            // .filter__menu-title {
-            //     margin-right: 10px;
-            // }
-            // input[type=checkbox] {
-            //     visibility: hidden
-            // }
-            
-    
-            // .filter__menu-checkbox input:checked ~ .checkbox { 
-            //     background-color: $base-color; 
-            // } 
-              
-              
-            // .filter__menu-checkbox input:checked ~ .checkbox:after { 
-            //     display: block; 
-            // } 
-              
-            // .checkbox:after { 
-            //     content: ""; 
-            //     position: absolute; 
-            //     display: none; 
-            //     left: 2px; 
-            //     bottom: 2px; 
-            //     width: 6px; 
-            //     height: 6px; 
-            //     border: solid $main-pink; 
-            //     border-width: 3px 3px 3px 3px;
-            //     border-radius: 3px;
-    
-            // } 
         }
     }
 }
