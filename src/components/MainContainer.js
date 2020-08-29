@@ -5,7 +5,7 @@ const Home = React.lazy(() => import('../pages/Home'))
 const AuthForm = React.lazy(() => import('./form/AuthForm'))
 const SingleWall = React.lazy(() => import('../pages/singleWall'));
 
-const MainContainer = ({ scrollPosition, setScrollPosition, filterSelection, setFilterSelection, walls, setWalls, updateFilter, clearFilter, user, loginHandler, openSearchBar, openSortInput, searchBarVisible, setUserPostCode, signUpFlag, signupHandler, signOut, sortInputVisible, userPostCode, searchFilter }) => (
+const MainContainer = ({ signUpSuccess, scrollPosition, setScrollPosition, filterSelection, setFilterSelection, walls, setWalls, updateFilter, clearFilter, user, loginHandler, openSearchBar, openSortInput, searchBarVisible, setUserPostCode, signupHandler, signOut, sortInputVisible, userPostCode, searchFilter }) => (
     <div className='main-container'>
         <Switch>
             <Route exact path="/" render={(routerProps) => <Suspense fallback={<div>Loading...</div>}><Home
@@ -20,6 +20,7 @@ const MainContainer = ({ scrollPosition, setScrollPosition, filterSelection, set
                 sortInputVisible={sortInputVisible}
                 setWalls={setWalls}
                 searchFilter={searchFilter}
+                signUpSuccess={signUpSuccess}
                 signOut={signOut}
                 updateFilter={updateFilter}
                 user={user}
@@ -28,7 +29,16 @@ const MainContainer = ({ scrollPosition, setScrollPosition, filterSelection, set
                 setFilterSelection={setFilterSelection}
                 setUserPostCode={setUserPostCode}
             /></Suspense>} />
-            <Route exact path="/signup" render={(routerProps) => <Suspense fallback={<div>Loading...</div>}><AuthForm {...routerProps} onSubmit={signupHandler} signup={true} user={user} /></Suspense>}/>
+            <Route exact path="/signup" render={(routerProps) => <Suspense fallback={<div>Loading...</div>}>
+                <AuthForm {...routerProps} 
+                    onSubmit={signupHandler} 
+                    signup={true} 
+                    user={user} 
+                    loginToggle={() => {}}
+                    mobileMenuToggle={() => {}}
+                    loginMenuToggle={() => {}}
+                />
+            </Suspense>}/>
             <Route exact path="/:wallSlug" render={(routerProps) => <Suspense fallback={<div>Loading...</div>}><SingleWall {...routerProps} signOut={signOut} user={user} /> </Suspense>}/>
         </Switch>
     </div>

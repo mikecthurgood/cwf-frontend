@@ -17,8 +17,8 @@ const App = () => {
   const [searchBarVisible, setSearchBarVisibility] = useState(false)
   const [searchFilter, setSearchFilter] = useState('')
   const [scrollPosition, setScrollPosition] = useState(0)
+  const [signUpSuccess, setSignupSuccess] = useState(false)
   const [singleWall, setSingleWall] = useState({})
-  const [signUpFlag, setSignUpFlag] = useState(false)
   const [sortInputVisible, setSortInputVisibility] = useState(false)
   const [user, setUser] = useState({ username: null, userId: null, isAuth: false, token: '' })
   const [userPostCode, setUserPostCode] = useState('')
@@ -65,8 +65,15 @@ const App = () => {
   const signupHandler = async (event, authData) => {
     event.preventDefault();
     const signupResult = await handleSignup(authData)
+    console.log('signupResult------------', signupResult)
     if (signupResult.error) return signupResult
-    if (signupResult.signupSuccess) window.location.assign("/")
+    if (signupResult.signupSuccess) {
+      setSignupSuccess(true)
+      setTimeout(() => {
+        setSignupSuccess(false)
+      }, 10000)
+      window.location.assign("/")
+    }
   }
 
   const signOut = () => {
@@ -149,7 +156,6 @@ const App = () => {
           loginError={loginError}
           mobileMenuToggle={mobileMenuToggle}
           loginMenuToggle={loginMenuToggle}
-          setSignUpFlag={setSignUpFlag}
         />
          <Suspense fallback={<div></div>}>
           <MobileMenu 
@@ -185,13 +191,13 @@ const App = () => {
           setSearchFilter={setSearchFilter}
           searchBarVisible={searchBarVisible}
           searchFilter={searchFilter}
+          signUpSuccess={signUpSuccess}
           signOut={signOut}
           signupHandler={signupHandler}
           sortInputVisible={sortInputVisible}
           updateFilter={updateFilter}
           user={user}
           walls={filteredWalls}
-          signUpFlag={signUpFlag}
           singleWall={singleWall}
           setSingleWall={setSingleWall}
         />

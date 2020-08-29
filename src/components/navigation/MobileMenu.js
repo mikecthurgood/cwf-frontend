@@ -27,7 +27,6 @@ const MobileMenu = ({ loginError, loginHandler, mobileMenuToggle, signOut, user,
                             onSubmit={loginHandler} 
                             signup={false} 
                             hideRegisterButton={true}
-                            setSignUpFlag={false} 
                             user={false}
                             loginToggle={loginToggle}
                             mobileMenuToggle={mobileMenuToggle}

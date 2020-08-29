@@ -65,12 +65,15 @@ export const handleLogin = (authData) => {
  export const handleSignup = async (authData) => {
     const promise = new Promise( async (resolve, reject) => {
     const { username, email, password, passwordConfirmation } = authData.submitData
+    const errors = []
     try{
         if (password !== passwordConfirmation) {
             const error = new Error();
             error.name = "Passwords do not match"
+            error.message = "Passwords do not match"
             error.type = "passwordMatch"
-            throw error
+            // throw error
+            errors.push(error)
         }
         const graphqlQuery = {
         query: `
@@ -100,18 +103,34 @@ export const handleLogin = (authData) => {
         },
         body: JSON.stringify(graphqlQuery)
         }).then(res => {return res.json()})
-        if (resData.errors && resData.errors[0].status === 422) {
-        throw new Error(
-            "Validation failed. Email address already registered."
-        );
+        if (resData.errors && resData.errors.length > 0 && resData.errors[0].data.includes(423)) {
+          const usernameError = new Error(
+              "Username exists. Please choose another username"
+          );
+          errors.unshift(usernameError)
         }
-        if (resData.errors && resData.errors[0].status === 456) {
-            throw new Error(
-                "Invalid email address."
-            );
-            }
-        if (resData.errors) {
-        throw new Error('User creation failed!');
+        if (resData.errors && resData.errors.length > 0 && resData.errors[0].data.includes(422)) {
+        const emailError = new Error(
+            "Email address already registered."
+        );
+        errors.unshift(emailError)
+        }
+        if (resData.errors && resData.errors.length > 0 && resData.errors[0].data.includes(424)) {
+          const invalidEmail = new Error(
+              "Invalid email address"
+          );
+          errors.push(invalidEmail)
+        }
+        if (resData.errors && resData.errors.length > 0 && resData.errors[0].data.includes(425)) {
+          const passwordLengthError = new Error(
+              "Password is to short (5 characters minimum)"
+          );
+          errors.push(passwordLengthError)
+        }
+        if (resData.errors && resData.errors.length > 0) {
+        const signupErrors = new Error('User creation failed!');
+        signupErrors.data = errors
+        throw signupErrors
         }
         resolve({ isAuth: false, authLoading: false, signupSuccess: true, userID: resData.data.createUser.id, username: resData.data.createUser.name });
     }
@@ -120,7 +139,7 @@ export const handleLogin = (authData) => {
         resolve({
           isAuth: false,
           authLoading: false,
-          error: err,
+          error: errors,
           signupSuccess: false
         })
       };

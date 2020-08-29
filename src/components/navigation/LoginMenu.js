@@ -27,7 +27,6 @@ const LoginMenu = ({ loginError, loginHandler, loginMenuToggle, signOut, user, v
                             onSubmit={loginHandler} 
                             signup={false} 
                             hideRegisterButton={true}
-                            setSignUpFlag={false} 
                             user={false}
                             loginToggle={loginToggle}
                             LoginMenuToggle={loginMenuToggle}

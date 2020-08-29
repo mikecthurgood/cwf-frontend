@@ -99,7 +99,10 @@ class AuthForm extends Component {
         const response = await this.props.onSubmit(e, {
             submitData
         })
-        if (response && response.error) return this.setState({errorMessage: response.error.message})
+        if (response && response.error) {
+          console.log('authFormErrors----------', response.error)
+          return this.setState({errorMessage: response.error})
+        }
       }
 
       closeMobileMenu = () => {
@@ -169,11 +172,20 @@ class AuthForm extends Component {
                         valid={this.state.loginForm['passwordConfirmation'].valid}
                         touched={this.state.loginForm['passwordConfirmation'].touched}
                         />}
-                        {signup && this.state.errorMessage && (
+                        {signup && this.state.errorMessage.length > 0 ? (
+                          <><div className='signup-errors'>
+                          <h6>THERE WERE SOME ERRORS</h6>
+                            {this.state.errorMessage.map(error => {
+                              return (
+                                  <h6 key={error.message}>- {error.message}</h6>
+                              )
+                            })}
+                            </div>
+                          </>)
+                          :
                           <>
-                            <h6>{this.state.errorMessage}</h6>
                           </>
-                        )}
+                        }
                         <div className='submit-button'>
                           <button onClick={this.closeMobileMenu} disabled={(this.state.loginForm['password'].value.length < 1 || this.state.loginForm.email.value.length < 1) ? true : false} className={`login_logout ${(this.state.loginForm['password'].value.length < 1 || this.state.loginForm.email.value.length < 1) ? 'disabled' : 'active'}`}>{signup ? 'Signup' : 'Login'}</button>
                         </div>

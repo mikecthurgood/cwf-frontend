@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import AuthForm from '../form/AuthForm'
 import './navbar.scss'
 
-const NavBar = ({ loginError, loginHandler, loginMenuToggle, setSearchFilter, signInTest, setSignUpFlag, signOut, user, mobileMenuToggle }) => {
+const NavBar = ({ loginError, loginHandler, loginMenuToggle, setSearchFilter, user }) => {
 
     return (
         <div className='navbar-container'>
@@ -15,10 +15,10 @@ const NavBar = ({ loginError, loginHandler, loginMenuToggle, setSearchFilter, si
                     loginError={loginError} 
                     onSubmit={loginHandler} 
                     signup={false} 
-                    setSignUpFlag={setSignUpFlag} 
                     user={user}
                     loginToggle={() => {}}
                     mobileMenuToggle={() => {}}
+                    loginMenuToggle={() => {}}
                 />
                  </div>
             </>
