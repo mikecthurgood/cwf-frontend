@@ -72,8 +72,8 @@ export const handleLogin = (authData) => {
             error.name = "Passwords do not match"
             error.message = "Passwords do not match"
             error.type = "passwordMatch"
-            // throw error
             errors.push(error)
+            throw error
         }
         const graphqlQuery = {
         query: `

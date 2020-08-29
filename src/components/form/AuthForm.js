@@ -38,8 +38,7 @@ class AuthForm extends Component {
           },
           formIsValid: false
         },
-        passwordsMatch: true,
-        errorMessage: '',
+        errorMessage: [],
       };
 
     inputChangeHandler = (input, value) => {
@@ -95,12 +94,10 @@ class AuthForm extends Component {
                 password: this.state.loginForm.password.value,
                 passwordConfirmation: this.state.loginForm.passwordConfirmation.value,
             }
-        if (this.props.signUp && submitData.password !== submitData.passwordConfirmation) return this.setState({ passwordsMatch: false, errorMessage: 'Passwords do not match'} )
         const response = await this.props.onSubmit(e, {
             submitData
         })
         if (response && response.error) {
-          console.log('authFormErrors----------', response.error)
           return this.setState({errorMessage: response.error})
         }
       }

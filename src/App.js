@@ -65,7 +65,6 @@ const App = () => {
   const signupHandler = async (event, authData) => {
     event.preventDefault();
     const signupResult = await handleSignup(authData)
-    console.log('signupResult------------', signupResult)
     if (signupResult.error) return signupResult
     if (signupResult.signupSuccess) {
       setSignupSuccess(true)
