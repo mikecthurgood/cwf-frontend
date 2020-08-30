@@ -1,12 +1,13 @@
 import React, { useEffect, Suspense } from 'react';
 import API from '../helpers/API'
 import { Helmet } from 'react-helmet'
-import FlashMessage from 'react-flash-message'
 
 const WallCard = React.lazy(() => import('../components/homePageComponents/WallCard'));
 const FilterMenu = React.lazy(() => import('../components/sortAndFilter/FilterMenu'));
+const SignUpSuccessModal = React.lazy(() => import('../components/homePageComponents/SignUpSuccess.js'))
 
-const Home = ({ signupSuccess, setScrollPosition, scrollPosition, filterSelection, setFilterSelection, walls, setWalls, updateFilter, clearFilter, searchFilter, searchBarVisible, openSearchBar, openSortInput, signOut, sortInputVisible, user, userPostCode, setUserPostCode }) => {
+
+const Home = ({ filterSelection, scrollPosition, searchFilter, setFilterSelection, setScrollPosition, setSignUpSuccess, setUserPostCode, setWalls, signOut, signUpSuccess, user, userPostCode, walls }) => {
 
     useEffect(() => {
         const fetchWalls = async () => {
@@ -42,11 +43,9 @@ const Home = ({ signupSuccess, setScrollPosition, scrollPosition, filterSelectio
                 />
             </Suspense>
             </div>
-            {/* {signupSuccess && 
-                <FlashMessage duration={10000}>
-                    <h6>Signup successful. Please login.</h6>
-                </FlashMessage>
-            } */}
+            <Suspense fallback={<></>}>
+                {signUpSuccess && <SignUpSuccessModal setSignUpSuccess={setSignUpSuccess}/>}
+            </Suspense>
             {userPostCode && (
                 <div className='postcode-information'>
                     <p>Sorted by distance from <strong>{userPostCode.toUpperCase()}</strong></p>

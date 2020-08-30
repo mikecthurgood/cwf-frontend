@@ -1,0 +1,66 @@
+$base-color: #282c34;
+$secondary-color: #72757c;
+$main-pink: #ed5656;
+$hover-pink: #cf4b4b;
+
+.signup__success-modal-container {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10000;
+    background-color: black;
+    opacity: 0.9;
+    
+    .signup__success-modal {
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center;
+        width: 300px;
+        height: fit-content;
+        border-radius: 5px;
+        padding: 50px;
+        top: 90px;
+        left: calc((100% - 300px) / 2);
+        z-index: 10000;
+        background-color: white;
+        opacity: 1;
+        border: solid 1px $base-color;
+        
+        
+        h3, p {
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        span {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+
+            button {
+                padding: 5px;
+                background-color: $main-pink;
+                font-family: 'Muli', sans-serif;
+                color: white;
+                font-weight: bold;
+                border-radius: 5px;
+                width: 50%;
+                opacity: 1;
+                &:hover {
+                    background-color: $hover-pink;
+                }
+            }
+        }
+
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .signup__success-modal-container {        
+        .signup__success-modal {
+            width: 50%;
+            left: 10%;
+        }
+    }
+  }

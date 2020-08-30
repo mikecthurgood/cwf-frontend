@@ -1,5 +1,5 @@
 import React, { useState, useEffect, Suspense } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import './App.scss';
 import NavBar from './components/navigation/NavBar'
 import MainContainer from './components/MainContainer'
@@ -17,7 +17,7 @@ const App = () => {
   const [searchBarVisible, setSearchBarVisibility] = useState(false)
   const [searchFilter, setSearchFilter] = useState('')
   const [scrollPosition, setScrollPosition] = useState(0)
-  const [signUpSuccess, setSignupSuccess] = useState(false)
+  const [signUpSuccess, setSignUpSuccess] = useState(false)
   const [singleWall, setSingleWall] = useState({})
   const [sortInputVisible, setSortInputVisibility] = useState(false)
   const [user, setUser] = useState({ username: null, userId: null, isAuth: false, token: '' })
@@ -67,11 +67,7 @@ const App = () => {
     const signupResult = await handleSignup(authData)
     if (signupResult.error) return signupResult
     if (signupResult.signupSuccess) {
-      setSignupSuccess(true)
-      setTimeout(() => {
-        setSignupSuccess(false)
-      }, 10000)
-      window.location.assign("/")
+      setSignUpSuccess(true)
     }
   }
 
@@ -146,6 +142,7 @@ const App = () => {
 
   return (
     <div className='app-main-container' >
+      {signUpSuccess && <Redirect to={'/'} />}
       <div className='app-container'>
         <NavBar
           signOut={signOut}
@@ -190,6 +187,7 @@ const App = () => {
           setSearchFilter={setSearchFilter}
           searchBarVisible={searchBarVisible}
           searchFilter={searchFilter}
+          setSignUpSuccess={setSignUpSuccess}
           signUpSuccess={signUpSuccess}
           signOut={signOut}
           signupHandler={signupHandler}

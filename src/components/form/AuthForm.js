@@ -104,7 +104,6 @@ class AuthForm extends Component {
 
       closeMobileMenu = () => {
         this.props.loginToggle()
-        this.props.mobileMenuToggle()
       }
       
       render() {

@@ -1,0 +1,14 @@
+.error-page-container {
+    margin-top: 70px;
+
+    .error-page {
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        //  span {
+        //      display: flex;
+        //      flex-direction: row;
+        //      justify-content: center;
+        //  }
+    }
+}
