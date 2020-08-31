@@ -365,6 +365,21 @@ $hover-pink: #cf4b4b;
                 overflow-y: scroll;
                 position: relative;
                 // top: 40px;
+                .back-button {
+                    position: relative;
+                    right: 5px;
+                    top: 0;
+                    width: 100%;
+                    text-align: right;
+                    margin: 0 10px 0 0;
+                    color: $main-pink;
+                    font-weight: bold;
+                    text-decoration: underline;
+                    &:hover {
+                        color: $hover-pink
+                    }
+        
+                }
                 .single__wall-heading {
                     .single__wall-title {
                         display: flex;
