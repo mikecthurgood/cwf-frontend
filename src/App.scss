@@ -57,6 +57,7 @@ span {
     display: flex;
     margin: 0;
     padding: 0;
+    background-color: rgb(211, 211, 211);
 
     @media only screen and (max-width: 480px) {
       top: 80px;
@@ -83,7 +84,7 @@ span {
       position: relative;
       height: fit-content;
       width: fit-content;
-      max-width: 85%;
+      max-width: 98%;
       margin-right: auto;
       margin-left: auto;
   

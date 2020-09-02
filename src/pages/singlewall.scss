@@ -13,11 +13,14 @@ $hover-pink: #cf4b4b;
     justify-content: center;
 
     .single__wall {
-        max-width: 1240px;
+        max-width: 1680px;
+        width: 95%;
         .back-button {
-            position: absolute;
-            right: 10px;
-            top: 70px;
+            position: relative;
+            // right: 5%;
+            // top: 70px;
+            margin-right: 5px;
+            float: right;
             color: $main-pink;
             font-weight: bold;
             text-decoration: underline;
@@ -367,6 +370,7 @@ $hover-pink: #cf4b4b;
                 // top: 40px;
                 .back-button {
                     position: relative;
+                    float: unset;
                     right: 5px;
                     top: 0;
                     width: 100%;
