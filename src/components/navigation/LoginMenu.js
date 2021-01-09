@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { Link } from 'react-router-dom';
+import Store from '../../context/Store';
 import './loginMenu.scss'
 
 const AuthForm = React.lazy(() => import('../form/AuthForm'))
 
-
-const LoginMenu = ({ loginError, loginHandler, loginMenuToggle, signOut, user, visible }) => {
+const LoginMenu = () => {
+    const { loginError, loginHandler, loginMenuToggle, signOut, user, loginMenuVisible } = useContext(Store)
 
     const [loginVisible, setLoginVisible] = useState(false)
 
@@ -14,7 +15,7 @@ const LoginMenu = ({ loginError, loginHandler, loginMenuToggle, signOut, user, v
     }
 
     return (
-        <div className={`login__menu-container ${visible ? 'visible' : ''} ${user.username ? '' : 'logged-out'}`}>
+        <div className={`login__menu-container ${loginMenuVisible ? 'visible' : ''} ${user.username ? '' : 'logged-out'}`}>
             <div className='login__menu-login-register'>
                 {user && user.username ? 
                 <h5 onClick={signOut}>Log out</h5>
