@@ -4,6 +4,7 @@ import './App.scss';
 import NavBar from './components/navigation/NavBar'
 import MainContainer from './components/MainContainer'
 import { handleLogin, handleSignup } from './helpers/Auth'
+import Store from './context/Store';
 
 const MobileMenu = React.lazy(() => import('./components/navigation/MobileMenu'))
 const LoginMenu = React.lazy(() => import('./components/navigation/LoginMenu'))
@@ -24,7 +25,6 @@ const App = () => {
   const [userPostCode, setUserPostCode] = useState('')
   const [walls, setWalls] = useState([])
   
-
   useEffect(() => {
     const token = localStorage.getItem('token')
     const userId = localStorage.getItem('userId')
@@ -37,7 +37,7 @@ const App = () => {
     setUser({username, userId, token, isAuth: true})
   }, [])
 
-  const loginHandler = async (event, authData) => {
+  async function loginHandler (event, authData) {
     event.preventDefault();
     const loginResult = await handleLogin(authData)
     if (loginResult.isAuth) {
@@ -52,17 +52,17 @@ const App = () => {
     }
   };
 
-  const toggleSearchBar = () => {
+  function toggleSearchBar () {
     setSearchBarVisibility(!searchBarVisible)
     setSortInputVisibility(false)
   }
 
-  const toggleSortInput = () => {
+  function toggleSortInput () {
     setSortInputVisibility(!sortInputVisible)
     setSearchBarVisibility(false)
   }
 
-  const signupHandler = async (event, authData) => {
+  async function signupHandler (event, authData) {
     event.preventDefault();
     const signupResult = await handleSignup(authData)
     if (signupResult.error) return signupResult
@@ -71,7 +71,7 @@ const App = () => {
     }
   }
 
-  const signOut = () => {
+  function signOut () {
     setUser({username: null, userId: null, isAuth: false, token: ''})
     localStorage.removeItem('token')
     localStorage.removeItem('userName')
@@ -80,17 +80,17 @@ const App = () => {
     setLoginMenuVisible(false)
   }
 
-  const updateFilter = (e) => {
+  function updateFilter (e) {
     setSearchFilter(e.target.value)
   }
 
-  const clearFilter = (e) => {
+  function clearFilter (e) {
     e.preventDefault()
     e.target.searchInput.value = ''
     setSearchFilter('')
   }
 
-  const setPostCode = (postcode) => {
+  function setPostCode (postcode) {
     const postcodeRegEx = /[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}/i; 
     if (!postcode) {
       setUserPostCode('')
@@ -106,11 +106,11 @@ const App = () => {
     return {status: false, message: 'Postcode is invalid'}
   }
 
-  const mobileMenuToggle = () => {
+  function mobileMenuToggle () {
     setMobileMenuVisible(!mobileMenuVisible)
   }
 
-  const loginMenuToggle = () => {
+  function loginMenuToggle () {
     setLoginMenuVisible(!loginMenuVisible)
   }
   
@@ -140,66 +140,53 @@ const App = () => {
     }
   })
 
+  const contextData = {
+    clearFilter,
+    filterSelection,
+    loginError,
+    loginHandler,
+    loginMenuToggle,
+    loginMenuVisible,
+    mobileMenuToggle,
+    mobileMenuVisible,
+    scrollPosition,
+    searchBarVisible,
+    searchFilter,
+    setFilterSelection,
+    setPostCode,
+    setScrollPosition,
+    setSearchFilter,
+    setSignUpSuccess,
+    setSingleWall,
+    setWalls,
+    signOut,
+    signupHandler,
+    signUpSuccess,
+    singleWall,
+    sortInputVisible,
+    toggleSearchBar,
+    toggleSortInput,
+    updateFilter,
+    user,
+    userPostCode,
+  }
+
   return (
-    <div className='app-main-container' >
-      {signUpSuccess && <Redirect to={'/'} />}
-      <div className='app-container'>
-        <NavBar
-          signOut={signOut}
-          user={user}
-          setSearchFilter={setSearchFilter}
-          loginHandler={loginHandler}
-          loginError={loginError}
-          mobileMenuToggle={mobileMenuToggle}
-          loginMenuToggle={loginMenuToggle}
-        />
-         <Suspense fallback={<div></div>}>
-          <MobileMenu 
-            loginError={loginError}
-            loginHandler={loginHandler}
-            mobileMenuToggle={mobileMenuToggle}
-            signOut={signOut}
-            user={user}
-            visible={mobileMenuVisible}
-          />
-        </Suspense>
-        <Suspense fallback={<div></div>}>
-          <LoginMenu 
-            loginError={loginError}
-            loginHandler={loginHandler}
-            loginMenuToggle={loginMenuToggle}
-            signOut={signOut}
-            user={user}
-            visible={loginMenuVisible}
-          />
-        </Suspense>
-        <MainContainer
-          userPostCode={userPostCode} 
-          filterSelection={filterSelection}
-          setFilterSelection={setFilterSelection}
-          setUserPostCode={setPostCode}
-          clearFilter={clearFilter}
-          openSearchBar={toggleSearchBar}
-          openSortInput={toggleSortInput}
-          scrollPosition={scrollPosition}
-          setScrollPosition={setScrollPosition}
-          setWalls={setWalls}
-          setSearchFilter={setSearchFilter}
-          searchBarVisible={searchBarVisible}
-          searchFilter={searchFilter}
-          setSignUpSuccess={setSignUpSuccess}
-          signUpSuccess={signUpSuccess}
-          signOut={signOut}
-          signupHandler={signupHandler}
-          sortInputVisible={sortInputVisible}
-          updateFilter={updateFilter}
-          user={user}
-          walls={filteredWalls}
-          singleWall={singleWall}
-          setSingleWall={setSingleWall}
-        />
+    <Store.Provider value={contextData} >
+      <div className='app-main-container' >
+        {signUpSuccess && <Redirect to={'/'} />}
+        <div className='app-container'>
+          <NavBar />
+          {/* <Suspense fallback={<div></div>}>
+            <MobileMenu />
+          </Suspense> */}
+          <Suspense fallback={<div></div>}>
+            <LoginMenu />
+          </Suspense>
+          <MainContainer walls={filteredWalls} />
+        </div>
       </div>
-    </div>
+    </Store.Provider>
   );
 }
 
