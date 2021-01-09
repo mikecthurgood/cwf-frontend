@@ -1,4 +1,5 @@
-import React, { useState, useEffect, Suspense } from 'react'
+import React, { useState, useEffect, Suspense, useContext } from 'react'
+import Store from '../context/Store'
 import { Link } from 'react-router-dom';
 import API from '../helpers/API'
 import { Helmet } from 'react-helmet'
@@ -14,7 +15,7 @@ const Reviews = React.lazy(() => import('../components/singleWallComponents/Revi
 const ContactForm = React.lazy(() => import('../components/form/ContactForm'))
 
 const SingleWall = (props) => {
-    
+    const { user, signOut } = useContext(Store)
     const [wall, setWall] = useState({})
     const [tabContent, setTabContent] = useState('description')
     const [reviewFormVisible, setReviewFormVisibility] = useState(false)
@@ -24,9 +25,10 @@ const SingleWall = (props) => {
         window.scrollTo(0, 0)
         
         const fetchWall = async () => {
-            const response = await API.getWall(props.match.params.wallSlug).then(resp => resp.json())
+            const { wallSlug } = props.match.params;
+            const response = await API.getWall(wallSlug).then(resp => resp.json())
             const data = response.data.singleWall
-            if (props.user.userId !== null && !data.loggedIn) props.signOut()
+            if (user.userId !== null && !data.loggedIn) signOut()
             if (data.wall !== wall) {
                 setWall(data.wall);
             }
@@ -59,7 +61,7 @@ const SingleWall = (props) => {
     const deleteReview = async (reviewId) => {        
         const confirmation = window.confirm("Are you sure you want to delete your review?")
         if (confirmation) {
-            const result = await API.deleteReview(reviewId, props.user.token)
+            const result = await API.deleteReview(reviewId, user.token)
             if (result) {
                 const updatedWall = {...wall, reviews: wall.reviews.filter(review => review.id !== reviewId)}
                 setWall(updatedWall)
@@ -85,7 +87,7 @@ const SingleWall = (props) => {
 
     const alreadyReviewed = () => {
         const authorArray = wall.reviews.map(review => review.authorId)
-        if (authorArray.includes(props.user.userId)) return true
+        if (authorArray.includes(user.userId)) return true
         return false
     }
 
@@ -153,7 +155,7 @@ const SingleWall = (props) => {
                             <div className='single__wall-tabbed-details'>
                                 <ContentTabs 
                                     wall={wall}
-                                    user={props.user}
+                                    user={user}
                                     tabContent={tabContent}
                                     setTabContent={setTabContent}
                                     description={createHTMLdescription}
@@ -166,7 +168,7 @@ const SingleWall = (props) => {
                                     </button>
                                     <Suspense fallback={<div></div>}>
                                         <ReviewForm
-                                            user={props.user}
+                                            user={user}
                                             wallId={wall.id}
                                             visible={alreadyReviewed() ? false : reviewFormVisible}
                                             editing={false}
@@ -182,7 +184,7 @@ const SingleWall = (props) => {
                                             <Reviews
                                                 wallId={wall.id}
                                                 reviews={wall.reviews}
-                                                user={props.user}
+                                                user={user}
                                                 editReviewFormVisible={editReviewFormVisible}
                                                 addReview={addReview}
                                                 createEditPost={createEditPost}
