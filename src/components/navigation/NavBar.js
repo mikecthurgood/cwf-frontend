@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import Store from '../../context/Store'
 import { Link } from 'react-router-dom';
 import AuthForm from '../form/AuthForm'
 import './navbar.scss'
 
-const NavBar = ({ loginError, loginHandler, loginMenuToggle, setSearchFilter, user }) => {
+const NavBar = () => {
+
+    const { loginError, loginHandler, loginMenuToggle, setSearchFilter, user } = useContext(Store)
 
     return (
         <div className='navbar-container'>
