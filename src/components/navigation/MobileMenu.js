@@ -1,11 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
+import Store from '../../context/Store'
 import { Link } from 'react-router-dom';
 import './mobileMenu.scss'
 
 const AuthForm = React.lazy(() => import('../form/AuthForm'))
 
 
-const MobileMenu = ({ loginError, loginHandler, mobileMenuToggle, signOut, user, visible }) => {
+const MobileMenu = () => {
+
+    const {loginError, loginHandler, mobileMenuToggle, signOut, user, mobileMenuVisible} = useContext(Store)
 
     const [loginVisible, setLoginVisible] = useState(false)
 
@@ -14,7 +17,7 @@ const MobileMenu = ({ loginError, loginHandler, mobileMenuToggle, signOut, user,
     }
 
     return (
-        <div className={`mobile__menu-container ${visible ? 'visible' : ''} ${user.username ? 'full-width' : ''}`}>
+        <div className={`mobile__menu-container ${mobileMenuVisible ? 'visible' : ''} ${user.username ? 'full-width' : ''}`}>
             <div className='mobile__menu-login-register'>
                 {user && user.username ? 
                 <h5 onClick={signOut}>Log out</h5>
