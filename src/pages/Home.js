@@ -1,13 +1,16 @@
-import React, { useEffect, Suspense } from 'react';
+import React, { useEffect, Suspense, useContext } from 'react';
 import API from '../helpers/API'
 import { Helmet } from 'react-helmet'
+import Store from '../context/Store';
 
 const WallCard = React.lazy(() => import('../components/homePageComponents/WallCard'));
 const FilterMenu = React.lazy(() => import('../components/sortAndFilter/FilterMenu'));
 const SignUpSuccessModal = React.lazy(() => import('../components/homePageComponents/SignUpSuccess.js'))
 
 
-const Home = ({ filterSelection, scrollPosition, searchFilter, setFilterSelection, setScrollPosition, setSignUpSuccess, setUserPostCode, setWalls, signOut, signUpSuccess, user, userPostCode, walls }) => {
+const Home = ({walls}) => {
+
+    const { filterSelection, searchFilter, setFilterSelection, setScrollPosition, setSignUpSuccess, setPostCode, setWalls, signOut, signUpSuccess, user, userPostCode } = useContext(Store)
 
     useEffect(() => {
         const fetchWalls = async () => {
@@ -39,7 +42,7 @@ const Home = ({ filterSelection, scrollPosition, searchFilter, setFilterSelectio
                     filterSelection={filterSelection}
                     setFilterSelection={setFilterSelection}
                     userPostCode={userPostCode} 
-                    setUserPostCode={setUserPostCode}
+                    setUserPostCode={setPostCode}
                 />
             </Suspense>
             </div>
@@ -54,7 +57,8 @@ const Home = ({ filterSelection, scrollPosition, searchFilter, setFilterSelectio
             <div className='outer-card-container'>
                 <div className='card-container'>
                     {searchFilter.length < 1 && sortedWalls.length === 0 && (<div>Loading Walls...</div>)}
-                    {sortedWalls.length > 0 ? sortedWalls.map(wall => <Suspense key={`${wall.id} suspense`} fallback={<div></div>}><WallCard wall={wall} key={wall.id} setScrollPosition={setScrollPosition} /></Suspense>) : searchFilter.length > 0 && <div className='wall-card-none-found'><h3>No walls match your search</h3></div>}
+                    {sortedWalls.length > 0 ? sortedWalls.map(wall => <Suspense key={`${wall.id} suspense`} fallback={<div></div>}>
+                        <WallCard wall={wall} key={wall.id} setScrollPosition={setScrollPosition} /></Suspense>) : searchFilter.length > 0 && <div className='wall-card-none-found'><h3>No walls match your search</h3></div>}
                     {sortedWalls.length > 0 && (<>
                         <div className='wall-card-placeholder'></div>
                         <div className='wall-card-placeholder'></div>
