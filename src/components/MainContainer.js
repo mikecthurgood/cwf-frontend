@@ -19,9 +19,7 @@ const MainContainer = ({walls}) => {
                 </Suspense>} />
                 <Route exact path="/signup" render={(routerProps) => <Suspense fallback={<div>Loading...</div>}>
                     <AuthForm {...routerProps} 
-                        onSubmit={signupHandler} 
-                        signup={true} 
-                        user={user} 
+                        signup={true}
                         loginToggle={() => {}}
                         loginMenuToggle={() => {}}
                     />
