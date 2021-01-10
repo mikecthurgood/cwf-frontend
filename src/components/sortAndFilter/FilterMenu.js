@@ -8,44 +8,37 @@ const FilterMenu = ({filterSelection, setFilterSelection, userPostCode, setUserP
 
     const [postCodeInput, setPostCodeInput ] = useState(userPostCode)
     const [postCodeInputVisible, setPostCodeInputVisible] = useState(false)
+    const [visible, setVisibility] = useState(false)
 
-    const handleSetPostCode = (e) => {
+    function handleSetPostCode (e) {
         e.preventDefault()
         setPostCodeInputVisible(false)
         const valid = setUserPostCode(postCodeInput)
     }
 
-    const handlePostCodeChange = (e) => {
+    function handlePostCodeChange (e) {
         setPostCodeInput(e.target.value)
     }
 
-    const clearPostcode = () => {
+    function clearPostcode () {
         setPostCodeInput('')
         setUserPostCode('')
     }
 
-    const [visible, setVisibility] = useState(false)
-
-    const toggleMenuVisibility = () => {
+    function toggleMenuVisibility () {
         setVisibility(!visible)
     }
 
-    const handleFilterChange = (e) => {
+    function handleFilterChange (e) {
         const selection = e.target.name
         const updatedFilters = filterSelection
         updatedFilters[selection] = !filterSelection[selection]
         setFilterSelection({...updatedFilters})
     }
 
-    const clearFilters = () => {
+    function clearFilters () {
         setFilterSelection({top: true, bouldering: true, auto: true, lead: true})
     }
-
-    // const openInputHandler = (type) => {
-    //     if (type === 'sort') {
-    //         openSort()
-    //     }        
-    // }
 
     return (
         <>

@@ -10,7 +10,7 @@ const LoginMenu = () => {
 
     const [loginVisible, setLoginVisible] = useState(false)
 
-    const loginToggle = () => {
+    function loginToggle () {
         setLoginVisible(!loginVisible)
     }
 
