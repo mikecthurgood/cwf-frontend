@@ -1,197 +1,203 @@
-import React, { Component } from 'react'
+import React, {useState, useEffect, useContext} from 'react'
 import Input from './Input'
 import { required, length, email } from '../../util/validators';
 import './AuthForm.scss';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import Store from '../../context/Store';
 
 
 
-class AuthForm extends Component {
+const AuthForm = ({ loginToggle, loginError, signup, hideRegisterButton }) => {
 
-    state = {
-        loginForm: {
-          email: {
-            value: '',
-            valid: false,
-            touched: false,
-            validators: [required, email]
-          },
-          password: {
-            value: '',
-            valid: false,
-            touched: false,
-            validators: [required, length({ min: 5 })]
-          },
-          passwordConfirmation: {
-            value: '',
-            valid: false,
-            touched: false,
-            validators: [required, length({ min: 5 })]
-          },
-          username: {
-            value: '',
-            confirmation: '',
-            valid: false,
-            touched: false,
-            validators: [required]
-          },
-          formIsValid: false
-        },
-        errorMessage: [],
-      };
+  const { user, signupHandler, loginHandler } = useContext(Store)
 
-    inputChangeHandler = (input, value) => {
-        this.setState(prevState => {
-          let isValid = true;
-          for (const validator of prevState.loginForm[input].validators) {
-            isValid = isValid && validator(value);
-          }
-          const updatedForm = {
-            ...prevState.loginForm,
-            [input]: {
-              ...prevState.loginForm[input],
-              valid: isValid,
-              value: value
-            }
-          };
-          let formIsValid = true;
-          for (const inputName in updatedForm) {
-            formIsValid = formIsValid && updatedForm[inputName].valid;
-          }
-          return {
-            loginForm: updatedForm,
-            formIsValid: formIsValid
-          };
-        });
-      };
+  useEffect(() => {
+    if (user && user.userId) {
+      return <Redirect to={"/"} />
+    }
+  }, []);
+
+  const [ userEmail, setUserEmail ] = useState({
+    value: '',
+    valid: false,
+    touched: false,
+  })
+
+  const [password, setPassword ] = useState({
+    value: '',
+    valid: false,
+    touched: false,
+  })
+
+  const [passwordConfirmation, setPasswordConfirmation ] = useState({
+    value: '',
+    valid: false,
+    touched: false,
+  })
+
+  const [username, setUsername] = useState({
+    value: '',
+    confirmation: '',
+    valid: false,
+    touched: false,
+  })
+
+  const validators = {
+    userEmail: [required, email],
+    password: [required, length({ min: 5 })],
+    passwordConfirmation: [required, length({ min: 5 })],
+    username: [required]
+  }
+
+  const [errorMessages, setErrorMessages] = useState([])
+
+  function inputChangeHandler (input, value) {
+
+    let isValid = true;
     
-      inputBlurHandler = input => {
-        this.setState(prevState => {
-          return {
-            loginForm: {
-              ...prevState.loginForm,
-              [input]: {
-                ...prevState.loginForm[input],
-                touched: true
-              }
-            }
-          };
-        });
-      };
+    for (const validator of validators[input]) {
+      isValid = isValid && validator(value);
+    }
 
-      submitHandler = async e => {
-        e.preventDefault()
-        const submitData = !this.props.signup ? 
-            {
-                email: this.state.loginForm.email.value,
-                password: this.state.loginForm.password.value
-            }
-            :
-            {
-                username: this.state.loginForm.username.value, 
-                email: this.state.loginForm.email.value,
-                password: this.state.loginForm.password.value,
-                passwordConfirmation: this.state.loginForm.passwordConfirmation.value,
-            }
-        const response = await this.props.onSubmit(e, {
-            submitData
-        })
-        if (response && response.error) {
-          return this.setState({errorMessage: response.error})
+    switch (input) {
+      case 'username': setUsername({...username, value, valid: isValid})
+      break;
+      case 'userEmail': setUserEmail({...userEmail, value, valid: isValid})
+      break;
+      case 'password': setPassword({...password, value, valid: isValid})
+      break;
+      case 'passwordConfirmation': setPasswordConfirmation({...passwordConfirmation, value, valid: isValid})
+      break;
+    }
+  };
+
+  function inputBlurHandler (e) {
+    const {value, id} = e.target
+    let isValid = true;
+    for (const validator of validators[id]) {
+      isValid = isValid && validator(value);
+    }
+
+    switch (id) {
+      case 'username': setUsername({...username, valid: isValid, touched: true })
+      break;
+      case 'userEmail': setUserEmail({...userEmail, valid: isValid, touched: true})
+      break;
+      case 'password': setPassword({...password, valid: isValid, touched: true})
+      break;
+      case 'passwordConfirmation': setPasswordConfirmation({...passwordConfirmation, valid: isValid, touched: true})
+      break;
+    }
+  };
+
+  async function submitHandler (e) {
+    e.preventDefault()
+    const submitData = signup ? 
+        {
+          username: username.value, 
+          email: userEmail.value,
+          password: password.value,
+          passwordConfirmation: passwordConfirmation.value,
         }
-      }
+        :
+        {
+          email: userEmail.value,
+          password: password.value
+        }
 
-      closeMobileMenu = () => {
-        this.props.loginToggle()
-      }
+    const response = signup ? await signupHandler(e, { submitData }) : await loginHandler(e, { submitData })
+    if (response && response.error) {
+      return setErrorMessages(response.error)
+    }
+  }
+
+  function closeMobileMenu () {
+    loginToggle()
+  }
+  
+  const disabled = password.value.length < 3 || userEmail.value.length < 3 ? true : false
       
-      render() {
-          const { loginError, signup, user, hideRegisterButton } = this.props
-          if (user && user.userId) {
-            return <Redirect to={"/"} />
-          }
-          return (
-            <>
-              <div className='auth__form-container'>
-                <div className='auth__form'>
-                  <div className='auth__form-components'>
-                    {!signup && !hideRegisterButton && <Link to='/signup'><button className='login_logout register'>Register</button></Link>}
-                    <form className={`${loginError ? 'error' : ''}`}
-                        onSubmit={e =>this.submitHandler(e)}
-                    >
-                        {signup && <Input
-                        id="username"
-                        label="username"
-                        type="text"
-                        control="input"
-                        placeholder="Choose a username"
-                        onChange={this.inputChangeHandler}
-                        onBlur={this.inputBlurHandler.bind(this, 'username')}
-                        value={this.state.loginForm.username.value}
-                        valid={this.state.loginForm['username'].valid}
-                        touched={this.state.loginForm['username'].touched}
-                        />}
-                        <Input
-                        id="email"
-                        label={`${signup ? 'Your Email' : ''}`}
-                        type="email"
-                        control="input"
-                        placeholder={`${signup ? 'Enter your email' : 'Email'}`}
-                        onChange={this.inputChangeHandler}
-                        onBlur={this.inputBlurHandler.bind(this, 'email')}
-                        value={this.state.loginForm.email.value}
-                        valid={this.state.loginForm['email'].valid}
-                        touched={signup ? this.state.loginForm['email'].touched : null}
-                        />
-                        <Input
-                        id="password"
-                        label={`${signup ? 'Password' : ''}`}
-                        type="password"
-                        control="input"
-                        placeholder={`${signup ? 'Choose your password' : 'Password'}`}
-                        onChange={this.inputChangeHandler}
-                        onBlur={this.inputBlurHandler.bind(this, 'password')}
-                        value={this.state.loginForm['password'].value}
-                        valid={this.state.loginForm['password'].valid}
-                        touched={signup ? this.state.loginForm['password'].touched : null}
-                        />
-                        {signup && <Input
-                        id="passwordConfirmation"
-                        label="Confirm Password"
-                        type="password"
-                        control="input"
-                        placeholder="Confirm your password"
-                        onChange={this.inputChangeHandler}
-                        onBlur={this.inputBlurHandler.bind(this, 'passwordConfirmation')}
-                        value={this.state.loginForm['passwordConfirmation'].confirmation}
-                        valid={this.state.loginForm['passwordConfirmation'].valid}
-                        touched={this.state.loginForm['passwordConfirmation'].touched}
-                        />}
-                        {signup && this.state.errorMessage.length > 0 ? (
-                          <><div className='signup-errors'>
-                          <h6>THERE WERE SOME ERRORS</h6>
-                            {this.state.errorMessage.map(error => {
-                              return (
-                                  <h6 key={error.message}>- {error.message}</h6>
-                              )
-                            })}
-                            </div>
-                          </>)
-                          :
-                          <>
-                          </>
-                        }
-                        <div className='submit-button'>
-                          <button onClick={this.closeMobileMenu} disabled={(this.state.loginForm['password'].value.length < 1 || this.state.loginForm.email.value.length < 1) ? true : false} className={`login_logout ${(this.state.loginForm['password'].value.length < 1 || this.state.loginForm.email.value.length < 1) ? 'disabled' : 'active'}`}>{signup ? 'Signup' : 'Login'}</button>
-                        </div>
-                    </form>
+  return (
+    <>
+      <div className='auth__form-container'>
+        <div className='auth__form'>
+          <div className='auth__form-components'>
+            {!signup && !hideRegisterButton && <Link to='/signup'><button className='login_logout register'>Register</button></Link>}
+            <form className={`${loginError ? 'error' : ''}`}
+                onSubmit={e => submitHandler(e)}
+            >
+                {signup && <Input
+                id="username"
+                label="username"
+                type="text"
+                control="input"
+                placeholder="Choose a username"
+                onChange={inputChangeHandler}
+                onBlur={inputBlurHandler}
+                value={username.value}
+                valid={username.valid}
+                touched={username.touched}
+                />}
+                <Input
+                id="userEmail"
+                label={`${signup ? 'Your Email' : ''}`}
+                type="email"
+                control="input"
+                placeholder={`${signup ? 'Enter your email' : 'Email'}`}
+                onChange={inputChangeHandler}
+                onBlur={inputBlurHandler}
+                value={userEmail.value}
+                valid={userEmail.valid}
+                touched={signup ? userEmail.touched : null}
+                />
+                <Input
+                id="password"
+                label={`${signup ? 'Password' : ''}`}
+                type="password"
+                control="input"
+                placeholder={`${signup ? 'Choose your password' : 'Password'}`}
+                onChange={inputChangeHandler}
+                onBlur={inputBlurHandler}
+                value={password.value}
+                valid={password.valid}
+                touched={signup ? password.touched : null}
+                />
+                {signup && <Input
+                id="passwordConfirmation"
+                label="Confirm Password"
+                type="password"
+                control="input"
+                placeholder="Confirm your password"
+                onChange={inputChangeHandler}
+                onBlur={inputBlurHandler}
+                value={passwordConfirmation.confirmation}
+                valid={passwordConfirmation.valid}
+                touched={passwordConfirmation.touched}
+                />}
+                {signup && errorMessages.length > 0 ? (
+                  <><div className='signup-errors'>
+                  <h6>THERE WERE SOME ERRORS</h6>
+                    {errorMessages.map(error => {
+                      return (
+                          <h6 key={error.message}>- {error.message}</h6>
+                      )
+                    })}
                     </div>
+                  </>)
+                  :
+                  <>
+                  </>
+                }
+                <div className='submit-button'>
+                  <button onClick={closeMobileMenu} disabled={disabled} className={`login_logout ${disabled ? 'disabled' : 'active'}`}>{signup ? 'Signup' : 'Login'}</button>
                 </div>
+            </form>
             </div>
-            </>
-        )
-      }
+        </div>
+    </div>
+    </>
+  )
 }
 
 export default AuthForm
