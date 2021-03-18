@@ -1,10 +1,14 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
+import { Dispatch, State } from '../../context/Store'
+
 import './filterMenu.scss'
 
 const WallFilter = React.lazy(() => import('./WallFilter'))
 const PostcodeSort = React.lazy(() => import('./PostcodeSort'))
 
-const FilterMenu = ({filterSelection, setFilterSelection, userPostCode, setUserPostCode}) => {
+const FilterMenu = () => {
+    const dispatch = useContext(Dispatch)
+    const {filterSelection, userPostCode } = useContext(State)
 
     const [postCodeInput, setPostCodeInput ] = useState(userPostCode)
     const [postCodeInputVisible, setPostCodeInputVisible] = useState(false)
@@ -13,7 +17,18 @@ const FilterMenu = ({filterSelection, setFilterSelection, userPostCode, setUserP
     function handleSetPostCode (e) {
         e.preventDefault()
         setPostCodeInputVisible(false)
-        const valid = setUserPostCode(postCodeInput)
+        let newPostcode
+        const postcodeRegEx = /[A-Z]{1,2}[0-9]{1,2} ?[0-9][A-Z]{2}/i; 
+        if (!postCodeInput) {
+            newPostcode = ''
+            localStorage.removeItem('userPostcode')
+        }
+        const validPostcode = postcodeRegEx.test(postCodeInput); 
+        if (validPostcode) {
+            newPostcode = postCodeInput
+            localStorage.setItem('userPostcode', postCodeInput)
+        }
+        dispatch({ type: 'setPostCode', data: newPostcode }) 
     }
 
     function handlePostCodeChange (e) {
@@ -22,7 +37,7 @@ const FilterMenu = ({filterSelection, setFilterSelection, userPostCode, setUserP
 
     function clearPostcode () {
         setPostCodeInput('')
-        setUserPostCode('')
+        dispatch({ type: 'setPostCode', data: '' })
     }
 
     function toggleMenuVisibility () {
@@ -33,11 +48,11 @@ const FilterMenu = ({filterSelection, setFilterSelection, userPostCode, setUserP
         const selection = e.target.name
         const updatedFilters = filterSelection
         updatedFilters[selection] = !filterSelection[selection]
-        setFilterSelection({...updatedFilters})
+        dispatch({ type: 'setFilterSelection', data: {...updatedFilters} })
     }
 
     function clearFilters () {
-        setFilterSelection({top: true, bouldering: true, auto: true, lead: true})
+        dispatch({ type: 'setFilterSelection', data: {top: true, bouldering: true, auto: true, lead: true} })
     }
 
     return (
@@ -54,14 +69,11 @@ const FilterMenu = ({filterSelection, setFilterSelection, userPostCode, setUserP
             <div className={`filter__menu-filter-container ${visible ? 'visible' : ''}`} >
                 <div className='filter__menu-filter-item' >
                     <WallFilter 
-                        filterSelection={filterSelection}
                         handleFilterChange={handleFilterChange}
                     />
                 </div>
                 <div className='filter__menu-filter-item' >
                     <PostcodeSort 
-                        filterSelection={filterSelection}
-                        handleFilterChange={handleFilterChange}
                         postCodeInput={postCodeInput}
                         handlePostCodeChange={handlePostCodeChange}
                         handleSetPostCode={handleSetPostCode}

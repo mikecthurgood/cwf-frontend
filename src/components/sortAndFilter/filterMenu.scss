@@ -26,9 +26,10 @@ $hover-pink: #cf4b4b;
     position: relative;
     text-align: left;
     display: flex;
-    left: 21px;
+    left: 0;
     top: 10px;
     color: white;
+    padding-left: 21px;
 
     .filter__menu-mobile-heading, .filter__menu-icon {
         display: none;

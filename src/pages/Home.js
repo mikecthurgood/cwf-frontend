@@ -1,23 +1,23 @@
 import React, { useEffect, Suspense, useContext } from 'react';
 import API from '../helpers/API'
 import { Helmet } from 'react-helmet'
-import Store from '../context/Store';
+import { State, Dispatch } from '../context/Store';
 
 const WallCard = React.lazy(() => import('../components/homePageComponents/WallCard'));
 const FilterMenu = React.lazy(() => import('../components/sortAndFilter/FilterMenu'));
 const SignUpSuccessModal = React.lazy(() => import('../components/homePageComponents/SignUpSuccess.js'))
 
-
 const Home = ({walls}) => {
 
-    const { filterSelection, searchFilter, setFilterSelection, setScrollPosition, setSignUpSuccess, setPostCode, setWalls, signOut, signUpSuccess, user, userPostCode } = useContext(Store)
+    const dispatch = useContext(Dispatch)
+    const { signOut, signUpSuccess, user, userPostCode } = useContext(State)
 
     useEffect(() => {
         const fetchWalls = async () => {
         const response = userPostCode ? await API.getWallsWithDistance(userPostCode).then(resp => resp.json()) : await API.getWalls().then(resp => resp.json())
         const data = response.data.walls || response.data.wallsWithDistance
         if (!data.loggedIn && user.userId !== null) signOut()
-        return setWalls(data.walls)
+        return dispatch({type: 'setWalls', data: data.walls })
     }
     try{
         fetchWalls();
@@ -25,10 +25,17 @@ const Home = ({walls}) => {
         console.log(err)
     }
 
-    }, [setWalls, user.userId, userPostCode]);
+    }, [user.userId, userPostCode]);
 
     const sortedWalls = walls ? walls.sort((a, b) => Number(a.distance) - Number(b.distance)) : {}
 
+    function setScrollPosition (data) {
+        dispatch({ type: 'setScrollPosition', data})
+    }
+
+    function clearSignUpSuccess () {
+        dispatch({type: 'setSignUpSuccess', data: false})
+    }
 
     return (
         <>
@@ -38,16 +45,11 @@ const Home = ({walls}) => {
         <div>
             <div className='secondary-nav'>
             <Suspense fallback={<div></div>}>
-                <FilterMenu
-                    filterSelection={filterSelection}
-                    setFilterSelection={setFilterSelection}
-                    userPostCode={userPostCode} 
-                    setUserPostCode={setPostCode}
-                />
+                <FilterMenu />
             </Suspense>
             </div>
             <Suspense fallback={<></>}>
-                {signUpSuccess && <SignUpSuccessModal setSignUpSuccess={setSignUpSuccess}/>}
+                {signUpSuccess && <SignUpSuccessModal clearSignUpSuccess={clearSignUpSuccess} />}
             </Suspense>
             {userPostCode && (
                 <div className='postcode-information'>
@@ -56,9 +58,9 @@ const Home = ({walls}) => {
             )}
             <div className='outer-card-container'>
                 <div className='card-container'>
-                    {searchFilter.length < 1 && sortedWalls.length === 0 && (<div>Loading Walls...</div>)}
-                    {sortedWalls.length > 0 ? sortedWalls.map(wall => <Suspense key={`${wall.id} suspense`} fallback={<div></div>}>
-                        <WallCard wall={wall} key={wall.id} setScrollPosition={setScrollPosition} /></Suspense>) : searchFilter.length > 0 && <div className='wall-card-none-found'><h3>No walls match your search</h3></div>}
+                    {sortedWalls.length === 0 && (<div>Loading Walls...</div>)}
+                    {sortedWalls.length > 0 && sortedWalls.map(wall => <Suspense key={`${wall.id} suspense`} fallback={<div></div>}>
+                        <WallCard wall={wall} key={wall.id} setScrollPosition={setScrollPosition} /></Suspense>)}
                     {sortedWalls.length > 0 && (<>
                         <div className='wall-card-placeholder'></div>
                         <div className='wall-card-placeholder'></div>

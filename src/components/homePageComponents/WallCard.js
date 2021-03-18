@@ -3,7 +3,7 @@ import StarRatings from 'react-star-ratings';
 import { Link } from 'react-router-dom';
 import './WallCard.scss'
 
-const WallCard = ({ wall, singleWall, setScrollPosition }) => (
+const WallCard = ({ wall, setScrollPosition }) => (
     <Link to={"/walls/" + wall.slug} className='wall-card' onClick={() => setScrollPosition(document.getElementsByClassName('app-container')[0].scrollTop)} >
         <div className='wallcard-heading'>
             <h5>{wall.name}</h5>

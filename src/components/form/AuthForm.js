@@ -4,13 +4,13 @@ import { required, length, email } from '../../util/validators';
 import './AuthForm.scss';
 import { Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
-import Store from '../../context/Store';
+import { State } from '../../context/Store';
 
 
 
-const AuthForm = ({ loginToggle, loginError, signup, hideRegisterButton }) => {
+const AuthForm = ({ loginToggle, signupHandler, signup, hideRegisterButton, loginHandler }) => {
 
-  const { user, signupHandler, loginHandler } = useContext(Store)
+  const { user, loginError } = useContext(State)
 
   useEffect(() => {
     if (user && user.userId) {
